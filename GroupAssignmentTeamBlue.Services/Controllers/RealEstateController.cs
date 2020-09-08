@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GroupAssignmentTeamBlue.Services.DtoModels;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,17 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
         }
 
         [HttpGet("{id}", Name = "GetRealEstate")]
-        public ActionResult GetRealEstate(Guid userId)
+        public ActionResult GetRealEstate(Guid realEstateId)
         {
             // TODO: Get real estate from repo
+            return NoContent();
+        }
+
+        [HttpPost]
+        public ActionResult GetRealEstate(RealEstateForCreationDto realEstate)
+        {
+            // TODO: Check if resources exists
+            // TODO: Get create estate in repo
             return NoContent();
         }
     }

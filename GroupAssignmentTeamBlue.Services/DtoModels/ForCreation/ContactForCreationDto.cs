@@ -8,8 +8,9 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
 {
     public class ContactForCreationDto
     {
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "A {0} is required")]
+        [MaxLength(50, ErrorMessage = "The name cannot be longer than {1} characters")]
+        // Min length?
         public string Name { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
