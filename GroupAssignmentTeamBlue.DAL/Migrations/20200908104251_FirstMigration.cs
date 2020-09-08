@@ -101,7 +101,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         column: x => x.RatingUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
