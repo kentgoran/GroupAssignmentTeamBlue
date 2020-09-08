@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GroupAssignmentTeamBlue.Services.DtoModels;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GroupAssignmentTeamBlue.Services.Controllers
@@ -11,16 +13,23 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
     public class UserController : ControllerBase
     {
         [HttpGet]
-        public ActionResult GetUsers()
+        public ActionResult<IEnumerable<UserDto>> GetUsers()
         {
             // TODO: Get users from repo
             return NoContent();
         }
 
         [HttpGet("{id}", Name = "GetUser")]
-        public ActionResult GetUser(Guid userId)
+        public IActionResult GetUser(Guid userId)
         {
             // TODO: Get user from repo
+            return NoContent();
+        }
+
+        [HttpPost]
+        public IActionResult CreateUser(UserForCreationDto user)
+        {
+            // TODO: Add user to db
             return NoContent();
         }
     }

@@ -8,8 +8,6 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels.ForCreation
 {
     public class CommentForCreationDto
     {
-        [Key]
-        public Guid Id { get; set; }
         [Required]
         public UserForCreationDto User { get; set; }
         [Required]

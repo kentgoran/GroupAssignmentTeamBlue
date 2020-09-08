@@ -10,8 +10,6 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
     public class RealEstateForCreationDto
     {
         [Required]
-        public Guid Id { get; set; }
-        [Required]
         public UserForCreationDto User { get; set; }
         [Required]
         public ContactForCreationDto Contact { get; set; }
