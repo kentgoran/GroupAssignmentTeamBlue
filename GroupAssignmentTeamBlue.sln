@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupAssignmentTeamBlue.Model", "GroupAssignmentTeamBlue.Model\GroupAssignmentTeamBlue.Model.csproj", "{7007FFF3-639D-4E45-A3EA-CDEA7B329502}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupAssignmentTeamBlue.DAL", "GroupAssignmentTeamBlue.DAL\GroupAssignmentTeamBlue.DAL.csproj", "{875CE2EF-0FF8-4E73-BBAC-5940DB160BD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7007FFF3-639D-4E45-A3EA-CDEA7B329502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7007FFF3-639D-4E45-A3EA-CDEA7B329502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7007FFF3-639D-4E45-A3EA-CDEA7B329502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7007FFF3-639D-4E45-A3EA-CDEA7B329502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{875CE2EF-0FF8-4E73-BBAC-5940DB160BD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{875CE2EF-0FF8-4E73-BBAC-5940DB160BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{875CE2EF-0FF8-4E73-BBAC-5940DB160BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{875CE2EF-0FF8-4E73-BBAC-5940DB160BD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B6E6FAC-66B6-405C-AB64-992F78C715AB}
+	EndGlobalSection
+EndGlobal
