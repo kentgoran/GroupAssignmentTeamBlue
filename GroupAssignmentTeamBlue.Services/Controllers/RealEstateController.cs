@@ -18,12 +18,18 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
         private readonly IRepository<RealEstate> _repository;
         private readonly IMapper _mapper;
 
+        /*
         public RealEstateController(IRepository<RealEstate> repository, IMapper mapper)
         {
             _repository = repository ?? throw new NullReferenceException();
             _mapper = mapper ?? throw new ArgumentNullException();
         }
-        
+        */
+        public RealEstateController(IMapper mapper)
+        {
+            _mapper = mapper ?? throw new ArgumentNullException();
+        }
+
 
         [HttpGet]
         public ActionResult GetRealEstates()
