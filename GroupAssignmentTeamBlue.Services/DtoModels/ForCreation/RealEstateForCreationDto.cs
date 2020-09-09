@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace GroupAssignmentTeamBlue.Services.DtoModels
@@ -17,6 +18,7 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
         public AddressForCreationDto Address { get; set; }
         
         [Required(ErrorMessage = "An Estate {0} is required")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public EstateType Type { get; set; }
         
         [Required(ErrorMessage = "A retable status required")]

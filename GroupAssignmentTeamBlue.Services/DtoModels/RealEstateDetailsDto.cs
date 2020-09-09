@@ -9,9 +9,7 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
     {
         public int Id { get; set; }
         public UserDto User { get; set; }
-        public string ContactName { get; set; }
-        public string ContactEmail { get; set; }
-        public string ContactPhoneNumber { get; set; }
+        public ContactDto Contact { get; set; }
         public AddressDto Address { get; set; }
         public string Type { get; set; }
         public bool IsRentable { get; set; }

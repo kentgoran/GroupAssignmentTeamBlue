@@ -1,7 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Threading.Tasks;
+using AutoMapper;
+using GroupAssignmentTeamBlue.Services.Profiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +31,17 @@ namespace GroupAssignmentTeamBlue.Services
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
+            
+            var mapperConfig = new MapperConfiguration(opt =>
+            {
+                opt.AddProfile<AddressProfile>();
+                opt.AddProfile<ContactProfile>();
+                opt.AddProfile<UserProfile>();
+            });
+            
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //services.AddDbContext<>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

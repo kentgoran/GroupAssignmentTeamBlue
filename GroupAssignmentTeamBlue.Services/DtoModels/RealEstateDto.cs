@@ -8,7 +8,6 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
     public class RealEstateDto
     {
         public int Id { get; set; }
-        // Street name and number
         public string StreetAddress { get; set; }
         public string StateProvince { get; set; }
         public string Country { get; set; }
