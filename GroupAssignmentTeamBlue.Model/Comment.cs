@@ -7,7 +7,7 @@ namespace GroupAssignmentTeamBlue.Model
     public class Comment
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public User User { get; set; }
         [Required]

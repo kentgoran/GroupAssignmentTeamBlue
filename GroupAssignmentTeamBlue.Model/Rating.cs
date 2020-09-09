@@ -9,7 +9,7 @@ namespace GroupAssignmentTeamBlue.Model
     public class Rating
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public User RatedUser { get; set; }
         [Required]

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GroupAssignmentTeamBlue.DAL.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,8 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     StreetName = table.Column<string>(maxLength: 50, nullable: false),
                     StreetNumber = table.Column<string>(maxLength: 10, nullable: false),
                     ZipCode = table.Column<string>(maxLength: 10, nullable: false),
@@ -27,7 +28,8 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 name: "Contacts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Email = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true)
@@ -41,7 +43,8 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(maxLength: 20, nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)
@@ -55,11 +58,12 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 name: "Comments",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
                     Content = table.Column<string>(maxLength: 1500, nullable: false),
                     TimeOfCreation = table.Column<DateTime>(nullable: false),
-                    ParentCommentId = table.Column<Guid>(nullable: true)
+                    ParentCommentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,9 +86,10 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 name: "Ratings",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    RatedUserId = table.Column<Guid>(nullable: false),
-                    RatingUserId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RatedUserId = table.Column<int>(nullable: false),
+                    RatingUserId = table.Column<int>(nullable: false),
                     Score = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -108,10 +113,11 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 name: "RealEstates",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false),
-                    ContactId = table.Column<Guid>(nullable: false),
-                    AddressId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    ContactId = table.Column<int>(nullable: false),
+                    AddressId = table.Column<int>(nullable: false),
                     Type = table.Column<int>(nullable: false),
                     IsRentable = table.Column<bool>(nullable: false),
                     IsSellable = table.Column<bool>(nullable: false),
