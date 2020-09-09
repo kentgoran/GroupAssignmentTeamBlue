@@ -9,7 +9,8 @@ namespace GroupAssignmentTeamBlue.Services.Profiles
         public UserProfile()
         {
             CreateMap<User, UserDto>();
-
+            CreateMap<UserDto, User>();
+            CreateMap<UserForCreationDto, User>();
         }
 
     }

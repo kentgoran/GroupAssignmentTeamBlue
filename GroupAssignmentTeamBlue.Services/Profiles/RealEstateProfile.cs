@@ -18,7 +18,7 @@ namespace GroupAssignmentTeamBlue.Services.Profiles
         public RealEstateProfile()
         {
             CreateMap<RealEstate, RealEstateDetailsDto>()
-                .ForMember(dto => dto.Type, opt => opt.MapFrom(source => nameof(source.Type)));
+                .ForMember(dto => dto.Type, opt => opt.MapFrom(source => source.Type.ToString()));
 
             CreateMap<RealEstateForCreationDto, RealEstate>();
         }

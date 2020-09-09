@@ -43,17 +43,17 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
         public ActionResult GetRealEstate(int realEstateId)
         {
             // TODO: Check if user is logged in
-
+            /*
             var realEstateEntity =_repository.Get(realEstateId);
             if(realEstateEntity == null)
             {
                 return NotFound();
             }
 
-            // Testa! vv
             var realestateToRetur = _mapper.Map<RealEstateDetailsDto>(realEstateEntity);
+            */
 
-            return Ok(realestateToRetur);
+            return NoContent();
         }
 
         [HttpPost]
@@ -64,10 +64,13 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
             // TODO: Check if resources exists
             // TODO: Create estate in repo
 
-            // map test vv
-            var estateToReurn = _mapper.Map<RealEstate>(realEstate);
+            // Ska date of creation sättas här eller i repo?
 
-            return Ok(estateToReurn);
+            // map test vv
+            var estateToSave = _mapper.Map<RealEstate>(realEstate);
+            var estateToReturn = _mapper.Map<RealEstateDetailsDto>(estateToSave);
+
+            return Ok(estateToReturn);
         }
     }
 }

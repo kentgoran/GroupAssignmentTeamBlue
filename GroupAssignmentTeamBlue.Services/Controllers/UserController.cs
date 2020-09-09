@@ -1,4 +1,7 @@
-﻿using GroupAssignmentTeamBlue.Services.DtoModels;
+﻿using AutoMapper;
+using GroupAssignmentTeamBlue.DAL.Repositories;
+using GroupAssignmentTeamBlue.Model;
+using GroupAssignmentTeamBlue.Services.DtoModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +15,14 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
     [Route("api/users")]
     public class UserController : ControllerBase
     {
+        private readonly IRepository<User> _repository;
+        private readonly IMapper _mapper;
+
+        public UserController(IMapper mapper)
+        {
+            _mapper = mapper ?? throw new ArgumentNullException();
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<UserDto>> GetUsers()
         {
