@@ -9,8 +9,9 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
     public interface IRepository<TEntity> where TEntity : class
     {
         void Add(TEntity entityToAdd);
-        TEntity Get(Guid Id);
+        TEntity Get(int Id);
         void Update(TEntity entityToUpdate);
-        void Remove(Guid Id);
+        void Remove(int Id);
+        bool EntityExists(int id);
     }
 }
