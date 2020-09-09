@@ -9,7 +9,7 @@ namespace GroupAssignmentTeamBlue.Model
     public class Address
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
         [MaxLength(50)]
         public string StreetName { get; set; }

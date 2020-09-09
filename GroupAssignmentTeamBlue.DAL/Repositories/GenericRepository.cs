@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,19 +21,18 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
             context.Set<TEntity>().Add(entityToAdd);
         }
 
-        public void Remove(Guid Id)
-        {
-            var entityToRemove = Get(Id);
-
-            if (entityToRemove != null)
+        public void Remove(int Id)
+        {          
+            if (EntityExists(Id))
             {
+                var entityToRemove = Get(Id);
                 context.Set<TEntity>().Remove(entityToRemove);
             }
 
-            //TODO: vad gör vi om entityn är null?
+            //TODO: vad gör vi om entityn inte hittas?
         }
 
-        public TEntity Get(Guid Id)
+        public TEntity Get(int Id)
         {
             return context.Set<TEntity>().Find(Id);
         }
@@ -41,6 +41,10 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         {
             context.Set<TEntity>().Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
+        }
+        public bool EntityExists(int Id)
+        {
+            return context.Set<TEntity>().Find(Id) != null;
         }
     }
 }

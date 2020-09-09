@@ -9,7 +9,7 @@ namespace GroupAssignmentTeamBlue.Model
     public class User
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
         [MinLength(3)]
         [MaxLength(20)]

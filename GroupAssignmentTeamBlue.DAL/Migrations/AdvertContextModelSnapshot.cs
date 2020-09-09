@@ -21,9 +21,10 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Address", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Country")
                         .IsRequired()
@@ -57,23 +58,24 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Comment", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(1500)")
                         .HasMaxLength(1500);
 
-                    b.Property<Guid?>("ParentCommentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("ParentCommentId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("TimeOfCreation")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -86,9 +88,10 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Contact", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -108,15 +111,16 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Rating", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("RatedUserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("RatedUserId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("RatingUserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("RatingUserId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Score")
                         .HasColumnType("int");
@@ -132,15 +136,16 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.RealEstate", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("AddressId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ContactId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfAdvertCreation")
                         .HasColumnType("datetime2");
@@ -160,8 +165,8 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("YearBuilt")
                         .HasColumnType("datetime2");
@@ -179,9 +184,10 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .IsRequired()
