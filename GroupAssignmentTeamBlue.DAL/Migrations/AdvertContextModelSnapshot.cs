@@ -217,13 +217,13 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Rating", b =>
                 {
                     b.HasOne("GroupAssignmentTeamBlue.Model.User", "RatedUser")
-                        .WithMany()
+                        .WithMany("RatingsRecieved")
                         .HasForeignKey("RatedUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GroupAssignmentTeamBlue.Model.User", "RatingUser")
-                        .WithMany()
+                        .WithMany("RatingsMade")
                         .HasForeignKey("RatingUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

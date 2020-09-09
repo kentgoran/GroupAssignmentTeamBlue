@@ -22,7 +22,8 @@ namespace GroupAssignmentTeamBlue.DAL.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Rating>().HasOne(r => r.RatedUser).WithMany(u => u.RatingsRecieved);
+            modelBuilder.Entity<Rating>().HasOne(r => r.RatingUser).WithMany(u => u.RatingsMade);
         }
     }
 }
