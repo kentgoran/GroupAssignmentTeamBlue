@@ -7,7 +7,7 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
 {
     public class AddressDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string StreetName { get; set; }
         public string StreetNumber { get; set; }
         public string ZipCode { get; set; }

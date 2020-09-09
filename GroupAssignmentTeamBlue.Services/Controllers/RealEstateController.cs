@@ -19,7 +19,7 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
         }
 
         [HttpGet("{id}", Name = "GetRealEstate")]
-        public ActionResult GetRealEstate(Guid realEstateId)
+        public ActionResult GetRealEstate(int realEstateId)
         {
             // TODO: Get real estate from repo
             return NoContent();

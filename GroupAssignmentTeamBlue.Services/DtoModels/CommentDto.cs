@@ -7,7 +7,7 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
 {
     public class CommentDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public UserDto User { get; set; }
         public string Content { get; set; }
         public DateTime TimeOfCreation { get; set; }

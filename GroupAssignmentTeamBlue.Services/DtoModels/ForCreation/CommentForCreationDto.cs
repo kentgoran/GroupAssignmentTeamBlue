@@ -9,7 +9,7 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels.ForCreation
     public class CommentForCreationDto
     {
         [Required(ErrorMessage = "A {0} is required")]
-        public UserDto User { get; set; }
+        public int UserId { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         [MaxLength(1500, ErrorMessage = "The content cannot be longer than {1} characters")]
         public string Content { get; set; }

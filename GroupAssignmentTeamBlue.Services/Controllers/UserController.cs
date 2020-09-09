@@ -20,7 +20,7 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
         }
 
         [HttpGet("{id}", Name = "GetUser")]
-        public IActionResult GetUser(Guid userId)
+        public IActionResult GetUser(int userId)
         {
             // TODO: Get user from repo
             return NoContent();

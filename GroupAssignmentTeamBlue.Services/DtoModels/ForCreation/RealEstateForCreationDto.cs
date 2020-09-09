@@ -11,7 +11,7 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
     {
         // Kommer från URL??
         [Required(ErrorMessage = "An id of the user is required")]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
         
         // Om kontakten redan finns??
         [Required(ErrorMessage = "A {0} is required")]

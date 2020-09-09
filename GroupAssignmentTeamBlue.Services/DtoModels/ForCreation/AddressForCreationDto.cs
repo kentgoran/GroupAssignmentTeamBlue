@@ -8,7 +8,7 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
 {
     public class AddressForCreationDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "A street name is required")]
         [MaxLength(50, ErrorMessage ="The street name cannot be longer than {1} characters")]
