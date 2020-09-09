@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using AutoMapper;
+using GroupAssignmentTeamBlue.DAL.Context;
+using GroupAssignmentTeamBlue.DAL.Repositories;
 using GroupAssignmentTeamBlue.Services.Profiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,16 +34,14 @@ namespace GroupAssignmentTeamBlue.Services
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
-            
-            var mapperConfig = new MapperConfiguration(opt =>
-            {
-                opt.AddProfile<AddressProfile>();
-                opt.AddProfile<ContactProfile>();
-                opt.AddProfile<UserProfile>();
-            });
-            
-
+          
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+            /*      How???   vv
+            services.AddTransient(IRepository<>, UnitOfWork);
+            */
+            // TODO: vv add connectionstring??
             //services.AddDbContext<>();
         }
 

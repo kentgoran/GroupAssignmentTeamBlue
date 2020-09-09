@@ -1,4 +1,7 @@
-﻿using GroupAssignmentTeamBlue.Model.Enums;
+﻿using AutoMapper.Configuration.Annotations;
+using GroupAssignmentTeamBlue.Model.Enums;
+using GroupAssignmentTeamBlue.Services.Profiles;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,9 +25,11 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
         public EstateType Type { get; set; }
         
         [Required(ErrorMessage = "A retable status required")]
+        [JsonConverter(typeof(BoolToStringConverter))]
         public bool IsRentable { get; set; }
         
         [Required(ErrorMessage = "A sellable status required")]
+        [JsonConverter(typeof(BoolToStringConverter))]
         public bool IsSellable { get; set; }
         
         [DataType(DataType.Currency)]

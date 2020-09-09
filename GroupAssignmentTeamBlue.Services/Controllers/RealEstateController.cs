@@ -23,29 +23,45 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
             _repository = repository ?? throw new NullReferenceException();
             _mapper = mapper ?? throw new ArgumentNullException();
         }
+        
 
         [HttpGet]
         public ActionResult GetRealEstates()
         {
-            // TODO: Get real estates from repo
+            // TODO: Get top 10 realestates from repo
+            // TODO: Paging??
             return NoContent();
         }
 
         [HttpGet("{id}", Name = "GetRealEstate")]
         public ActionResult GetRealEstate(int realEstateId)
         {
-            //_repository.Get(realEstateId);
-            // TODO: Get real estate from repo
-            return NoContent();
+            // TODO: Check if user is logged in
+
+            var realEstateEntity =_repository.Get(realEstateId);
+            if(realEstateEntity == null)
+            {
+                return NotFound();
+            }
+
+            // Testa! vv
+            var realestateToRetur = _mapper.Map<RealEstateDetailsDto>(realEstateEntity);
+
+            return Ok(realestateToRetur);
         }
 
         [HttpPost]
         public ActionResult CreateRealEstate(RealEstateForCreationDto realEstate)
         {
+
             //_repository.Add();
             // TODO: Check if resources exists
             // TODO: Create estate in repo
-            return NoContent();
+
+            // map test vv
+            var estateToReurn = _mapper.Map<RealEstate>(realEstate);
+
+            return Ok(estateToReurn);
         }
     }
 }
