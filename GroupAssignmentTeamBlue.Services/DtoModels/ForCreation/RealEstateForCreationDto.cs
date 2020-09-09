@@ -9,15 +9,10 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
 {
     public class RealEstateForCreationDto
     {
-        // Kommer från URL??
-        [Required(ErrorMessage = "An id of the user is required")]
-        public int UserId { get; set; }
-        
-        // Om kontakten redan finns??
+        // User kommer från Token
         [Required(ErrorMessage = "A {0} is required")]
         public ContactForCreationDto Contact { get; set; }
         
-        // Om Addressen redan finns??
         [Required(ErrorMessage = "An {0} is required")]
         public AddressForCreationDto Address { get; set; }
         

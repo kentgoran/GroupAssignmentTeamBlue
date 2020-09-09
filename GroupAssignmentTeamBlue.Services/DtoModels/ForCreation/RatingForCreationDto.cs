@@ -8,12 +8,8 @@ namespace GroupAssignmentTeamBlue.Services.DtoModels
 {
     public class RatingForCreationDto
     {
-        // Kommer från URL??
-        [Required(ErrorMessage ="An id of the rated user is required")]
-        public int RatedUserId { get; set; }
-        [Required(ErrorMessage = "An id of the rating user is required")]
-        public int RatingUserId { get; set; }
-        [Required(ErrorMessage = "A street name is required")]
+        // Rated User kommer från URL och Rating user kommer från token
+        [Required(ErrorMessage = "A {0} is required")]
         [Range(1, 5)]
         public int Score { get; set; }
     }
