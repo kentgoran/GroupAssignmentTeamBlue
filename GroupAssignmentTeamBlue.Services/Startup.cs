@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,8 @@ namespace GroupAssignmentTeamBlue.Services
         public void ConfigureServices(IServiceCollection services)
         {       
             services.AddControllers().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
