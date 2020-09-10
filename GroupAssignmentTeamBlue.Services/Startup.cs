@@ -1,19 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Security.Policy;
 using System.Threading.Tasks;
-using AutoMapper;
 using GroupAssignmentTeamBlue.DAL.Context;
-using GroupAssignmentTeamBlue.DAL.Repositories;
-using GroupAssignmentTeamBlue.Services.Profiles;
+using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,17 +27,8 @@ namespace GroupAssignmentTeamBlue.Services
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {       
             services.AddControllers().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
-          
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-
-            /*      How???   vv
-            services.AddTransient(IRepository<>, UnitOfWork);
-            */
-            // TODO: vv add connectionstring??
-            //services.AddDbContext<>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +42,8 @@ namespace GroupAssignmentTeamBlue.Services
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

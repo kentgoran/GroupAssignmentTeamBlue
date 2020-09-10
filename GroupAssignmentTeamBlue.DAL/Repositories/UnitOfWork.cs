@@ -16,9 +16,9 @@ namespace GroupAssignmentTeamBlue.DAL.Context
             
             AddressRepository = new AddressRepository(context);
             CommentRepository = new CommentRepository(context);
-            ContactRepository = new ContactRepository(context);
+            //ContactRepository = new ContactRepository(context);
             RatingRepository = new RatingRepository(context);
-            RealEstateRepository = new RealEstateRepository(context);
+            //RealEstateRepository = new RealEstateRepository(context);
             UserRepository = new UserRepository(context);
 
         }
