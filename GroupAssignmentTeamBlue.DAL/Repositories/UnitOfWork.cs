@@ -9,16 +9,16 @@ namespace GroupAssignmentTeamBlue.DAL.Context
 {
     public class UnitOfWork
     {
-        private AdvertContext context;
+        private readonly AdvertContext context;
         public UnitOfWork(AdvertContext context)
         {
             this.context = context;
             
             AddressRepository = new AddressRepository(context);
             CommentRepository = new CommentRepository(context);
-            //ContactRepository = new ContactRepository(context);
+            ContactRepository = new ContactRepository(context);
             RatingRepository = new RatingRepository(context);
-            //RealEstateRepository = new RealEstateRepository(context);
+            RealEstateRepository = new RealEstateRepository(context);
             UserRepository = new UserRepository(context);
 
         }
