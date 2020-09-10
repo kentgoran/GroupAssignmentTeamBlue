@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.DAL.Repositories;
 using GroupAssignmentTeamBlue.Model;
 using GroupAssignmentTeamBlue.Services.DtoModels;
@@ -15,12 +16,13 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
     [Route("api/users")]
     public class UserController : ControllerBase
     {
-        private readonly IRepository<User> _repository;
+        private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UserController(IMapper mapper)
+        public UserController(IMapper mapper, UnitOfWork unitOfWork)
         {
             _mapper = mapper ?? throw new ArgumentNullException();
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException();
         }
 
         [HttpGet]

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.DAL.Repositories;
 using GroupAssignmentTeamBlue.Model;
 using GroupAssignmentTeamBlue.Services.DtoModels;
@@ -15,7 +16,7 @@ namespace GroupAssignmentTeamBlue.Services.Controllers
     [Route("api/realetates")]
     public class RealEstateController : ControllerBase
     {
-        private readonly IRepository<RealEstate> _repository;
+        private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         /*
