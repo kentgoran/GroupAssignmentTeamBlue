@@ -8,8 +8,6 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 {
     public class UserForCreationDto
     {
-        [Required]
-        public Guid Id { get; set; }
         [Required(ErrorMessage = "Username is required")]
         [MinLength(3, ErrorMessage = "Username must be between 3 and 20 characters")]
         [MaxLength(20, ErrorMessage = "Username must be between 3 and 20 characters")]

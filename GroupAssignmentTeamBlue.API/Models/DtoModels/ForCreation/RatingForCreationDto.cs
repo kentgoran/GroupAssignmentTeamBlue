@@ -8,13 +8,8 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 {
     public class RatingForCreationDto
     {
-        [Key]
-        public Guid Id { get; set; }
-        [Required]
-        public UserDto RatedUser { get; set; }
-        [Required]
-        public UserDto RatingUser { get; set; }
-        [Required]
+        // Rated User kommer från URL och Rating user kommer från token
+        [Required(ErrorMessage = "A {0} is required")]
         [Range(1, 5)]
         public int Score { get; set; }
     }

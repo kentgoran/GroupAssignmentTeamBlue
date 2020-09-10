@@ -8,15 +8,10 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 {
     public class CommentForCreationDto
     {
-        [Key]
-        public Guid Id { get; set; }
-        [Required]
-        public UserForCreationDto User { get; set; }
-        [Required]
-        [MaxLength(1500)]
+        // User kommer från URL
+        // Potensiell parent comment kommer från URL
+        [Required(ErrorMessage = "{0} is required")]
+        [MaxLength(1500, ErrorMessage = "The content cannot be longer than {1} characters")]
         public string Content { get; set; }
-        [Required]
-        public DateTime TimeOfCreation { get; set; }
-        public CommentDto ParentComment { get; set; }
     }
 }
