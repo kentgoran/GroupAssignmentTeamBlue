@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,20 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GroupAssignmentTeamBlue.Model
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        [Key]
-        public int Id { get; set; }
-        [Required]
-        [MinLength(3)]
-        [MaxLength(20)]
-        public string UserName { get; set; }
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
         public IEnumerable<Rating> RatingsMade { get; set; }
         public IEnumerable<Rating> RatingsRecieved { get; set; }
