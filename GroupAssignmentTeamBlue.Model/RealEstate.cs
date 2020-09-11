@@ -11,6 +11,12 @@ namespace GroupAssignmentTeamBlue.Model
         [Key]
         public int Id { get; set; }
         [Required]
+        [MaxLength(50)]
+        public string Title { get; set; }
+        [MaxLength(500)]
+        public string Description { get; set; }
+
+        [Required]
         public User User { get; set; }
         [Required]
         public Contact Contact { get; set; }
@@ -26,8 +32,12 @@ namespace GroupAssignmentTeamBlue.Model
         public decimal Rent { get; set; }
         [DataType(DataType.Currency)]
         public decimal SellPrice { get; set; }
-        public DateTime YearBuilt { get; set; }
+        //Can't set dynamic range (DateTime.Now.Year), so set 2 years from now,
+        //so that properties not yet built can be input in the system
+        [Range(1600, 2022)]
+        public int YearBuilt { get; set; }
         [Required]
         public DateTime DateOfAdvertCreation { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }

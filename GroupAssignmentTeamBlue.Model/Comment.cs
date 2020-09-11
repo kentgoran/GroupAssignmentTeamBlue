@@ -16,5 +16,6 @@ namespace GroupAssignmentTeamBlue.Model
         [Required]
         public DateTime TimeOfCreation { get; set; }
         public Comment ParentComment { get; set; }
+        public RealEstate RealEstateInQuestion { get; set; }
     }
 }
