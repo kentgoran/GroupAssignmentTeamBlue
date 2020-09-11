@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,5 +24,11 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         [MinLength(3, ErrorMessage = "The password has to be atleast 3 characters long")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Confirm password is required")]
+        [MinLength(3, ErrorMessage = "The password has to be atleast 3 characters long")]
+        [DataType(DataType.Password)]
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
     }
 }

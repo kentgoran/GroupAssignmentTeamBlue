@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -17,15 +18,15 @@ namespace GroupAssignmentTeamBlue.API.Controllers
 
         public AccountController(UserManager<User> userManager)
         {
-            _userManager = userManager;
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
+        
         [Route("register")]
         [HttpPost]
-        public IActionResult RegisterNewUser(
-            string username, string email, string password, string confirmPassword)
+        [Consumes("application/x-www-form-urlencoded")]
+        public IActionResult RegisterNewUser([FromForm]UserForCreationDto user)
         {
-            //TODO: Create the user
-
+            //TODO: Actually add the new user, hash password etc
             return Ok();
         }
     }
