@@ -22,7 +22,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [HttpGet("{id}/", Name = "GetComment")]
         public ActionResult GetComment(int id, int? skip = null, int? take = null)
         {
-            // TODO: Get real estates from repo
+            // TODO: Get comment from repo
             return NoContent();
         }
 
@@ -30,7 +30,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [HttpGet("byuser/{username}/", Name = "GetCommentByUser")]
         public ActionResult GetComment(string userName, int? skip = null, int? take = null)
         {
-            // TODO: Get real estates from repo
+            // TODO: Get comment by user from repo
             return NoContent();
         }
     }

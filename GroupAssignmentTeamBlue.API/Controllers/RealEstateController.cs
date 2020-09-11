@@ -20,14 +20,14 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRealEstates(int? skip = null, int? take = null)
+        public ActionResult GetRealEstates(int skip = 0, int take = 10)
         {
             // TODO: Get real estates from repo
             return NoContent();
         }
 
         [HttpGet("{id}/", Name = "GetRealEstate")]
-        public ActionResult GetRealEstate(int userId)
+        public ActionResult GetRealEstate(int realEstate)
         {
             // TODO: Get real estate from repo
             return NoContent();
