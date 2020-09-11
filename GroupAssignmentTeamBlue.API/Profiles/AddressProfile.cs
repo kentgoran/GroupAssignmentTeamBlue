@@ -2,6 +2,7 @@
 using GroupAssignmentTeamBlue.Model;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
+using System.Text.RegularExpressions;
 
 namespace GroupAssignmentTeamBlue.API.Profiles
 {

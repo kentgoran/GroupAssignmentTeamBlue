@@ -11,6 +11,8 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         [Required(ErrorMessage = "Username is required")]
         [MinLength(3, ErrorMessage = "Username must be between 3 and 20 characters")]
         [MaxLength(20, ErrorMessage = "Username must be between 3 and 20 characters")]
+                          // vv Dots are not allowed
+        //[RegularExpression("^[^.]$", ErrorMessage ="The Username should not contain any dots")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "An email address is required")]

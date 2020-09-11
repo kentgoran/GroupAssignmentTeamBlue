@@ -64,7 +64,7 @@ namespace GroupAssignmentTeamBlue.API
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
