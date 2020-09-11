@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.Model;
 using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace GroupAssignmentTeamBlue.API
 {
@@ -43,6 +45,24 @@ namespace GroupAssignmentTeamBlue.API
                 AddXmlDataContractSerializerFormatters();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            //This adds checking our token
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "JwtBearer";
+                options.DefaultChallengeScheme = "JwtBearer";
+            }).AddJwtBearer("JwtBearer", JwtBearerOptions =>
+            {
+                JwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperSecretCodeFromHell666")),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromMinutes(2)
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
