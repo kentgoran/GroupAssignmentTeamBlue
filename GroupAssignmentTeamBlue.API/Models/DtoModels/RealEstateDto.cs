@@ -9,14 +9,9 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        // Street name and number
-        public string Address { get; set; }
-        // Phone number
-        public string Contact { get; set; }
-        public string Type { get; set; }
         public decimal Rent { get; set; }
         public decimal SellPrice { get; set; }
-        public string YearBuilt { get; set; }
+        public bool IsRentable { get; set; }
+        public bool IsSellable { get; set; }
     }
 }

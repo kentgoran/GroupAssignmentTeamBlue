@@ -8,11 +8,11 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 {
     public class ContactForCreationDto
     {
-        [Required(ErrorMessage = "A {0} is required")]
         [MaxLength(50, ErrorMessage = "The name cannot be longer than {1} characters")]
         public string Name { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Required(ErrorMessage = "A {0} is required")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
     }

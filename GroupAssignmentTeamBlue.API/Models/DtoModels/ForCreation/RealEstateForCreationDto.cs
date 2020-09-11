@@ -11,6 +11,10 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 {
     public class RealEstateForCreationDto
     {
+        [Required(ErrorMessage = "A {0} is required")]
+        public string Title { get; set; }
+        [Required(ErrorMessage = "A {0} is required")]
+        public string Description { get; set; }
         // User kommer från Token
         [Required(ErrorMessage = "A {0} is required")]
         public ContactForCreationDto Contact { get; set; }
@@ -36,6 +40,6 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         [DataType(DataType.Currency)]
         public decimal SellPrice { get; set; }
 
-        public DateTime YearBuilt { get; set; }
+        public int YearBuilt { get; set; }
     }
 }
