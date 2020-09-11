@@ -27,7 +27,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         [HttpGet]
-        [HttpGet("{username}/", Name = "GetCommentByUser")]
+        [HttpGet("byuser/{username}/", Name = "GetCommentByUser")]
         public ActionResult GetComment(string userName, int? skip = null, int? take = null)
         {
             // TODO: Get real estates from repo
