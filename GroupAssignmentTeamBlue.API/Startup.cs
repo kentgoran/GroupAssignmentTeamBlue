@@ -34,7 +34,8 @@ namespace GroupAssignmentTeamBlue.API
             services.AddDbContext<AdvertContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("AppData")));
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<User>(options => 
+            options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AdvertContext>();
 
             services.AddControllersWithViews();
@@ -46,6 +47,10 @@ namespace GroupAssignmentTeamBlue.API
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            //Removes requirement for non-alphanumerics
+            services.Configure<PasswordOptions>(options =>
+            options.RequireNonAlphanumeric = false);
+
             //This adds checking our token
             services.AddAuthentication(options =>
             {
@@ -56,7 +61,7 @@ namespace GroupAssignmentTeamBlue.API
                 JwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperSecretCodeFromHell666")),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("PasswordKey"))),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ValidateLifetime = true,

@@ -17,10 +17,10 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         public string Description { get; set; }
         // User kommer från Token
         [Required(ErrorMessage = "A {0} is required")]
-        public ContactForCreationDto Contact { get; set; }
+        public string Contact { get; set; }
 
         [Required(ErrorMessage = "An {0} is required")]
-        public AddressForCreationDto Address { get; set; }
+        public string Address { get; set; }
 
         [Required(ErrorMessage = "An Estate {0} is required")]
         [JsonConverter(typeof(JsonStringEnumConverter))]

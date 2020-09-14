@@ -19,9 +19,9 @@ namespace GroupAssignmentTeamBlue.Model
         [Required]
         public User User { get; set; }
         [Required]
-        public Contact Contact { get; set; }
+        public string Contact { get; set; }
         [Required]
-        public Address Address { get; set; }
+        public string Address { get; set; }
         [Required]
         public EstateType Type { get; set; }
         [Required]
