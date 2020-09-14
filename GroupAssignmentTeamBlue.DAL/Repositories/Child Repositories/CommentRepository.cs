@@ -15,12 +15,11 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         public CommentRepository(AdvertContext context) : base(context)
         {
         }
-        //public ICollection<Comment> GetCommentsByUser(int userId)
-        //{
-        //    return context.Comments
-        //        .Include(c => c.User)
-        //        .Where(c => c.User.Id == userId)
-        //        .ToList();
-        //}
+        
+
+        public ICollection<Comment> GetCommentsForRealEstate(int realEstateId, int skip, int take)
+        {
+            return context.Comments.Where(c => c.RealEstateInQuestion.Id == realEstateId).Skip(skip).Take(take).Include(c => c.User).ToList();
+        }
     }
 }

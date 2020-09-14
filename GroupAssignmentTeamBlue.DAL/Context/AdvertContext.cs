@@ -17,18 +17,11 @@ namespace GroupAssignmentTeamBlue.DAL.Context
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<RealEstate> RealEstates { get; set; }
 
-        //This constructor is to be used after creating the database, but needs to be commented out in early dev, as applying migrations does not
-        //work with dependency injection
+
         public AdvertContext(DbContextOptions<AdvertContext> options) : base(options)
         {
 
         }
-
-        //Comment out this OnConfiguring when NOT applying migrations, as well as un-commenting out the constructor above
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=AdvertTeamBlue; Integrated Security=True;");
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
