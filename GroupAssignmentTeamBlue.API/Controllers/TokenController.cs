@@ -5,11 +5,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper.Configuration;
-using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
@@ -17,12 +16,20 @@ namespace GroupAssignmentTeamBlue.API.Controllers
     public class TokenController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly IConfiguration _configuration;
 
-        public TokenController(UserManager<User> userManager)
+        public TokenController(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
+            _configuration = configuration;
         }
-
+        /// <summary>
+        /// POST action for /token, checks username and password to generate a token
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="grant_type"></param>
+        /// <returns>A token, expiration time etc</returns>
         [Route("/token")]
         [HttpPost]
         public async Task<IActionResult> Create(string username, string password, string grant_type)
@@ -33,22 +40,35 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             }
             else
             {
+                
                 return BadRequest();
             }
         }
 
+        /// <summary>
+        /// Checks if given username and password are correct
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>boolean, true if username exists and the given password is correct</returns>
         private async Task<bool> IsValidUsernameAndPassword(string username, string password)
         {
             var user = await _userManager.FindByNameAsync(username);
             return await _userManager.CheckPasswordAsync(user, password);
         }
 
+        /// <summary>
+        /// Generates a token, with it's given parameters
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>A token consisting of username, access_token, expiration date etc</returns>
         private async Task<dynamic> GenerateToken(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             DateTimeOffset issuedTime = new DateTimeOffset(DateTime.Now);
             DateTimeOffset expiresTime = new DateTimeOffset(DateTime.Now.AddDays(14));
 
+            //This list of claims is used to create the token below
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, username),
@@ -56,12 +76,12 @@ namespace GroupAssignmentTeamBlue.API.Controllers
                 new Claim(JwtRegisteredClaimNames.Nbf, issuedTime.ToUnixTimeSeconds().ToString()),
                 new Claim(JwtRegisteredClaimNames.Exp, expiresTime.ToUnixTimeSeconds().ToString())
             };
-            //TODO: Move secret key
+            //TODO: Move secret key!
             var token = new JwtSecurityToken(
                 new JwtHeader(
                     new SigningCredentials(
                         new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes("SuperSecretCodeFromHell666")),
+                        Encoding.UTF8.GetBytes(_configuration.GetValue<string>("PasswordKey"))),
                         SecurityAlgorithms.HmacSha256)),
                     new JwtPayload(claims));
 
