@@ -34,7 +34,8 @@ namespace GroupAssignmentTeamBlue.API
             services.AddDbContext<AdvertContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("AppData")));
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<User>(options => 
+            options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AdvertContext>();
 
             services.AddControllersWithViews();
@@ -45,6 +46,10 @@ namespace GroupAssignmentTeamBlue.API
                 AddXmlDataContractSerializerFormatters();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            //Removes requirement for non-alphanumerics
+            services.Configure<PasswordOptions>(options =>
+            options.RequireNonAlphanumeric = false);
 
             //This adds checking our token
             services.AddAuthentication(options =>
