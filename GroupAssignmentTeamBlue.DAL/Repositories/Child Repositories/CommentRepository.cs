@@ -16,10 +16,18 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         {
         }
         
-
+        /// <summary>
+        /// Gets comments for a given realEstate
+        /// </summary>
+        /// <param name="realEstateId">Id of given realEstate</param>
+        /// <param name="skip">The amount of comments to skip</param>
+        /// <param name="take">the amount of comments to take</param>
+        /// <returns>an ICollection of comments</returns>
         public ICollection<Comment> GetCommentsForRealEstate(int realEstateId, int skip, int take)
         {
-            return context.Comments.Where(c => c.RealEstateInQuestion.Id == realEstateId).Skip(skip).Take(take).Include(c => c.User).ToList();
+            return context.Comments.Where(c => c.RealEstateInQuestion.Id == realEstateId).
+                OrderBy(c => c.TimeOfCreation).Skip(skip).Take(take).
+                Include(c => c.User).ToList();
         }
     }
 }

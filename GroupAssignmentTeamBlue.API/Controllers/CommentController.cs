@@ -31,13 +31,24 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">id-number to the realEstate in question</param>
+        /// <param name="skip">Optional number for comments to skip, default is 0</param>
+        /// <param name="take">optional number for comments to take, default is 10, max is 100</param>
+        /// <returns>All comments wanted</returns>
         [HttpGet]
         [HttpGet("{id}/", Name = "GetComment")]
         public ActionResult GetComment(int id, int skip = 0, int take = 10)
         {
-            if(take > 100)
+            if(skip < 0)
             {
-                return BadRequest("Cannot take more than 100 items at a time");
+                return BadRequest("Skip can't be a negative number");
+            }
+            if(take < 1 || take > 100)
+            {
+                return BadRequest("Take must be 1-100");
             }
             var comments = _unitOfWork.CommentRepository.GetCommentsForRealEstate(id, skip, take);
             //Does this work? or map each one individually?

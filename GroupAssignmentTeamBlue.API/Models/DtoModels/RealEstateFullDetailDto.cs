@@ -8,7 +8,7 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels
 {
     public class RealEstateFullDetailDto : RealEstatePartlyDetailedDto
     {
-        public ContactDto Contact { get; set; }
+        public string Contact { get; set; }
         public IEnumerable<CommentDto> Comments { get; set; }
     }
 }

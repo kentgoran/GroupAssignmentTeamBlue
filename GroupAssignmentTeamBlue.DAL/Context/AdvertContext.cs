@@ -11,9 +11,9 @@ namespace GroupAssignmentTeamBlue.DAL.Context
 {
     public class AdvertContext : IdentityDbContext<User, UserRole, int>
     {
-        public DbSet<Address> Addresses { get; set; }
+        
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
+        
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<RealEstate> RealEstates { get; set; }
 
