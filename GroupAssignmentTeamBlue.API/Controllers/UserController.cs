@@ -4,9 +4,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,35 +32,60 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
+        /// <summary>
+        /// Gets a user with the given username from the repository.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns> Returns a 200 Ok together with a representatino of the user if the entity was found.
+        /// If no entity with the given username was found a status code of 404 Not Found is returned.</returns>
         [HttpGet("{userName}/", Name = "GetUser")]
         public ActionResult GetUser(string userName)
         {
-                 // needs to be get by username instead of by id
-            //_unitOfWork.UserRepository.Get();
-            // TODO: Get user from repo
-            return NoContent();
+            var user = _unitOfWork.UserRepository.Get(userName);
+            if(user == null)
+            {
+                return NotFound("No user with the given username was found");
+            }
+
+            var userForReturn = _mapper.Map<UserDto>(user);
+
+            return Ok(userForReturn);
         }
 
-        
+        /// <summary>
+        /// Creates a rating if no record with corelating rating- and rated-user was found, 
+        /// else it updates the existing record.
+        /// </summary>
+        /// <param name="rating"></param>
+        /// <returns> Returns a status code of 200 OK if the records was updated or created. 
+        /// If no user with the given id was found a status code of 400 Bad Request is returned.</returns>
+        [Authorize]
         [HttpPut("rate/")]
         public async Task<ActionResult> RateUser(RatingForCreationDto rating)
         {
-            // TODO: check if rated user and rating already have a rating.
-            /*
-            if(_unitOfWork.RatingRepository.EntityExists(ratedUser, ratingUser))
-            {
-
-            }
-            */
-
-            var ratingToAdd = _mapper.Map<Rating>(rating);
             var ratedUser = _unitOfWork.UserRepository.Get(rating.RatedUserId);
-            var ratingUser = await _userManager.GetUserAsync(User);
+            if (ratedUser == null)
+            {
+                return BadRequest("User could not be found");
+            }
 
-            ratingToAdd.RatedUser = ratedUser;
-            ratingToAdd.RatingUser = ratingUser;
+            Rating rating1 = new Rating();
+
+            var ratingUser = await _userManager.GetUserAsync(User);
+            var foundRating = _unitOfWork.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
+            if(foundRating == null)
+            {
+                var ratingToAdd = _mapper.Map<Rating>(rating);
+                ratingToAdd.RatedUser = ratedUser;
+                ratingToAdd.RatingUser = ratingUser;
+
+                _unitOfWork.RatingRepository.Add(ratingToAdd);
+            }
+            else
+            {
+                foundRating.Score = rating.Score;
+            }
             
-            _unitOfWork.RatingRepository.Add(ratingToAdd);
             _unitOfWork.SaveChanges();
 
             return Ok();

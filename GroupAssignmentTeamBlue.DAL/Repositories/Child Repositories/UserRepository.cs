@@ -11,8 +11,14 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
     public class UserRepository : GenericRepository<User>
     {
         public UserRepository(AdvertContext context) : base(context) 
-        { 
-            
+        {
+        }
+
+        public User Get(string userName)
+        {
+            return context.Users
+                .Where(u => u.UserName == userName)
+                .FirstOrDefault();
         }
     }
 }

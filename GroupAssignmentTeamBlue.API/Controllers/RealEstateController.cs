@@ -111,7 +111,6 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRealEstate(RealEstateForCreationDto realEstate)
         {
-            //User.Identity.Name?
             var realEstateToAdd = _mapper.Map<RealEstate>(realEstate);
 
             var user = await _userManager.GetUserAsync(User);
