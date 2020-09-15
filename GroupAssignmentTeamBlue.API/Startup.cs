@@ -41,9 +41,7 @@ namespace GroupAssignmentTeamBlue.API
                 .AddEntityFrameworkStores<AdvertContext>();
 
 
-            //Removes requirement for non-alphanumerics
-            services.Configure<PasswordOptions>(options =>
-            options.RequireNonAlphanumeric = false);
+
 
             services.AddControllersWithViews();
             
@@ -70,6 +68,12 @@ namespace GroupAssignmentTeamBlue.API
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.FromMinutes(5)
                 };
+            });
+
+            //Removes requirement for non-alphanumerics
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
             });
         }
 

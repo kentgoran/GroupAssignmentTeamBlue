@@ -35,6 +35,8 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         {
 
             var user = _mapper.Map<User>(userForCreation);
+            //unsure if email needs to be confirmed. Test?
+            user.EmailConfirmed = true;
             await _userManager.CreateAsync(user);
             await _userManager.AddPasswordAsync(user, userForCreation.Password);
             
