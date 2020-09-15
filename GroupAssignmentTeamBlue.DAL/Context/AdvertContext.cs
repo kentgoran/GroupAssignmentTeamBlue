@@ -32,10 +32,11 @@ namespace GroupAssignmentTeamBlue.DAL.Context
             modelBuilder.Entity<RealEstate>().Property(r => r.Rent).HasColumnType("money");
             modelBuilder.Entity<RealEstate>().Property(r => r.SellPrice).HasColumnType("money");
 
-            DbGenerator.Initializer();          
+            DbGenerator.Initializer();
+            modelBuilder.Entity<User>().HasData(DbGenerator.GeneratedUsers);
             modelBuilder.Entity<RealEstate>().HasData(DbGenerator.GeneratedRealEstates);
             modelBuilder.Entity<Comment>().HasData(DbGenerator.GeneratedComments);
-            modelBuilder.Entity<Rating>().HasData(DbGenerator.GeneratedRatings);
+            
 
             base.OnModelCreating(modelBuilder);
         }
