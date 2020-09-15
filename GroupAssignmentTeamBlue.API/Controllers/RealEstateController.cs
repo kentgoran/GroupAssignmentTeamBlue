@@ -35,7 +35,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [HttpGet]
         public IActionResult GetRealEstates(int skip = 0, int take = 10)
         {
-            if (take < 0 || take > 100)
+            if (take <= 0 || take > 100)
             {
                 return BadRequest();                
             }
