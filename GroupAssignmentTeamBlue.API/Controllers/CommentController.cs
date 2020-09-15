@@ -63,7 +63,13 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             return Ok(toReturn);
         }
 
-
+        /// <summary>
+        /// Gets comments made by a given user, by username
+        /// </summary>
+        /// <param name="username">The user from where to get comments</param>
+        /// <param name="skip">The amount of comments to skip, default = 0</param>
+        /// <param name="take">The amount of comments to take, default = 10</param>
+        /// <returns>200 OK, with a list of comments</returns>
         [HttpGet]
         [HttpGet("byuser/{username}/", Name = "GetCommentByUser")]
         public ActionResult GetComment(string username, int skip = 0, int take = 10)

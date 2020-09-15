@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Bogus.DataSets;
 
 namespace GroupAssignmentTeamBlue.DAL.Context
 {
@@ -30,7 +31,13 @@ namespace GroupAssignmentTeamBlue.DAL.Context
             modelBuilder.Entity<Comment>().HasOne(c => c.RealEstateInQuestion).WithMany(r => r.Comments);
             modelBuilder.Entity<RealEstate>().Property(r => r.Rent).HasColumnType("money");
             modelBuilder.Entity<RealEstate>().Property(r => r.SellPrice).HasColumnType("money");
-            //base.OnModelCreating has to be called in order for IdentityDbContext to do it's thing
+
+            DbGenerator.Initializer();
+            modelBuilder.Entity<User>().HasData(DbGenerator.GeneratedUsers);
+            modelBuilder.Entity<RealEstate>().HasData(DbGenerator.GeneratedRealEstates);
+            modelBuilder.Entity<Comment>().HasData(DbGenerator.GeneratedComments);
+            
+
             base.OnModelCreating(modelBuilder);
         }
     }
