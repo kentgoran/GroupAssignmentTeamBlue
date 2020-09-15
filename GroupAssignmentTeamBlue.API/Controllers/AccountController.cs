@@ -13,7 +13,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+        public class AccountController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
@@ -21,18 +21,23 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         public AccountController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-            _mapper = mapper;
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-        
+        /// <summary>
+        /// Registers a new user to the api
+        /// </summary>
+        /// <param name="userForCreation">The information needed to create the user</param>
+        /// <returns>200 OK</returns>
         [Route("register")]
         [HttpPost]
         [Consumes("application/x-www-form-urlencoded")]
         public async Task<IActionResult> RegisterNewUser([FromForm]UserForCreationDto userForCreation)
         {
-            //TODO: Actually add the new user, hash password etc
+
             var user = _mapper.Map<User>(userForCreation);
             await _userManager.CreateAsync(user);
             await _userManager.AddPasswordAsync(user, userForCreation.Password);
+            
             return Ok();
         }
     }

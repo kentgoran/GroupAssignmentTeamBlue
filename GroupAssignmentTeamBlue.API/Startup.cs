@@ -16,6 +16,8 @@ using GroupAssignmentTeamBlue.Model;
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace GroupAssignmentTeamBlue.API
 {
@@ -38,6 +40,11 @@ namespace GroupAssignmentTeamBlue.API
             options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AdvertContext>();
 
+
+            //Removes requirement for non-alphanumerics
+            services.Configure<PasswordOptions>(options =>
+            options.RequireNonAlphanumeric = false);
+
             services.AddControllersWithViews();
             
             services.AddRazorPages();
@@ -46,10 +53,6 @@ namespace GroupAssignmentTeamBlue.API
                 AddXmlDataContractSerializerFormatters();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-            //Removes requirement for non-alphanumerics
-            services.Configure<PasswordOptions>(options =>
-            options.RequireNonAlphanumeric = false);
 
             //This adds checking our token
             services.AddAuthentication(options =>
@@ -65,7 +68,7 @@ namespace GroupAssignmentTeamBlue.API
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromMinutes(2)
+                    ClockSkew = TimeSpan.FromMinutes(5)
                 };
             });
         }
@@ -87,9 +90,11 @@ namespace GroupAssignmentTeamBlue.API
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            
+
             app.UseRouting();
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
