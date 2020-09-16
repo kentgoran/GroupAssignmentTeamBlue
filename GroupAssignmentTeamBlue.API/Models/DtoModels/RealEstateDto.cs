@@ -9,8 +9,8 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public decimal Rent { get; set; }
-        public decimal SellPrice { get; set; }
+        public decimal? Rent { get; set; }
+        public decimal? SellPrice { get; set; }
         public bool IsRentable { get; set; }
         public bool IsSellable { get; set; }
     }

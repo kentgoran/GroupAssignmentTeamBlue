@@ -29,9 +29,9 @@ namespace GroupAssignmentTeamBlue.Model
         [Required]
         public bool IsSellable { get; set; }
         [DataType(DataType.Currency)]
-        public decimal Rent { get; set; }
+        public decimal? Rent { get; set; }
         [DataType(DataType.Currency)]
-        public decimal SellPrice { get; set; }
+        public decimal? SellPrice { get; set; }
         //Can't set dynamic range (DateTime.Now.Year), so set 2 years from now,
         //so that properties not yet built can be input in the system
         [Range(1600, 2022)]

@@ -37,10 +37,10 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         public bool IsSellable { get; set; }
 
         [DataType(DataType.Currency)]
-        public decimal Rent { get; set; }
+        public decimal? Rent { get; set; }
 
         [DataType(DataType.Currency)]
-        public decimal SellPrice { get; set; }
+        public decimal? SellPrice { get; set; }
 
         public int YearBuilt { get; set; }
     }
