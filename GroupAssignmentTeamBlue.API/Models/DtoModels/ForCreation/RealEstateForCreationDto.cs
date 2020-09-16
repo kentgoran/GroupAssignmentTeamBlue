@@ -6,9 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using GroupAssignmentTeamBlue.API.ValidationAttributes;
 
 namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 {
+    [HasToBeForSaleOrRentable(ErrorMessage = "The real estate has to either be for sale or retable")]
     public class RealEstateForCreationDto
     {
         [Required(ErrorMessage = "A {0} is required")]
