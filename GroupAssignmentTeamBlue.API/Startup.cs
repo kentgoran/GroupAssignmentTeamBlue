@@ -94,9 +94,13 @@ namespace GroupAssignmentTeamBlue.API
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            
+            //Below ensures that un-applied migrations are applied at runtime
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetService<AdvertContext>().Database.Migrate();
+            }
 
-            app.UseRouting();
+                app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();

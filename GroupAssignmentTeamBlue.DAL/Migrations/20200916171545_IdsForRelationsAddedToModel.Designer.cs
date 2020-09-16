@@ -4,14 +4,16 @@ using GroupAssignmentTeamBlue.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GroupAssignmentTeamBlue.DAL.Migrations
 {
     [DbContext(typeof(AdvertContext))]
-    partial class AdvertContextModelSnapshot : ModelSnapshot
+    [Migration("20200916171545_IdsForRelationsAddedToModel")]
+    partial class IdsForRelationsAddedToModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,32 +54,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "This apartment is crap...",
-                            RealEstateId = 1,
-                            TimeOfCreation = new DateTime(2020, 9, 16, 17, 9, 12, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Content = "You are just mad because I didn't let you rent it...",
-                            RealEstateId = 1,
-                            TimeOfCreation = new DateTime(2020, 9, 16, 17, 14, 30, 0, DateTimeKind.Unspecified),
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Content = "Woah, *Grabbing popcorn*",
-                            RealEstateId = 1,
-                            TimeOfCreation = new DateTime(2020, 9, 16, 17, 30, 29, 0, DateTimeKind.Unspecified),
-                            UserId = 3
-                        });
                 });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Rating", b =>
@@ -103,22 +79,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.HasIndex("RatingUserId");
 
                     b.ToTable("Ratings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            RatedUserId = 1,
-                            RatingUserId = 2,
-                            Score = 4
-                        },
-                        new
-                        {
-                            Id = 2,
-                            RatedUserId = 3,
-                            RatingUserId = 1,
-                            Score = 1
-                        });
                 });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.RealEstate", b =>
@@ -174,38 +134,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("RealEstates");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Kulls väg 8",
-                            Contact = "0709-662239",
-                            DateOfAdvertCreation = new DateTime(2020, 9, 14, 18, 15, 30, 0, DateTimeKind.Unspecified),
-                            Description = "This is a test",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 200m,
-                            Title = "Sum",
-                            Type = 0,
-                            UserId = 2,
-                            YearBuilt = 2019
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Kulls väg 23",
-                            Contact = "112",
-                            DateOfAdvertCreation = new DateTime(2020, 9, 13, 12, 28, 30, 0, DateTimeKind.Unspecified),
-                            Description = "This is a test",
-                            IsRentable = false,
-                            IsSellable = true,
-                            SellPrice = 1795000m,
-                            Title = "Haiii",
-                            Type = 0,
-                            UserId = 1,
-                            YearBuilt = 2001
-                        });
                 });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.User", b =>
@@ -273,72 +201,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "68e01f8c-ba04-416e-9e53-dab4c5f2e50d",
-                            Email = "bamse@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "BAMSE@GMAIL.COM",
-                            NormalizedUserName = "BAMSE@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAR00VgEXuNcTRL9aekKB86ar4F2D+pRmar9AGvUw/Fnxxe531NIpGwsPAi56bxqTg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "DRGRSWDQ5C5MZZBZQUWDGHQRW66QI5D6",
-                            TwoFactorEnabled = false,
-                            UserName = "bamse@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b3d90eb5-90d9-4f69-97bd-057f32692f84",
-                            Email = "skalman@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "SKALMAN@GMAIL.COM",
-                            NormalizedUserName = "SKALMAN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEOcqQ00ZZaNxwRK5lJGV1RPtl7rGeeMIlietoHd62yeavAR3PsuAGrBI8TWClg/qg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "P7HU2IDVNJQEYMGXCN55NQHELVS3TECN",
-                            TwoFactorEnabled = false,
-                            UserName = "skalman@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c6ba646-058a-4876-ab51-e681e26f74d3",
-                            Email = "alfons@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "ALFONS@GMAIL.COM",
-                            NormalizedUserName = "ALFONS@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGFDh/g9WmY5IWx5cxkE44yyV5a6ucoFfhUcoe8DmVNIP5Ror9j1dYRxA2zKQMXG0g==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "K4GFE2ZZLA7BRDI3VWC2M2N2ILHKE6X3",
-                            TwoFactorEnabled = false,
-                            UserName = "alfons@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "a638d86b-eac1-4338-90c3-a0f9b42ac60f",
-                            Email = "laban@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "LABAN@GMAIL.COMm",
-                            NormalizedUserName = "LABAN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMD595Y3JYWe+nH1AIQhsN6Ft74vry91PDj0/7Mt4ZZoFim856jomEAfq92mo8LHuQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "NW6F2HLUH24CNHBFUNW54LVDZVNG3ALB",
-                            TwoFactorEnabled = false,
-                            UserName = "laban@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.UserRole", b =>
