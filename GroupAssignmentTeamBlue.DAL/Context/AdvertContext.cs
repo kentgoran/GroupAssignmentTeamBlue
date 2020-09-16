@@ -34,9 +34,6 @@ namespace GroupAssignmentTeamBlue.DAL.Context
 
             DbGenerator.Initializer();
             modelBuilder.Entity<User>().HasData(DbGenerator.GeneratedUsers);
-            modelBuilder.Entity<RealEstate>().HasData(DbGenerator.GeneratedRealEstates);
-            modelBuilder.Entity<Comment>().HasData(DbGenerator.GeneratedComments);
-            
 
             base.OnModelCreating(modelBuilder);
         }
