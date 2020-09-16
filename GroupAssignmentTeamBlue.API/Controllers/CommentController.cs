@@ -103,7 +103,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
 
             if(comment.RealEstateInQuestion == null)
             {
-                return BadRequest($"RealEstate with id {commentForCreation.RealEstateId} was not found");
+                return NotFound($"RealEstate with id {commentForCreation.RealEstateId} was not found");
             }
             comment.User = await _userManager.FindByNameAsync(username);
             
