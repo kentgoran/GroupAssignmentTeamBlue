@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupAssignmentTeamBlue.DAL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupAssignmentTeamBlue.API", "GroupAssignmentTeamBlue.API\GroupAssignmentTeamBlue.API.csproj", "{9905B0B6-ECEE-487B-A0AD-3C2334E7C6FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupAssignmentTeamBlue.Tests", "GroupAssignmentTeamBlue.Tests\GroupAssignmentTeamBlue.Tests.csproj", "{E0A8415A-D712-421E-AF8F-4DFC48225956}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9905B0B6-ECEE-487B-A0AD-3C2334E7C6FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9905B0B6-ECEE-487B-A0AD-3C2334E7C6FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9905B0B6-ECEE-487B-A0AD-3C2334E7C6FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0A8415A-D712-421E-AF8F-4DFC48225956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0A8415A-D712-421E-AF8F-4DFC48225956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0A8415A-D712-421E-AF8F-4DFC48225956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0A8415A-D712-421E-AF8F-4DFC48225956}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
