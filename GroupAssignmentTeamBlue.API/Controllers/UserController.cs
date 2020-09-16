@@ -58,7 +58,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// </summary>
         /// <param name="rating"></param>
         /// <returns> Returns a status code of 200 OK if the records was updated or created. 
-        /// If no user with the given id was found a status code of 400 Bad Request is returned.</returns>
+        /// If no user with the given id was found a status code of 404 Not Found is returned.</returns>
         [Authorize]
         [HttpPut("rate/")]
         public async Task<ActionResult> RateUser(RatingForCreationDto rating)
@@ -66,7 +66,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             var ratedUser = _unitOfWork.UserRepository.Get(rating.RatedUserId);
             if (ratedUser == null)
             {
-                return BadRequest("User could not be found");
+                return NotFound("User could not be found");
             }
 
             Rating rating1 = new Rating();

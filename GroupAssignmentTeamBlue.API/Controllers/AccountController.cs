@@ -13,7 +13,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-        public class AccountController : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
@@ -23,6 +23,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
+
         /// <summary>
         /// Registers a new user to the api
         /// </summary>
