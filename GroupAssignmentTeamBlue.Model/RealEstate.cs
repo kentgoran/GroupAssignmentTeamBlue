@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace GroupAssignmentTeamBlue.Model
@@ -15,9 +16,10 @@ namespace GroupAssignmentTeamBlue.Model
         public string Title { get; set; }
         [MaxLength(500)]
         public string Description { get; set; }
-
-        [Required]
+        [ForeignKey("UserId")]
         public User User { get; set; }
+        [Required]
+        public int UserId { get; set; }
         [Required]
         public string Contact { get; set; }
         [Required]

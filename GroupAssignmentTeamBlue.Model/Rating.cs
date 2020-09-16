@@ -10,10 +10,15 @@ namespace GroupAssignmentTeamBlue.Model
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [ForeignKey("RatedUserId")]
         public User RatedUser { get; set; }
         [Required]
+        public int RatedUserId { get; set; }
+       
+        [ForeignKey("RatingUserId")]
         public User RatingUser { get; set; }
+        [Required]
+        public int RatingUserId { get; set; }
         [Required]
         [Range(1,5)]
         public int Score { get; set; }
