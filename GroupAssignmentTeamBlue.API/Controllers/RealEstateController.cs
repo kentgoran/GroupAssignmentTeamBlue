@@ -35,9 +35,13 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [HttpGet]
         public IActionResult GetRealEstates(int skip = 0, int take = 10)
         {
-            if (take <= 0 || take > 100)
+            if (skip < 0)
             {
-                return BadRequest();                
+                return BadRequest("Skip can't be a negative number");
+            }
+            if (take < 1 || take > 100)
+            {
+                return BadRequest("Take must be 1-100");
             }
 
             var realEstateEntities = _unitOfWork.RealEstateRepository

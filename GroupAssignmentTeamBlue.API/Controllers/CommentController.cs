@@ -37,7 +37,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// GET Method for getting comments based on the realEstate they were written for, with skip and take for paging-functionality
         /// </summary>
         /// <param name="id">id-number to the realEstate in question</param>
         /// <param name="skip">Optional number for comments to skip, default is 0</param>
