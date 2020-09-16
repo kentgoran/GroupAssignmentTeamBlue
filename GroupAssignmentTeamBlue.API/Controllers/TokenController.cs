@@ -23,6 +23,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             _userManager = userManager;
             _configuration = configuration;
         }
+
         /// <summary>
         /// POST action for /token, checks username and password to generate a token
         /// </summary>
@@ -41,7 +42,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             else
             {
                 
-                return BadRequest();
+                return BadRequest("Invalid username or password");
             }
         }
 

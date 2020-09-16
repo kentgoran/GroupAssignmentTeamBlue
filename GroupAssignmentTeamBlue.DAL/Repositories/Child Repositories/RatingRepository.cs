@@ -13,5 +13,12 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         public RatingRepository(AdvertContext context) : base(context)
         {
         }
+
+        public Rating Get(int ratedUserId, int ratingUserId)
+        {
+            return context.Ratings
+                .Where(r => r.RatedUser.Id == ratedUserId && r.RatingUser.Id == ratingUserId)
+                .FirstOrDefault();
+        }
     }
 }

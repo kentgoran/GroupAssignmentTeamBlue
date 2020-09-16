@@ -37,7 +37,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// GET Method for getting comments based on the realEstate they were written for, with skip and take for paging-functionality
         /// </summary>
         /// <param name="id">id-number to the realEstate in question</param>
         /// <param name="skip">Optional number for comments to skip, default is 0</param>
@@ -103,7 +103,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
 
             if(comment.RealEstateInQuestion == null)
             {
-                return BadRequest($"RealEstate with id {commentForCreation.RealEstateId} was not found");
+                return NotFound($"RealEstate with id {commentForCreation.RealEstateId} was not found");
             }
             comment.User = await _userManager.FindByNameAsync(username);
             
