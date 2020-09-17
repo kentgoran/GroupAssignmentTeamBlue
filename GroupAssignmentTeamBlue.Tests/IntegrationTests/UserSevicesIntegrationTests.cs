@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Http;
 using GroupAssignmentTeamBlue.Model;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using System.IO;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.IdentityModel.Tokens.Jwt;
+using Newtonsoft.Json;
 
 namespace GroupAssignmentTeamBlue.Tests.IntegrationTests
 {
@@ -24,9 +28,6 @@ namespace GroupAssignmentTeamBlue.Tests.IntegrationTests
             _client = new HttpClient();
         }
 
-
-        // Tests for status codes??
-
         #region GetUserTests
         [Fact]
         public async Task GetUser_ExistingUser_ShouldGetUser()
@@ -37,24 +38,41 @@ namespace GroupAssignmentTeamBlue.Tests.IntegrationTests
             var response = await _client.GetAsync(getUserRequestUrl);
             using (var stream = new MemoryStream())
             {
-
+                await response.Content.CopyToAsync(stream);
+                var serializer = JsonSerializer.Create();
+                serializer.Deserialize(stream);
+                User user = (User)DeserializeFromStream(stream);
+                stream.
             }
-            /*
-             var user = await response.Content.CopyToAsync();
+
+            using (var reader = new Json())
+                // Assert
+
+                Assert.NotNull(user);
+            Assert.IsType<UserDto>(user);
+            //Assert.Equal(foundUser, user);
+            //Assert.Equal(foundUser.Id, user.Id);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);           
+        }
+
+        [Fact]
+        public async Task GetUser_InvalidUser_ShouldNotCreateUser()
+        {
+            // Arrange
+
+            // Act
+            var response = await _client.GetAsync(getUserRequestUrl);
+            using (var stream = new MemoryStream())
+            {
+                await response.Content.CopyToAsync(stream);
+            }
+            
             // Assert
             Assert.NotNull(user);
             Assert.IsType<UserDto>(user);
             //Assert.Equal(foundUser, user);
-            Assert.Equal(foundUser.Id, user.Id);
-            */
-        }
-
-        [Fact]
-        public void GetUser_InvalidUser_ShouldNotCreateUser()
-        {
-            // Arrange
-            // Act
-            // Assert
+            //Assert.Equal(foundUser.Id, user.Id);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
         #endregion
 
