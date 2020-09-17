@@ -65,7 +65,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [HttpGet("{id}/", Name = "GetRealEstate")]
         public ActionResult GetRealEstate(int id)
         {
-            var realEstateEntity = _unitOfWork.RealEstateRepository.Get(id);
+            var realEstateEntity = _unitOfWork.RealEstateRepository.GetAndIncludeComments(id);
             if (realEstateEntity == null)
             {
                 return NotFound($"RealEstate with id {id} not found");

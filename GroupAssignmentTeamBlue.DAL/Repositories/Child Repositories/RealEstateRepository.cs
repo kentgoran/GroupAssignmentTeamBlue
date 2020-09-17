@@ -25,5 +25,10 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         {
             return context.RealEstates.OrderByDescending(r => r.DateOfAdvertCreation).Skip(skip).Take(take).ToList();
         }
+
+        public RealEstate GetAndIncludeComments(int Id)
+        {
+            return context.RealEstates.Where(r => r.Id == Id).Include(r => r.Comments).FirstOrDefault();
+        }
     }
 }

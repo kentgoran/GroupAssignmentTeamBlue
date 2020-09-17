@@ -21,7 +21,9 @@ namespace GroupAssignmentTeamBlue.API.Profiles
 
             CreateMap<RealEstate, RealEstateDto>();
 
-            CreateMap<RealEstate, RealEstateFullDetailDto>();
+            CreateMap<RealEstate, RealEstateFullDetailDto>()
+                .ForMember(dto => dto.Comments, opt => opt.MapFrom(source => source.Comments));
+                
                 //.ForMember(dto => dto.Address, 
                 //opt => opt.MapFrom(source => $"{source.Address.StreetName} {source.Address.StreetNumber}"));
 
@@ -33,9 +35,12 @@ namespace GroupAssignmentTeamBlue.API.Profiles
 
             CreateMap<RealEstateForCreationDto, RealEstate>()
                 .ForMember(entity => entity.IsSellable, 
-                opt => opt.MapFrom(source => source.SellPrice == null ? false : true))
+                opt => opt.MapFrom(source => source.SellingPrice == null ? false : true))
                 .ForMember(entity => entity.IsRentable, 
-                opt => opt.MapFrom(source => source.Rent == null ? false : true));
+                opt => opt.MapFrom(source => source.RentingPrice == null ? false : true))
+                .ForMember(entity => entity.SellPrice, opt => opt.MapFrom(source => source.SellingPrice))
+                .ForMember(entity => entity.Rent, opt => opt.MapFrom(source => source.RentingPrice))
+                .ForMember(entity => entity.DateOfAdvertCreation, opt => opt.MapFrom(source => DateTime.UtcNow));
         }
     }
 }

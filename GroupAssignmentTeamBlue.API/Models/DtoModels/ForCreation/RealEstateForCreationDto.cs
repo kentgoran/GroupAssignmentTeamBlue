@@ -10,7 +10,7 @@ using GroupAssignmentTeamBlue.API.ValidationAttributes;
 
 namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 {
-    [HasToBeForSaleOrRentable(ErrorMessage = "The real estate has to either be for sale or retable")]
+    [HasToBeForSaleOrRentable(ErrorMessage = "The real estate has to either be for sale or rentable")]
     public class RealEstateForCreationDto
     {
         [Required(ErrorMessage = "A {0} is required")]
@@ -29,10 +29,10 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         public EstateType Type { get; set; }
 
         [DataType(DataType.Currency)]
-        public decimal? Rent { get; set; }
+        public decimal? RentingPrice { get; set; }
 
         [DataType(DataType.Currency)]
-        public decimal? SellPrice { get; set; }
+        public decimal? SellingPrice { get; set; }
 
         public int YearBuilt { get; set; }
     }

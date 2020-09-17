@@ -17,7 +17,7 @@ namespace GroupAssignmentTeamBlue.API.ValidationAttributes
 
                 // If the realestate is neither sellable nor rentable,
                 // return error message
-                if (realEstate.SellPrice == null && realEstate.Rent == null)
+                if (realEstate.SellingPrice == null && realEstate.RentingPrice == null)
                 {
                     return new ValidationResult(ErrorMessage,
                         new[] { nameof(RealEstateForCreationDto) });
