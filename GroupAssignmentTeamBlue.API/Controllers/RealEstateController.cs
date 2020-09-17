@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
 {
@@ -32,6 +33,12 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
+        /// <summary>
+        /// GET for RealEstates, with optional skip/take parameters for paging, does not require authentication
+        /// </summary>
+        /// <param name="skip">Amount to skip, can't be negative number. default = 0</param>
+        /// <param name="take">Amount to take, has to be 1-100. default = 10</param>
+        /// <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         [HttpGet]
         public IActionResult GetRealEstates(int skip = 0, int take = 10)
         {
@@ -45,76 +52,43 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             }
 
             var realEstateEntities = _unitOfWork.RealEstateRepository
-                .SkipAndTakeRealEstates(skip, take).OrderByDescending(re => re.DateOfAdvertCreation);
+                .SkipAndTakeRealEstates(skip, take);
             var realEstateDtos = _mapper.Map<IEnumerable<RealEstateDto>>(realEstateEntities);
             return Ok(realEstateDtos);
         }
 
-        // Det här? ...
+        /// <summary>
+        /// GET for a single RealEstate, by RealEstateId. If user is authenticated, it returns full details, else a dto with less details
+        /// </summary>
+        /// <param name="id">Id of the RealEstate to get</param>
+        /// <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
         [HttpGet("{id}/", Name = "GetRealEstate")]
-        public ActionResult GetRealEstate(int realEstateId)
+        public ActionResult GetRealEstate(int id)
         {
-            var realEstateEntity = _unitOfWork.RealEstateRepository.Get(realEstateId);
-            if(realEstateEntity == null)
-            {
-                return NotFound();
-            }
-
-            RealEstateDto realEstateDto = null;
-
-            realEstateDto = User.Identity.IsAuthenticated ?
-                _mapper.Map<RealEstateFullDetailDto>(realEstateEntity) : 
-                _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
-
-            // If the user is logged in/ authenticated 
-            if (User.Identity.IsAuthenticated)
-            {
-                // Creates a map of the real estate with all details included
-                realEstateDto = _mapper.Map<RealEstateFullDetailDto>(realEstateEntity);
-            }
-            else
-            {
-                // Creates a map of the real estate with some details included
-                realEstateDto = _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
-            }
-            return Ok(realEstateDto);
-        }
-
-
-            // ... eller det här vv ?
-        /*
-        [HttpGet("{id}/", Name = "GetRealEstate")]
-        public ActionResult GetRealEstate(int realEstateId)
-        {
-            var realEstateEntity = _unitOfWork.RealEstateRepository.Get(realEstateId);
-
+            var realEstateEntity = _unitOfWork.RealEstateRepository.Get(id);
             if (realEstateEntity == null)
             {
-                return NotFound();
+                return NotFound($"RealEstate with id {id} not found");
             }
-            var realEstateDto = _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
+
+            //If the user is logged in, returns the fully detailed RealEstate, else returns less detailed data
+            RealEstateDto realEstateDto = User.Identity.IsAuthenticated ?
+                _mapper.Map<RealEstateFullDetailDto>(realEstateEntity) :
+                _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
+
             return Ok(realEstateDto);
         }
 
-        [Authorize]
-        [HttpGet("{id}/", Name = "GetRealEstate")]
-        public ActionResult GetRealEstateDetails(int realEstateId)
-        {
-            var realEstateEntity = _unitOfWork.RealEstateRepository.Get(realEstateId);
-
-            if(realEstateEntity == null)
-            {
-                return NotFound();
-            }
-            var realEstateDto = _mapper.Map<RealEstateFullDetailDto>(realEstateEntity);
-            return Ok(realEstateDto);
-        }
-        */
-
+        /// <summary>
+        /// POST action for RealEstate. Creates a new RealEstate. Requires authentication
+        /// </summary>
+        /// <param name="realEstate">Contains all the information needed to create a new RealEstate</param>
+        /// <returns>201 Created, with some of the info input</returns>
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateRealEstate(RealEstateForCreationDto realEstate)
         {
+            //Right now, this method does NOT work, due to difference between our ForCreationDto and the actual specifications from Claes
             var realEstateToAdd = _mapper.Map<RealEstate>(realEstate);
 
             var user = await _userManager.GetUserAsync(User);

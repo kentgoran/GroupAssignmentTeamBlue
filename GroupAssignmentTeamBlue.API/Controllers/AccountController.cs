@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
@@ -28,19 +29,18 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// Registers a new user to the api
         /// </summary>
         /// <param name="userForCreation">The information needed to create the user</param>
-        /// <returns>200 OK</returns>
+        /// <returns>200 OK, or 400 Bad Request with additional error info in the body</returns>
         [Route("register")]
         [HttpPost]
         [Consumes("application/x-www-form-urlencoded")]
         public async Task<IActionResult> RegisterNewUser([FromForm]UserForCreationDto userForCreation)
         {
-
             var user = _mapper.Map<User>(userForCreation);
-            //unsure if email needs to be confirmed. Test?
-            user.EmailConfirmed = true;
-            await _userManager.CreateAsync(user);
-            await _userManager.AddPasswordAsync(user, userForCreation.Password);
-            
+            var result = await _userManager.CreateAsync(user, userForCreation.Password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
             return Ok();
         }
     }

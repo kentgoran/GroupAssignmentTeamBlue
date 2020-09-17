@@ -55,11 +55,14 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             {
                 return BadRequest("Take must be 1-100");
             }
+            if (!_unitOfWork.RealEstateRepository.EntityExists(id))
+            {
+                return NotFound($"Real Estate Id {id} was not found.");
+            }
+
             var comments = _unitOfWork.CommentRepository.GetCommentsForRealEstate(id, skip, take);
-            //Does this work? or map each one individually?
             var toReturn = _mapper.Map<List<CommentDto>>(comments);
             
-
             return Ok(toReturn);
         }
 
@@ -82,6 +85,11 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             {
                 return BadRequest("Take must be 1-100");
             }
+            if(_unitOfWork.UserRepository.Get(username) == null)
+            {
+                return NotFound($"Username '{username}' was not found");
+            }
+
             var comments = _unitOfWork.CommentRepository.GetCommentsByUser(username, skip, take);
             var toReturn = _mapper.Map<List<CommentDto>>(comments);
 
@@ -94,18 +102,20 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="commentForCreation">Information about the comment to be created</param>
         /// <returns>200 OK with comment content, username and creation-time. BadRequest if RealEstate is not found</returns>
         [HttpPost]
-        public async Task<ActionResult> PostComment(CommentForCreationDto commentForCreation)
+        public ActionResult PostComment(CommentForCreationDto commentForCreation)
         {
+            //Gets username from the token
             var username = HttpContext.User.Identity.Name;
             var comment = _mapper.Map<Comment>(commentForCreation);
-            //TODO: Change below logic to the mapper profile, if possible
-            comment.RealEstateInQuestion = _unitOfWork.RealEstateRepository.Get(commentForCreation.RealEstateId);
 
-            if(comment.RealEstateInQuestion == null)
+            //Check if the realestate-id maps to an actual entity
+            if(!_unitOfWork.RealEstateRepository.EntityExists(comment.RealEstateId))
             {
-                return NotFound($"RealEstate with id {commentForCreation.RealEstateId} was not found");
+                return NotFound($"RealEstate with id {comment.RealEstateId} was not found");
             }
-            comment.User = await _userManager.FindByNameAsync(username);
+
+            //get current users Id, and adds it to the new comment
+            comment.UserId = _unitOfWork.UserRepository.Get(username).Id;
             
             _unitOfWork.CommentRepository.Add(comment);
             _unitOfWork.SaveChanges();
