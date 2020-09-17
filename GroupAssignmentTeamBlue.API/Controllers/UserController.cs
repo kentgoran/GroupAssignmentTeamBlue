@@ -63,29 +63,30 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [HttpPut("rate/")]
         public async Task<ActionResult> RateUser(RatingForCreationDto rating)
         {
-            var ratedUser = _unitOfWork.UserRepository.Get(rating.RatedUserId);
+            var ratedUser = _unitOfWork.UserRepository.Get(rating.UserId);
             if (ratedUser == null)
             {
                 return NotFound("User could not be found");
             }
 
-            Rating rating1 = new Rating();
-
             var ratingUser = await _userManager.GetUserAsync(User);
+            if(ratingUser.Id == ratedUser.Id)
+            {
+                return BadRequest("You can't rate yourself");
+            }
+
             var foundRating = _unitOfWork.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
             if(foundRating == null)
             {
                 var ratingToAdd = _mapper.Map<Rating>(rating);
-                ratingToAdd.RatedUser = ratedUser;
-                ratingToAdd.RatingUser = ratingUser;
-
+                ratingToAdd.RatingUserId = ratingUser.Id;
                 _unitOfWork.RatingRepository.Add(ratingToAdd);
             }
             else
             {
-                foundRating.Score = rating.Score;
+                foundRating.Score = rating.Value;
             }
-            
+
             _unitOfWork.SaveChanges();
 
             return Ok();

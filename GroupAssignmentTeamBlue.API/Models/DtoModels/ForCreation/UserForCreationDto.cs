@@ -18,11 +18,12 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 
         [Required(ErrorMessage = "An email address is required")]
         [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "A password is required")]
         //Regex checks atleast 1 lowercase, 1 uppercase, 1 digit and atleast 6 total
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$", ErrorMessage = "Password must contain atleast 1 uppercase letter, 1 lowercase letter, 1 digit and be atleast 6 digits long")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$", ErrorMessage = "Password must contain atleast 1 uppercase letter, 1 lowercase letter, 1 digit and be atleast 6 digits long")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

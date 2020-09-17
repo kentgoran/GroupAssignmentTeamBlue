@@ -41,7 +41,6 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             }
             else
             {
-                
                 return BadRequest("Invalid username or password");
             }
         }
@@ -77,7 +76,6 @@ namespace GroupAssignmentTeamBlue.API.Controllers
                 new Claim(JwtRegisteredClaimNames.Nbf, issuedTime.ToUnixTimeSeconds().ToString()),
                 new Claim(JwtRegisteredClaimNames.Exp, expiresTime.ToUnixTimeSeconds().ToString())
             };
-            //TODO: Move secret key!
             var token = new JwtSecurityToken(
                 new JwtHeader(
                     new SigningCredentials(

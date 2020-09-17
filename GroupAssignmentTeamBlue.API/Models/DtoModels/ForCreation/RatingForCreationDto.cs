@@ -9,10 +9,10 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
     public class RatingForCreationDto
     {
         [Required(ErrorMessage = "A {0} is required")]
-        public int RatedUserId { get; set; }
+        public int UserId { get; set; }
         // Rated User kommer från URL och Rating user kommer från token
         [Required(ErrorMessage = "A {0} is required")]
         [Range(1, 5)]
-        public int Score { get; set; }
+        public int Value { get; set; }
     }
 }
