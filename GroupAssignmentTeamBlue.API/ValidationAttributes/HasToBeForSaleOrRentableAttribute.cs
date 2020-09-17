@@ -15,16 +15,9 @@ namespace GroupAssignmentTeamBlue.API.ValidationAttributes
             {
                 var realEstate = value as RealEstateForCreationDto;
 
-                bool isLegalSale = realEstate.IsSellable ? 
-                    realEstate.SellPrice != null : realEstate.SellPrice == null;
-
-                bool isLegalRent = realEstate.IsRentable ? 
-                    realEstate.Rent != null : realEstate.Rent == null;
-
                 // If the realestate is neither sellable nor rentable,
                 // return error message
-                if ((!realEstate.IsSellable && !realEstate.IsRentable)
-                    || !isLegalSale || !isLegalRent)
+                if (realEstate.SellPrice == null && realEstate.Rent == null)
                 {
                     return new ValidationResult(ErrorMessage,
                         new[] { nameof(RealEstateForCreationDto) });

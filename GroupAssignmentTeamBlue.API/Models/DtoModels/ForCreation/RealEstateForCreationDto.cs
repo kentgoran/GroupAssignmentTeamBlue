@@ -28,14 +28,6 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public EstateType Type { get; set; }
 
-        [Required(ErrorMessage = "A retable status required")]
-        [JsonConverter(typeof(BoolToStringConverter))]
-        public bool IsRentable { get; set; }
-
-        [Required(ErrorMessage = "A sellable status required")]
-        [JsonConverter(typeof(BoolToStringConverter))]
-        public bool IsSellable { get; set; }
-
         [DataType(DataType.Currency)]
         public decimal? Rent { get; set; }
 
