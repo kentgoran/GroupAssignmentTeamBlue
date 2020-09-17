@@ -27,29 +27,24 @@ namespace GroupAssignmentTeamBlue.DAL.Context
         public static ICollection<RealEstate> GeneratedRealEstates { get; private set; }
         public static ICollection<User> GeneratedUsers { get; private set; }
 
-        public static void Initializer()
+        public static void Initializer(int NumberOfRealEstatesToGenerate = 5)
         {       
             GeneratedUsers = GenerateUsers();
-            GeneratedRealEstates = GenerateRealEstates(5);
+            GeneratedRealEstates = GenerateRealEstates(NumberOfRealEstatesToGenerate);
+            //GeneratedComments = GenerateComments();
    
         }
-        private static ICollection<RealEstate> GenerateRealEstates(int count)
+        private static ICollection<RealEstate> GenerateRealEstates(int numberOfRealEstatesToGenerate)
         {
-
             Randomizer.Seed = new Random(5);
             int id = 1;
 
             var realEstates = new Faker<RealEstate>()
                 .CustomInstantiator(re => new RealEstate())
-                .RuleFor(re => re.Id, id++)
-                .RuleFor(re => re.Title, t => t.Lorem.Sentence())
-                .RuleFor(re => re.Description, t => t.Lorem.Paragraph())
-                .RuleFor(re => re.User, (f, re) =>
-                {
-                    int maxInt = GeneratedUsers.Count() - 1;
-                    int userspot = f.Random.Int(0, maxInt);
-                    return GeneratedUsers.ToList()[userspot];
-                })
+                .RuleFor(re => re.Id, _ => id++)
+                .RuleFor(re => re.Title, t => t.Lorem.Word())
+                .RuleFor(re => re.Description, t => t.Lorem.Sentence())
+                .RuleFor(re => re.UserId, t => t.Random.Int(1, 4))
                 .RuleFor(re => re.Contact, (f, re) =>
                 {
                     return $"{f.Name.FullName()}, ${f.Address.FullAddress()}";
@@ -63,24 +58,19 @@ namespace GroupAssignmentTeamBlue.DAL.Context
                 })
                 .RuleFor(re => re.Rent, (f, re) =>
                 {
-                    return re.IsRentable ? (decimal?)f.Random.Decimal(4500, 12500) : 0;
+                    return re.IsRentable ? Math.Round(f.Random.Decimal(4500, 12500)) : 0;
                 })
                 .RuleFor(re => re.SellPrice, (f, re) =>
                 {
-                    return re.IsSellable ? (decimal?)f.Random.Decimal(100000, 3000000) : 0;
+                    return re.IsSellable ? Math.Round(f.Random.Decimal(100000, 3000000)) : 0;
                 })
                 .RuleFor(re => re.YearBuilt, f => f.Random.Int(1600, DateTime.Now.Year))
                 .RuleFor(re => re.DateOfAdvertCreation, (f, re) =>
                 {
                     return f.Date.Between(new DateTime(re.YearBuilt, 01, 01), new DateTime(re.YearBuilt, 12, 31));
-                })
-                .RuleFor(re => re.Comments, (f, re) =>
-                {
-                    return GenerateComments(re.User, re, f.Random.Int(0, 5));
                 });
 
-
-            var users = realEstates.Generate(5);
+            var users = realEstates.Generate(numberOfRealEstatesToGenerate);
             return users;
         }
         private static ICollection<User> GenerateUsers()
@@ -162,24 +152,17 @@ namespace GroupAssignmentTeamBlue.DAL.Context
             };
             return result;
         }
-        private static ICollection<Comment> GenerateComments(User user, RealEstate realEstate, int count)
-        {
-            int commentId = GeneratedComments.Count() + 1;
+        //private static ICollection<Comment> GenerateComments()
+        //{
+        //    int commentId = GeneratedComments.Count() + 1;
+        //    var comments = new Faker<Comment>()
+        //        .RuleFor(c => c.Id, _ => commentId++)
+        //        .RuleFor(c => c.Content, f => f.Lorem.Sentence())
+        //        .RuleFor(c => c.UserId, f => f.Random.Int(1, 4))
+        //        .RuleFor(c => c.TimeOfCreation, f => f.Date.Between(new DateTime(1600, 01, 01), DateTime.Now.Date))
+        //        .RuleFor(c => c.RealEstateId, f => f.Random.Int(1, GeneratedRatings.Count())).Generate(25);
 
-            var comments = new Faker<Comment>()
-                .CustomInstantiator(c => new Comment())
-                .RuleFor(c => c.Id, commentId++)
-                .RuleFor(c => c.Content, f => f.Lorem.Paragraph())
-                .RuleFor(c => c.User, user)
-                .RuleFor(c => c.TimeOfCreation, f => f.Date.Between(new DateTime(1600, 01, 01), DateTime.Now.Date))
-                .RuleFor(c => c.RealEstateInQuestion, realEstate).Generate(count);
-
-            foreach (var comment in comments)
-            {
-
-                GeneratedComments.Add(comment);
-            }
-            return comments;
-        }
+        //    return comments;
+        //}
     }
 }
