@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroupAssignmentTeamBlue.DAL.Migrations
 {
     [DbContext(typeof(AdvertContext))]
-    [Migration("20200916171716_AddedSeedData")]
-    partial class AddedSeedData
+    [Migration("20200917204938_SeedData")]
+    partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,32 +54,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "This apartment is crap...",
-                            RealEstateId = 1,
-                            TimeOfCreation = new DateTime(2020, 9, 16, 17, 9, 12, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Content = "You are just mad because I didn't let you rent it...",
-                            RealEstateId = 1,
-                            TimeOfCreation = new DateTime(2020, 9, 16, 17, 14, 30, 0, DateTimeKind.Unspecified),
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Content = "Woah, *Grabbing popcorn*",
-                            RealEstateId = 1,
-                            TimeOfCreation = new DateTime(2020, 9, 16, 17, 30, 29, 0, DateTimeKind.Unspecified),
-                            UserId = 3
-                        });
                 });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Rating", b =>
@@ -105,22 +79,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.HasIndex("RatingUserId");
 
                     b.ToTable("Ratings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            RatedUserId = 1,
-                            RatingUserId = 2,
-                            Score = 4
-                        },
-                        new
-                        {
-                            Id = 2,
-                            RatedUserId = 3,
-                            RatingUserId = 1,
-                            Score = 1
-                        });
                 });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.RealEstate", b =>
@@ -181,32 +139,82 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Address = "Kulls väg 8",
-                            Contact = "0709-662239",
-                            DateOfAdvertCreation = new DateTime(2020, 9, 14, 18, 15, 30, 0, DateTimeKind.Unspecified),
-                            Description = "This is a test",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 200m,
-                            Title = "Sum",
+                            Address = "91073 Feest Spurs, West Wilfridville, Senegal",
+                            Contact = "Laurine Carroll, $1908 Antone Manors, South Araceli, Sri Lanka",
+                            DateOfAdvertCreation = new DateTime(1644, 12, 23, 14, 5, 42, 386, DateTimeKind.Unspecified).AddTicks(4720),
+                            Description = "Voluptatem fuga laudantium non ratione.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            Rent = 0m,
+                            SellPrice = 1096466m,
+                            Title = "laboriosam",
                             Type = 0,
-                            UserId = 2,
-                            YearBuilt = 2019
+                            UserId = 4,
+                            YearBuilt = 1644
                         },
                         new
                         {
                             Id = 2,
-                            Address = "Kulls väg 23",
-                            Contact = "112",
-                            DateOfAdvertCreation = new DateTime(2020, 9, 13, 12, 28, 30, 0, DateTimeKind.Unspecified),
-                            Description = "This is a test",
+                            Address = "930 Sonya Bridge, Feilshire, Philippines",
+                            Contact = "Jody Dietrich, $6304 Howell Roads, East Angusshire, Palestinian Territory",
+                            DateOfAdvertCreation = new DateTime(1649, 1, 23, 3, 0, 38, 110, DateTimeKind.Unspecified).AddTicks(377),
+                            Description = "Velit eaque sed quidem aut doloribus aut.",
+                            IsRentable = true,
+                            IsSellable = false,
+                            Rent = 4866m,
+                            SellPrice = 0m,
+                            Title = "quo",
+                            Type = 2,
+                            UserId = 2,
+                            YearBuilt = 1649
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "62059 Hilpert Brooks, Lake Haylie, Turkmenistan",
+                            Contact = "Nico Hauck, $80258 Cole Turnpike, South Dellview, Andorra",
+                            DateOfAdvertCreation = new DateTime(1702, 11, 23, 20, 53, 52, 222, DateTimeKind.Unspecified).AddTicks(9110),
+                            Description = "Sint consequuntur provident est aliquid deleniti aut voluptatibus vitae.",
+                            IsRentable = true,
+                            IsSellable = false,
+                            Rent = 9329m,
+                            SellPrice = 0m,
+                            Title = "sint",
+                            Type = 3,
+                            UserId = 2,
+                            YearBuilt = 1702
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "6552 Okuneva Haven, New Golden, Canada",
+                            Contact = "Verlie Bode, $117 Barton Springs, Scarletttown, French Guiana",
+                            DateOfAdvertCreation = new DateTime(1616, 5, 29, 9, 10, 21, 867, DateTimeKind.Unspecified).AddTicks(6542),
+                            Description = "Nulla sit qui corporis maiores minima sed.",
                             IsRentable = false,
                             IsSellable = true,
-                            SellPrice = 1795000m,
-                            Title = "Haiii",
+                            Rent = 0m,
+                            SellPrice = 301994m,
+                            Title = "vero",
                             Type = 0,
                             UserId = 1,
-                            YearBuilt = 2001
+                            YearBuilt = 1616
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "628 Goodwin Cape, New Dorrismouth, Belarus",
+                            Contact = "Wilton Mayert, $955 Hagenes Heights, Port Audra, Germany",
+                            DateOfAdvertCreation = new DateTime(1742, 1, 30, 16, 57, 59, 687, DateTimeKind.Unspecified).AddTicks(1157),
+                            Description = "Animi necessitatibus pariatur repudiandae a vel voluptatem amet atque excepturi.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            Rent = 0m,
+                            SellPrice = 1620100m,
+                            Title = "veritatis",
+                            Type = 2,
+                            UserId = 1,
+                            YearBuilt = 1742
                         });
                 });
 
@@ -501,13 +509,13 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.HasOne("GroupAssignmentTeamBlue.Model.User", "RatedUser")
                         .WithMany("RatingsRecieved")
                         .HasForeignKey("RatedUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GroupAssignmentTeamBlue.Model.User", "RatingUser")
                         .WithMany("RatingsMade")
                         .HasForeignKey("RatingUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 

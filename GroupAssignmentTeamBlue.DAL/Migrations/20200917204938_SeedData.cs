@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GroupAssignmentTeamBlue.DAL.Migrations
 {
-    public partial class AddedSeedData : Migration
+    public partial class SeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,37 +19,16 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Ratings",
-                columns: new[] { "Id", "RatedUserId", "RatingUserId", "Score" },
-                values: new object[,]
-                {
-                    { 1, 1, 2, 4 },
-                    { 2, 3, 1, 1 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "RealEstates",
                 columns: new[] { "Id", "Address", "Contact", "DateOfAdvertCreation", "Description", "IsRentable", "IsSellable", "Rent", "SellPrice", "Title", "Type", "UserId", "YearBuilt" },
                 values: new object[,]
                 {
-                    { 2, "Kulls väg 23", "112", new DateTime(2020, 9, 13, 12, 28, 30, 0, DateTimeKind.Unspecified), "This is a test", false, true, null, 1795000m, "Haiii", 0, 1, 2001 },
-                    { 1, "Kulls väg 8", "0709-662239", new DateTime(2020, 9, 14, 18, 15, 30, 0, DateTimeKind.Unspecified), "This is a test", true, false, 200m, null, "Sum", 0, 2, 2019 }
+                    { 4, "6552 Okuneva Haven, New Golden, Canada", "Verlie Bode, $117 Barton Springs, Scarletttown, French Guiana", new DateTime(1616, 5, 29, 9, 10, 21, 867, DateTimeKind.Unspecified).AddTicks(6542), "Nulla sit qui corporis maiores minima sed.", false, true, 0m, 301994m, "vero", 0, 1, 1616 },
+                    { 5, "628 Goodwin Cape, New Dorrismouth, Belarus", "Wilton Mayert, $955 Hagenes Heights, Port Audra, Germany", new DateTime(1742, 1, 30, 16, 57, 59, 687, DateTimeKind.Unspecified).AddTicks(1157), "Animi necessitatibus pariatur repudiandae a vel voluptatem amet atque excepturi.", false, true, 0m, 1620100m, "veritatis", 2, 1, 1742 },
+                    { 2, "930 Sonya Bridge, Feilshire, Philippines", "Jody Dietrich, $6304 Howell Roads, East Angusshire, Palestinian Territory", new DateTime(1649, 1, 23, 3, 0, 38, 110, DateTimeKind.Unspecified).AddTicks(377), "Velit eaque sed quidem aut doloribus aut.", true, false, 4866m, 0m, "quo", 2, 2, 1649 },
+                    { 3, "62059 Hilpert Brooks, Lake Haylie, Turkmenistan", "Nico Hauck, $80258 Cole Turnpike, South Dellview, Andorra", new DateTime(1702, 11, 23, 20, 53, 52, 222, DateTimeKind.Unspecified).AddTicks(9110), "Sint consequuntur provident est aliquid deleniti aut voluptatibus vitae.", true, false, 9329m, 0m, "sint", 3, 2, 1702 },
+                    { 1, "91073 Feest Spurs, West Wilfridville, Senegal", "Laurine Carroll, $1908 Antone Manors, South Araceli, Sri Lanka", new DateTime(1644, 12, 23, 14, 5, 42, 386, DateTimeKind.Unspecified).AddTicks(4720), "Voluptatem fuga laudantium non ratione.", false, true, 0m, 1096466m, "laboriosam", 0, 4, 1644 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Comments",
-                columns: new[] { "Id", "Content", "ParentCommentId", "RealEstateId", "TimeOfCreation", "UserId" },
-                values: new object[] { 1, "This apartment is crap...", null, 1, new DateTime(2020, 9, 16, 17, 9, 12, 0, DateTimeKind.Unspecified), 1 });
-
-            migrationBuilder.InsertData(
-                table: "Comments",
-                columns: new[] { "Id", "Content", "ParentCommentId", "RealEstateId", "TimeOfCreation", "UserId" },
-                values: new object[] { 2, "You are just mad because I didn't let you rent it...", null, 1, new DateTime(2020, 9, 16, 17, 14, 30, 0, DateTimeKind.Unspecified), 2 });
-
-            migrationBuilder.InsertData(
-                table: "Comments",
-                columns: new[] { "Id", "Content", "ParentCommentId", "RealEstateId", "TimeOfCreation", "UserId" },
-                values: new object[] { 3, "Woah, *Grabbing popcorn*", null, 1, new DateTime(2020, 9, 16, 17, 30, 29, 0, DateTimeKind.Unspecified), 3 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -57,37 +36,32 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
+                keyValue: 3);
+
+            migrationBuilder.DeleteData(
+                table: "RealEstates",
+                keyColumn: "Id",
+                keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "RealEstates",
+                keyColumn: "Id",
+                keyValue: 2);
+
+            migrationBuilder.DeleteData(
+                table: "RealEstates",
+                keyColumn: "Id",
+                keyValue: 3);
+
+            migrationBuilder.DeleteData(
+                table: "RealEstates",
+                keyColumn: "Id",
                 keyValue: 4);
 
             migrationBuilder.DeleteData(
-                table: "Comments",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Comments",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Comments",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Ratings",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Ratings",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
                 table: "RealEstates",
                 keyColumn: "Id",
-                keyValue: 2);
+                keyValue: 5);
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
@@ -97,17 +71,12 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "RealEstates",
-                keyColumn: "Id",
-                keyValue: 1);
+                keyValue: 2);
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: 2);
+                keyValue: 4);
         }
     }
 }
