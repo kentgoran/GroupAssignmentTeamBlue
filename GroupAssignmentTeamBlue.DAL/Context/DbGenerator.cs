@@ -21,17 +21,20 @@ namespace GroupAssignmentTeamBlue.DAL.Context
             GeneratedComments = new List<Comment>();
             GeneratedRatings = new List<Rating>();
             GeneratedUsers = new List<User>();
+            GeneratedRealEstates = new List<RealEstate>();
         }
         public static ICollection<Comment> GeneratedComments { get; private set; }
-        public static ICollection<Rating> GeneratedRatings { get; set; }
+        public static ICollection<Rating> GeneratedRatings { get; private set; }
         public static ICollection<RealEstate> GeneratedRealEstates { get; private set; }
         public static ICollection<User> GeneratedUsers { get; private set; }
 
-        public static void Initializer(int NumberOfRealEstatesToGenerate = 5)
+        public static void Initializer
+            (int numberOfRealEstatesToGenerate = 5, int numberOfRatingsToGenerate = 5, int numberOfCommentsToGenerate = 5)
         {       
             GeneratedUsers = GenerateUsers();
-            GeneratedRealEstates = GenerateRealEstates(NumberOfRealEstatesToGenerate);
-            //GeneratedComments = GenerateComments();
+            GeneratedRealEstates = GenerateRealEstates(numberOfRealEstatesToGenerate);
+            GeneratedComments = GenerateComments(numberOfCommentsToGenerate);
+            GeneratedRatings = GenerateRatings(numberOfRatingsToGenerate);
    
         }
         private static ICollection<RealEstate> GenerateRealEstates(int numberOfRealEstatesToGenerate)
@@ -152,17 +155,40 @@ namespace GroupAssignmentTeamBlue.DAL.Context
             };
             return result;
         }
-        //private static ICollection<Comment> GenerateComments()
-        //{
-        //    int commentId = GeneratedComments.Count() + 1;
-        //    var comments = new Faker<Comment>()
-        //        .RuleFor(c => c.Id, _ => commentId++)
-        //        .RuleFor(c => c.Content, f => f.Lorem.Sentence())
-        //        .RuleFor(c => c.UserId, f => f.Random.Int(1, 4))
-        //        .RuleFor(c => c.TimeOfCreation, f => f.Date.Between(new DateTime(1600, 01, 01), DateTime.Now.Date))
-        //        .RuleFor(c => c.RealEstateId, f => f.Random.Int(1, GeneratedRatings.Count())).Generate(25);
+        private static ICollection<Comment> GenerateComments(int count)
+        {
+            int ids = GeneratedComments.Count() + 1;
 
-        //    return comments;
-        //}
+            var commentGenerator = new Faker<Comment>()
+                .RuleFor(r => r.Id, _ => ids++)
+                .RuleFor(r => r.RealEstateId, f => f.Random.Int(1, GeneratedRealEstates.Count()))
+                .RuleFor(r => r.TimeOfCreation, f => f.Date.Recent())
+                .RuleFor(r => r.UserId, f => f.Random.Int(1, 4))
+                .RuleFor(r => r.Content, f => f.Lorem.Sentence());
+
+            return commentGenerator.Generate(count);
+        }
+
+        private static ICollection<Rating> GenerateRatings(int count)
+        {
+            int ids = GeneratedRatings.Count() + 1;
+
+            var ratingGenerator = new Faker<Rating>()
+                .RuleFor(r => r.Id, _ => ids++)
+                .RuleFor(r => r.RatedUserId, f => f.Random.Int(1, 4))
+                .RuleFor(r => r.RatingUserId, (f, r) => {
+                    int ratingUserId = 0;
+                    do
+                    {
+                        ratingUserId = f.Random.Int(1, 4);
+                    } while (ratingUserId != r.RatedUserId);
+
+                    return ratingUserId;
+                })
+                .RuleFor(r => r.Score, f => f.Random.Int(1, 5));
+
+            return ratingGenerator.Generate(count);
+        }
+
     }
 }
