@@ -57,9 +57,9 @@ namespace GroupAssignmentTeamBlue.API
 
 
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
             
-            services.AddRazorPages();
+            //services.AddRazorPages();
             
             services.AddControllers().AddNewtonsoftJson().
                 AddXmlDataContractSerializerFormatters();
@@ -146,13 +146,13 @@ namespace GroupAssignmentTeamBlue.API
                 setupAction.RoutePrefix = "";
             });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //    endpoints.MapRazorPages();
+            //});
         }
     }
 }
