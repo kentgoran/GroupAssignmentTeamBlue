@@ -20,6 +20,8 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Reflection;
 using System.IO;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace GroupAssignmentTeamBlue.API
 {
@@ -54,7 +56,15 @@ namespace GroupAssignmentTeamBlue.API
             options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AdvertContext>();
 
-
+            services.AddMvc(setupAction =>
+            {
+                setupAction.Filters.Add(
+                    new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
+                setupAction.Filters.Add(
+                    new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
+                setupAction.Filters.Add(
+                    new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+            });
             
 
             //services.AddControllersWithViews();
@@ -146,13 +156,13 @@ namespace GroupAssignmentTeamBlue.API
                 setupAction.RoutePrefix = "";
             });
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //    endpoints.MapRazorPages();
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+            });
         }
     }
 }

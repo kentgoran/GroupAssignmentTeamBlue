@@ -17,6 +17,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Consumes("application/x-www-form-urlencoded")]
     public class AccountController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
@@ -40,8 +41,6 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>200 OK, or 400 Bad Request with additional error info in the body</returns>
         [Route("register")]
         [HttpPost]
-        [Consumes("application/x-www-form-urlencoded")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> RegisterNewUser([FromForm]UserForCreationDto userForCreation)
         {

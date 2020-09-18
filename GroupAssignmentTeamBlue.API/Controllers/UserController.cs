@@ -20,6 +20,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
     /// </summary>
     [Route("api/[controller]s")]
     [ApiController]
+    [Consumes("application/json")]
     public class UserController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -72,7 +73,6 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// If no user with the given id was found a status code of 404 Not Found is returned.</returns>
         [Authorize]
         [HttpPut("rate/")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> RateUser(RatingForCreationDto rating)

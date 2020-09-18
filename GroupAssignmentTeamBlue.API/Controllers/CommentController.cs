@@ -20,6 +20,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
     [Authorize]
     [Route("api/[controller]s")]
     [ApiController]
+    [Consumes("application/json")]
     public class CommentController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -54,7 +55,6 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="take">optional number for comments to take, default is 10, max is 100</param>
         /// <returns>All comments wanted</returns>
         [HttpGet("{id}/", Name = "GetComment")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetComment(int id, int skip = 0, int take = 10)
@@ -86,7 +86,6 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="take">The amount of comments to take, default = 10</param>
         /// <returns>200 OK, with a list of comments</returns>
         [HttpGet("byuser/{username}/", Name = "GetCommentByUser")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetComment(string username, int skip = 0, int take = 10)

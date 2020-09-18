@@ -17,6 +17,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
     /// <summary>
     /// Controller for tokens. Called upon to create an access token
     /// </summary>
+    [Consumes("application/x-www-form-urlencoded")]
     public class TokenController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -42,7 +43,6 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>A token, expiration time etc</returns>
         [Route("/token")]
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Create(string username, string password, string grant_type)
         {
