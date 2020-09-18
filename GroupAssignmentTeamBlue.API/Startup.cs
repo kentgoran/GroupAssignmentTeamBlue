@@ -55,7 +55,7 @@ namespace GroupAssignmentTeamBlue.API
                 .AddEntityFrameworkStores<AdvertContext>();
 
 
-
+            
 
             //services.AddControllersWithViews();
             

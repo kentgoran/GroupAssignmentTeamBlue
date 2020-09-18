@@ -41,6 +41,8 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [Route("register")]
         [HttpPost]
         [Consumes("application/x-www-form-urlencoded")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> RegisterNewUser([FromForm]UserForCreationDto userForCreation)
         {
             var user = _mapper.Map<User>(userForCreation);

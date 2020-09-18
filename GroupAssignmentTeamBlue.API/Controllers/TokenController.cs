@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using GroupAssignmentTeamBlue.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -41,11 +42,13 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>A token, expiration time etc</returns>
         [Route("/token")]
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Create(string username, string password, string grant_type)
         {
             if(await IsValidUsernameAndPassword(username, password))
             {
-                return new ObjectResult(await GenerateToken(username));
+                return Ok(new ObjectResult(await GenerateToken(username)));
             }
             else
             {
