@@ -12,13 +12,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
 {
+    /// <summary>
+    /// Controller for handling Accounts
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Consumes("application/x-www-form-urlencoded")]
     public class AccountController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Constructor, sets up the AccountController
+        /// </summary>
+        /// <param name="userManager">UserManager to be injected</param>
+        /// <param name="mapper">AutoMapper to be injected</param>
         public AccountController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
@@ -32,7 +41,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>200 OK, or 400 Bad Request with additional error info in the body</returns>
         [Route("register")]
         [HttpPost]
-        [Consumes("application/x-www-form-urlencoded")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> RegisterNewUser([FromForm]UserForCreationDto userForCreation)
         {
             var user = _mapper.Map<User>(userForCreation);

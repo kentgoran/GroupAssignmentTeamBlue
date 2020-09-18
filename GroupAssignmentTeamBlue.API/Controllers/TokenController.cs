@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using GroupAssignmentTeamBlue.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,11 +14,20 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
 {
+    /// <summary>
+    /// Controller for tokens. Called upon to create an access token
+    /// </summary>
+    [Consumes("application/x-www-form-urlencoded")]
     public class TokenController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
 
+        /// <summary>
+        /// Constructor, sets up the controller
+        /// </summary>
+        /// <param name="userManager">UserManager to be injected</param>
+        /// <param name="configuration">Configuration to be injected</param>
         public TokenController(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
@@ -33,11 +43,12 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>A token, expiration time etc</returns>
         [Route("/token")]
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Create(string username, string password, string grant_type)
         {
             if(await IsValidUsernameAndPassword(username, password))
             {
-                return new ObjectResult(await GenerateToken(username));
+                return Ok(new ObjectResult(await GenerateToken(username)));
             }
             else
             {

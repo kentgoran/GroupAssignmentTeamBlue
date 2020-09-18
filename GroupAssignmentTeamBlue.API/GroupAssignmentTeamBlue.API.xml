@@ -1,0 +1,496 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GroupAssignmentTeamBlue.API</name>
+    </assembly>
+    <members>
+        <member name="T:GroupAssignmentTeamBlue.API.Controllers.AccountController">
+            <summary>
+            Controller for handling Accounts
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.AccountController.#ctor(Microsoft.AspNetCore.Identity.UserManager{GroupAssignmentTeamBlue.Model.User},AutoMapper.IMapper)">
+            <summary>
+            Constructor, sets up the AccountController
+            </summary>
+            <param name="userManager">UserManager to be injected</param>
+            <param name="mapper">AutoMapper to be injected</param>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.AccountController.RegisterNewUser(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto)">
+            <summary>
+            Registers a new user to the api
+            </summary>
+            <param name="userForCreation">The information needed to create the user</param>
+            <returns>200 OK, or 400 Bad Request with additional error info in the body</returns>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Controllers.CommentController">
+            <summary>
+            Controller for comments. Everyone requires authorization
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.#ctor(AutoMapper.IMapper,GroupAssignmentTeamBlue.DAL.Context.AdvertContext,Microsoft.AspNetCore.Identity.UserManager{GroupAssignmentTeamBlue.Model.User})">
+            <summary>
+            Constructor, sets up the controller
+            </summary>
+            <param name="mapper">AutoMapper to be injected</param>
+            <param name="context">DbContext to be injected</param>
+            <param name="userManager">UserManager, to be injected</param>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.GetComment(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            GET Method for getting comments based on the realEstate they were written for, with skip and take for paging-functionality
+            </summary>
+            <param name="id">id-number to the realEstate in question</param>
+            <param name="skip">Optional number for comments to skip, default is 0</param>
+            <param name="take">optional number for comments to take, default is 10, max is 100</param>
+            <returns>All comments wanted</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.GetComment(System.String,System.Int32,System.Int32)">
+            <summary>
+            Gets comments made by a given user, by username
+            </summary>
+            <param name="username">The user from where to get comments</param>
+            <param name="skip">The amount of comments to skip, default = 0</param>
+            <param name="take">The amount of comments to take, default = 10</param>
+            <returns>200 OK, with a list of comments</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.PostComment(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto)">
+            <summary>
+            POST for a new comment
+            </summary>
+            <param name="commentForCreation">Information about the comment to be created</param>
+            <returns>200 OK with comment content, username and creation-time. BadRequest if RealEstate is not found</returns>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Controllers.RealEstateController">
+            <summary>
+            Controller for RealEstates
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.#ctor(AutoMapper.IMapper,GroupAssignmentTeamBlue.DAL.Context.AdvertContext,Microsoft.AspNetCore.Identity.UserManager{GroupAssignmentTeamBlue.Model.User})">
+            <summary>
+            Constructor, sets up the controller
+            </summary>
+            <param name="mapper">AutoMapper to be injected</param>
+            <param name="context">DbContext to be injected</param>
+            <param name="userManager">UserManager to be injected</param>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstates(System.Int32,System.Int32)">
+            <summary>
+            GET for RealEstates, with optional skip/take parameters for paging, does not require authentication
+            </summary>
+            <param name="skip">Amount to skip, can't be negative number. default = 0</param>
+            <param name="take">Amount to take, has to be 1-100. default = 10</param>
+            <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstate(System.Int32)">
+            <summary>
+            GET for a single RealEstate, by RealEstateId. If user is authenticated, it returns full details, else a dto with less details
+            </summary>
+            <param name="id">Id of the RealEstate to get</param>
+            <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.CreateRealEstate(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto)">
+            <summary>
+            POST action for RealEstate. Creates a new RealEstate. Requires authentication
+            </summary>
+            <param name="realEstate">Contains all the information needed to create a new RealEstate</param>
+            <returns>201 Created, with some of the info input</returns>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Controllers.TokenController">
+            <summary>
+            Controller for tokens. Called upon to create an access token
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.TokenController.#ctor(Microsoft.AspNetCore.Identity.UserManager{GroupAssignmentTeamBlue.Model.User},Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor, sets up the controller
+            </summary>
+            <param name="userManager">UserManager to be injected</param>
+            <param name="configuration">Configuration to be injected</param>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.TokenController.Create(System.String,System.String,System.String)">
+            <summary>
+            POST action for /token, checks username and password to generate a token
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="grant_type"></param>
+            <returns>A token, expiration time etc</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.TokenController.IsValidUsernameAndPassword(System.String,System.String)">
+            <summary>
+            Checks if given username and password are correct
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns>boolean, true if username exists and the given password is correct</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.TokenController.GenerateToken(System.String)">
+            <summary>
+            Generates a token, with it's given parameters
+            </summary>
+            <param name="username"></param>
+            <returns>A token consisting of username, access_token, expiration date etc</returns>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Controllers.UserController">
+            <summary>
+            Controller for Users
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.UserController.#ctor(AutoMapper.IMapper,GroupAssignmentTeamBlue.DAL.Context.AdvertContext,Microsoft.AspNetCore.Identity.UserManager{GroupAssignmentTeamBlue.Model.User})">
+            <summary>
+            Constructor, sets up the Controller
+            </summary>
+            <param name="mapper">AutoMapper to be injected</param>
+            <param name="context">DbContext to be injected</param>
+            <param name="userManager">UserManager to be injected</param>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.UserController.GetUser(System.String)">
+            <summary>
+            Gets a user with the given username from the repository.
+            </summary>
+            <param name="userName"></param>
+            <returns> Returns a 200 Ok together with a representatino of the user if the entity was found.
+            If no entity with the given username was found a status code of 404 Not Found is returned.</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.UserController.RateUser(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto)">
+            <summary>
+            Creates a rating if no record with corelating rating- and rated-user was found, 
+            else it updates the existing record.
+            </summary>
+            <param name="rating"></param>
+            <returns> Returns a status code of 200 OK if the records was updated or created. 
+            If no user with the given id was found a status code of 404 Not Found is returned.</returns>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.CommentDto">
+            <summary>
+            Comment dto, contains username, Content, Time of creation and Parent comment
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.CommentDto.UserName">
+            <summary>
+            Username of the person who placed the comment
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.CommentDto.Content">
+            <summary>
+            The actual comment
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.CommentDto.TimeOfCreation">
+            <summary>
+            When the comment was made
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.CommentDto.ParentComment">
+            <summary>
+            Potential parent of the comment, the comment which this comment was an answer to
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto">
+            <summary>
+            A comment for creation, with RealEstateId and Content
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto.RealEstateId">
+            <summary>
+            Id of the RealEstate in question
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto.Content">
+            <summary>
+            The actual comment
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto">
+            <summary>
+            A Rating for creation, with UserId and a Value
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto.UserId">
+            <summary>
+            Id of the user being rated
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto.Value">
+            <summary>
+            Value, the score to give, between 1-5
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto">
+            <summary>
+            A RealEstate for creation
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Title">
+            <summary>
+            Title of the advert
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Description">
+            <summary>
+            A description of the place
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Contact">
+            <summary>
+            Contact info, ie email/phone number
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Address">
+            <summary>
+            Address of the place
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Type">
+            <summary>
+            The type of estate, Apartment, House, Office or Warehouse
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.RentingPrice">
+            <summary>
+            RentingPrice, nullable. However, either RentingPrice or SellingPrice has to be entered
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.SellingPrice">
+            <summary>
+            SellingPrice, nullable. However, either RentingPrice or SellingPrice has to be entered
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.YearBuilt">
+            <summary>
+            The year the place was built
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto">
+            <summary>
+            A user for creation
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto.UserName">
+            <summary>
+            A persons username
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto.Email">
+            <summary>
+            Email address
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto.Password">
+            <summary>
+            Password. Must be atleast 1 lowercase, 1 uppercase, 1 digit and atleast 6 total
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto.ConfirmPassword">
+            <summary>
+            To confirm password, has to be exactly the same as password
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto">
+            <summary>
+            RealEstate dto, with id-number, title, rent, sellprice and bools for isRentable and isSellable
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Id">
+            <summary>
+            Id of the realEstate
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Title">
+            <summary>
+            Title of the object
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Rent">
+            <summary>
+            How much the rent is, per month
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.SellPrice">
+            <summary>
+            How much to buy the object
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.IsRentable">
+            <summary>
+            Boolean depicting whether the place is for rent or not
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.IsSellable">
+            <summary>
+            Boolean depicting whether the place is for sale or not
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto">
+            <summary>
+            A Real Estate Dto with full details
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Contact">
+            <summary>
+            Contact information
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Comments">
+            <summary>
+            List of comments made about the object
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto">
+            <summary>
+            Real Estate dto, partly detailed
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Description">
+            <summary>
+            Objects description
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Address">
+            <summary>
+            Address of the object
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Type">
+            <summary>
+            Object type
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.YearBuilt">
+            <summary>
+            The year the object was built
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.DateOfAdvertCreation">
+            <summary>
+            Date and time of advert creating
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.UserDto">
+            <summary>
+            User dto, with username, amount of realEstates listed, amount of comments and an average rating recieved
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.UserDto.UserName">
+            <summary>
+            Name of the user
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.UserDto.RealEstateCount">
+            <summary>
+            Amount of realEstates listed
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.UserDto.CommentCount">
+            <summary>
+            Amount of comments made
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.UserDto.RatingAvrage">
+            <summary>
+            Average rating recieved
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Profiles.CommentProfile">
+            <summary>
+            Profiler for using AutoMapper with Comments
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Profiles.CommentProfile.#ctor">
+            <summary>
+            Constructor for CommentProfile, setting mapping for Comments and it's dto's
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Profiles.RatingProfile">
+            <summary>
+            Profiler for using AutoMapper on Ratings and it's dto's
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Profiles.RatingProfile.#ctor">
+            <summary>
+            Constructor, setting up AutoMapper for Ratings and it's dto's
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Profiles.RealEstateProfile">
+            <summary>
+            Profiler for RealEstates
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Profiles.RealEstateProfile.#ctor">
+            <summary>
+            Constructor, setting up mapping for using AutoMapper on RealEstates and their Dto's
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Profiles.UserProfile">
+            <summary>
+            Profiler for setting up AutoMapper on Users and their Dto's
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Profiles.UserProfile.#ctor">
+            <summary>
+            Constructor, setting up mapping for using AutoMapper on User and it's Dto's
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Program.Main(System.String[])">
+            <summary>
+            Start of the program
+            </summary>
+            <param name="args">optional arguments to be sent to the program</param>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Startup">
+            <summary>
+            Startup class, sets up the api
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Startup.Configuration">
+            <summary>
+            Holds configuration options
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.ValidationAttributes.HasToBeForSaleOrRentable">
+            <summary>
+            Checks so that a given RealEstateForCreationDto has either a sellingprice or a rentprice
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.ValidationAttributes.HasToBeForSaleOrRentable.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates the rule
+            </summary>
+            <param name="value"></param>
+            <param name="validationContext"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

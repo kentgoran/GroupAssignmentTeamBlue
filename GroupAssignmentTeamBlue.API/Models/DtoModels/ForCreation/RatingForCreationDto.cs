@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 {
+    /// <summary>
+    /// A Rating for creation, with UserId and a Value
+    /// </summary>
     public class RatingForCreationDto
     {
+        /// <summary>
+        /// Id of the user being rated
+        /// </summary>
         [Required(ErrorMessage = "A {0} is required")]
         public int UserId { get; set; }
-        // Rated User kommer från URL och Rating user kommer från token
+        /// <summary>
+        /// Value, the score to give, between 1-5
+        /// </summary>
         [Required(ErrorMessage = "A {0} is required")]
         [Range(1, 5)]
         public int Value { get; set; }

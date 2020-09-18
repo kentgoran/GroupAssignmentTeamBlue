@@ -4,6 +4,7 @@ using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,15 +14,25 @@ using System.Threading.Tasks;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
 {
+    /// <summary>
+    /// Controller for comments. Everyone requires authorization
+    /// </summary>
     [Authorize]
     [Route("api/[controller]s")]
     [ApiController]
+    [Consumes("application/json")]
     public class CommentController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly UnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// Constructor, sets up the controller
+        /// </summary>
+        /// <param name="mapper">AutoMapper to be injected</param>
+        /// <param name="context">DbContext to be injected</param>
+        /// <param name="userManager">UserManager, to be injected</param>
         public CommentController(IMapper mapper, AdvertContext context, UserManager<User> userManager)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -43,8 +54,9 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="skip">Optional number for comments to skip, default is 0</param>
         /// <param name="take">optional number for comments to take, default is 10, max is 100</param>
         /// <returns>All comments wanted</returns>
-        [HttpGet]
         [HttpGet("{id}/", Name = "GetComment")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetComment(int id, int skip = 0, int take = 10)
         {
             if(skip < 0)
@@ -73,8 +85,9 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="skip">The amount of comments to skip, default = 0</param>
         /// <param name="take">The amount of comments to take, default = 10</param>
         /// <returns>200 OK, with a list of comments</returns>
-        [HttpGet]
         [HttpGet("byuser/{username}/", Name = "GetCommentByUser")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetComment(string username, int skip = 0, int take = 10)
         {
             if (skip < 0)
@@ -102,6 +115,8 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="commentForCreation">Information about the comment to be created</param>
         /// <returns>200 OK with comment content, username and creation-time. BadRequest if RealEstate is not found</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult PostComment(CommentForCreationDto commentForCreation)
         {
             //Gets username from the token

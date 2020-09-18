@@ -17,14 +17,24 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
 {
+    /// <summary>
+    /// Controller for RealEstates
+    /// </summary>
     [Route("api/[controller]s")]
     [ApiController]
+    [Consumes("application/json")]
     public class RealEstateController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly UnitOfWork _unitOfWork;
         private readonly UserManager<User> _userManager;
 
+        /// <summary>
+        /// Constructor, sets up the controller
+        /// </summary>
+        /// <param name="mapper">AutoMapper to be injected</param>
+        /// <param name="context">DbContext to be injected</param>
+        /// <param name="userManager">UserManager to be injected</param>
         public RealEstateController(IMapper mapper, AdvertContext context, UserManager<User> userManager)
         {
             _mapper = mapper ?? throw new ArgumentNullException();
@@ -40,6 +50,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="take">Amount to take, has to be 1-100. default = 10</param>
         /// <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetRealEstates(int skip = 0, int take = 10)
         {
             if (skip < 0)
@@ -63,6 +74,8 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="id">Id of the RealEstate to get</param>
         /// <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
         [HttpGet("{id}/", Name = "GetRealEstate")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetRealEstate(int id)
         {
             var realEstateEntity = _unitOfWork.RealEstateRepository.GetAndIncludeComments(id);
@@ -86,9 +99,9 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>201 Created, with some of the info input</returns>
         [Authorize]
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateRealEstate(RealEstateForCreationDto realEstate)
         {
-            //Right now, this method does NOT work, due to difference between our ForCreationDto and the actual specifications from Claes
             var realEstateToAdd = _mapper.Map<RealEstate>(realEstate);
 
             var user = await _userManager.GetUserAsync(User);
