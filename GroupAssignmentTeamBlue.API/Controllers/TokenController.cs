@@ -13,11 +13,19 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
 {
+    /// <summary>
+    /// Controller for tokens. Called upon to create an access token
+    /// </summary>
     public class TokenController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
 
+        /// <summary>
+        /// Constructor, sets up the controller
+        /// </summary>
+        /// <param name="userManager">UserManager to be injected</param>
+        /// <param name="configuration">Configuration to be injected</param>
         public TokenController(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager;

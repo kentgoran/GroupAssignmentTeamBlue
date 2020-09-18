@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
 {
+    /// <summary>
+    /// Controller for Users
+    /// </summary>
     [Route("api/[controller]s")]
     [ApiController]
     public class UserController : ControllerBase
@@ -23,6 +26,12 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         private readonly UnitOfWork _unitOfWork;
         private readonly UserManager<User> _userManager;
 
+        /// <summary>
+        /// Constructor, sets up the Controller
+        /// </summary>
+        /// <param name="mapper">AutoMapper to be injected</param>
+        /// <param name="context">DbContext to be injected</param>
+        /// <param name="userManager">UserManager to be injected</param>
         public UserController(IMapper mapper, AdvertContext context, UserManager<User> userManager)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

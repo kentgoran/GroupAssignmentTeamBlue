@@ -8,10 +8,15 @@ using System.Threading.Tasks;
 
 namespace GroupAssignmentTeamBlue.API.Profiles
 {
+    /// <summary>
+    /// Profiler for using AutoMapper on Ratings and it's dto's
+    /// </summary>
     public class RatingProfile : Profile
     {
 
-
+        /// <summary>
+        /// Constructor, setting up AutoMapper for Ratings and it's dto's
+        /// </summary>
         public RatingProfile()
         {
             CreateMap<RatingForCreationDto, Rating>()

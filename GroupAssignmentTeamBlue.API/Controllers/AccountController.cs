@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
 {
+    /// <summary>
+    /// Controller for handling Accounts
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -19,6 +22,11 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Constructor, sets up the AccountController
+        /// </summary>
+        /// <param name="userManager">UserManager to be injected</param>
+        /// <param name="mapper">AutoMapper to be injected</param>
         public AccountController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));

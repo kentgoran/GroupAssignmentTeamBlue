@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GroupAssignmentTeamBlue.API</name>
+    </assembly>
+    <members>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.AccountController.RegisterNewUser(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto)">
+            <summary>
+            Registers a new user to the api
+            </summary>
+            <param name="userForCreation">The information needed to create the user</param>
+            <returns>200 OK, or 400 Bad Request with additional error info in the body</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.GetComment(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            GET Method for getting comments based on the realEstate they were written for, with skip and take for paging-functionality
+            </summary>
+            <param name="id">id-number to the realEstate in question</param>
+            <param name="skip">Optional number for comments to skip, default is 0</param>
+            <param name="take">optional number for comments to take, default is 10, max is 100</param>
+            <returns>All comments wanted</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.GetComment(System.String,System.Int32,System.Int32)">
+            <summary>
+            Gets comments made by a given user, by username
+            </summary>
+            <param name="username">The user from where to get comments</param>
+            <param name="skip">The amount of comments to skip, default = 0</param>
+            <param name="take">The amount of comments to take, default = 10</param>
+            <returns>200 OK, with a list of comments</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.PostComment(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto)">
+            <summary>
+            POST for a new comment
+            </summary>
+            <param name="commentForCreation">Information about the comment to be created</param>
+            <returns>200 OK with comment content, username and creation-time. BadRequest if RealEstate is not found</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstates(System.Int32,System.Int32)">
+            <summary>
+            GET for RealEstates, with optional skip/take parameters for paging, does not require authentication
+            </summary>
+            <param name="skip">Amount to skip, can't be negative number. default = 0</param>
+            <param name="take">Amount to take, has to be 1-100. default = 10</param>
+            <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstate(System.Int32)">
+            <summary>
+            GET for a single RealEstate, by RealEstateId. If user is authenticated, it returns full details, else a dto with less details
+            </summary>
+            <param name="id">Id of the RealEstate to get</param>
+            <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.CreateRealEstate(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto)">
+            <summary>
+            POST action for RealEstate. Creates a new RealEstate. Requires authentication
+            </summary>
+            <param name="realEstate">Contains all the information needed to create a new RealEstate</param>
+            <returns>201 Created, with some of the info input</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.TokenController.Create(System.String,System.String,System.String)">
+            <summary>
+            POST action for /token, checks username and password to generate a token
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="grant_type"></param>
+            <returns>A token, expiration time etc</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.TokenController.IsValidUsernameAndPassword(System.String,System.String)">
+            <summary>
+            Checks if given username and password are correct
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns>boolean, true if username exists and the given password is correct</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.TokenController.GenerateToken(System.String)">
+            <summary>
+            Generates a token, with it's given parameters
+            </summary>
+            <param name="username"></param>
+            <returns>A token consisting of username, access_token, expiration date etc</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.UserController.GetUser(System.String)">
+            <summary>
+            Gets a user with the given username from the repository.
+            </summary>
+            <param name="userName"></param>
+            <returns> Returns a 200 Ok together with a representatino of the user if the entity was found.
+            If no entity with the given username was found a status code of 404 Not Found is returned.</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.UserController.RateUser(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto)">
+            <summary>
+            Creates a rating if no record with corelating rating- and rated-user was found, 
+            else it updates the existing record.
+            </summary>
+            <param name="rating"></param>
+            <returns> Returns a status code of 200 OK if the records was updated or created. 
+            If no user with the given id was found a status code of 404 Not Found is returned.</returns>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto">
+            <summary>
+            A comment for creation, with RealEstateId and Content
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto.RealEstateId">
+            <summary>
+            Id of the RealEstate in question
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto.Content">
+            <summary>
+            The actual comment
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto">
+            <summary>
+            A Rating for creation, with UserId and a Value
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto.UserId">
+            <summary>
+            Id of the user being rated
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto.Value">
+            <summary>
+            Value, the score to give, between 1-5
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto">
+            <summary>
+            A RealEstate for creation
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Title">
+            <summary>
+            Title of the advert
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Description">
+            <summary>
+            A description of the place
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Contact">
+            <summary>
+            Contact info, ie email/phone number
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Address">
+            <summary>
+            Address of the place
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Type">
+            <summary>
+            The type of estate, Apartment, House, Office or Warehouse
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.RentingPrice">
+            <summary>
+            RentingPrice, nullable. However, either RentingPrice or SellingPrice has to be entered
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.SellingPrice">
+            <summary>
+            SellingPrice, nullable. However, either RentingPrice or SellingPrice has to be entered
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.YearBuilt">
+            <summary>
+            The year the place was built
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto">
+            <summary>
+            A user for creation
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto.UserName">
+            <summary>
+            A persons username
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto.Email">
+            <summary>
+            Email address
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto.Password">
+            <summary>
+            Password. Must be atleast 1 lowercase, 1 uppercase, 1 digit and atleast 6 total
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto.ConfirmPassword">
+            <summary>
+            To confirm password, has to be exactly the same as password
+            </summary>
+        </member>
+    </members>
+</doc>

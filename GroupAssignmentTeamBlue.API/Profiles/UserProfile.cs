@@ -6,8 +6,14 @@ using System.Linq;
 
 namespace GroupAssignmentTeamBlue.API.Profiles
 {
+    /// <summary>
+    /// Profiler for setting up AutoMapper on Users and their Dto's
+    /// </summary>
     public class UserProfile : Profile
     {
+        /// <summary>
+        /// Constructor, setting up mapping for using AutoMapper on User and it's Dto's
+        /// </summary>
         public UserProfile()
         {
             CreateMap<User, UserDto>()                                              // Prestanda problem??

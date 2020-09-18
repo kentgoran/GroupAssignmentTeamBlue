@@ -14,8 +14,14 @@ using System.Linq;
 
 namespace GroupAssignmentTeamBlue.API.Profiles
 {
+    /// <summary>
+    /// Profiler for RealEstates
+    /// </summary>
     public class RealEstateProfile : Profile
     {
+        /// <summary>
+        /// Constructor, setting up mapping for using AutoMapper on RealEstates and their Dto's
+        /// </summary>
         public RealEstateProfile()
         {
 
