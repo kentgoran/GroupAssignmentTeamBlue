@@ -139,7 +139,10 @@ namespace GroupAssignmentTeamBlue.API
             //Below ensures that un-applied migrations are applied at runtime
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                scope.ServiceProvider.GetService<AdvertContext>().Database.Migrate();
+
+                var context = scope.ServiceProvider.GetService<AdvertContext>();
+                context.Database.EnsureDeleted();
+                context.Database.Migrate();
             }
 
                 app.UseRouting();
