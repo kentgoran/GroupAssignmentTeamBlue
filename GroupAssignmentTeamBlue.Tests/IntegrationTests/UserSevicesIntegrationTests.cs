@@ -14,18 +14,40 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Testing;
+using RestSharp;
+using System.Diagnostics;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using GroupAssignmentTeamBlue.DAL.Context;
+using Moq;
+using AutoMapper;
+using GroupAssignmentTeamBlue.API.Controllers;
 
 namespace GroupAssignmentTeamBlue.Tests.IntegrationTests
 {
-    public class UserSevicesIntegrationTests
+    public class UserSevicesIntegrationTests : IDisposable
     {
         private readonly HttpClient _client;
-        private const string getUserRequestUrl = "http://localhost:5000/api/users/idhere";
+        private readonly Mock<UnitOfWork> _repositoryMock;
+        private readonly RealEstateController _controller;
+        private const string getUserRequestUrl = "/users/1";
+        private const string getUnexistingUser = "/users/-1";
 
-        public UserSevicesIntegrationTests()
+        
+        public UserSevicesIntegrationTests(WebApplicationFactory<Startup> factory)
         {
-            
-            _client = new HttpClient();
+            _client = factory.CreateClient();
+            _client.BaseAddress = new Uri("http://localhost:5000/api");
+
+            _repositoryMock = new Mock<UnitOfWork>();
+            _repositoryMock.Setup(opt => opt.UserRepository);
+
+            var mapConfig = new MapperConfiguration(opt =>
+            { });
+            _controller = new RealEstateController(mapConfig.CreateMapper(), new AdvertContext(), );
         }
 
         #region GetUserTests
@@ -33,26 +55,42 @@ namespace GroupAssignmentTeamBlue.Tests.IntegrationTests
         public async Task GetUser_ExistingUser_ShouldGetUser()
         {
             // Arrange
-
             // Act
+            //var stream = await _client.GetStreamAsync(getUserRequestUrl);
+
+
             var response = await _client.GetAsync(getUserRequestUrl);
-            using (var stream = new MemoryStream())
+            var content = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(response.Content);
+            //response.Content.
+            //var jsonContent = (JsonObject)content;
+
+            /*
+            using (stream)dd
             {
+                stream.
+
                 await response.Content.CopyToAsync(stream);
                 var serializer = JsonSerializer.Create();
+                var reader = new JsonTextReader();
                 serializer.Deserialize(stream);
                 User user = (User)DeserializeFromStream(stream);
                 stream.
             }
+            */
 
-            using (var reader = new Json())
-                // Assert
 
-                Assert.NotNull(user);
+            response.EnsureSuccessStatusCode();
+
+            // Assert
+            /*
+            Assert.NotNull(user);
             Assert.IsType<UserDto>(user);
             //Assert.Equal(foundUser, user);
             //Assert.Equal(foundUser.Id, user.Id);
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);           
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);     
+            */
         }
 
         [Fact]
@@ -68,8 +106,8 @@ namespace GroupAssignmentTeamBlue.Tests.IntegrationTests
             }
             
             // Assert
-            Assert.NotNull(user);
-            Assert.IsType<UserDto>(user);
+            //Assert.NotNull(user);
+            //Assert.IsType<UserDto>(user);
             //Assert.Equal(foundUser, user);
             //Assert.Equal(foundUser.Id, user.Id);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -102,5 +140,10 @@ namespace GroupAssignmentTeamBlue.Tests.IntegrationTests
         }
         #endregion
 
+        // Works as TestCleanup
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -50,11 +50,10 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             return Ok(realEstateDtos);
         }
 
-        // Det här? ...
         [HttpGet("{id}/", Name = "GetRealEstate")]
-        public ActionResult GetRealEstate(int realEstateId)
+        public ActionResult GetRealEstate(int id)
         {
-            var realEstateEntity = _unitOfWork.RealEstateRepository.Get(realEstateId);
+            var realEstateEntity = _unitOfWork.RealEstateRepository.Get(id);
             if(realEstateEntity == null)
             {
                 return NotFound();
@@ -66,50 +65,8 @@ namespace GroupAssignmentTeamBlue.API.Controllers
                 _mapper.Map<RealEstateFullDetailDto>(realEstateEntity) : 
                 _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
 
-            // If the user is logged in/ authenticated 
-            if (User.Identity.IsAuthenticated)
-            {
-                // Creates a map of the real estate with all details included
-                realEstateDto = _mapper.Map<RealEstateFullDetailDto>(realEstateEntity);
-            }
-            else
-            {
-                // Creates a map of the real estate with some details included
-                realEstateDto = _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
-            }
             return Ok(realEstateDto);
         }
-
-
-            // ... eller det här vv ?
-        /*
-        [HttpGet("{id}/", Name = "GetRealEstate")]
-        public ActionResult GetRealEstate(int realEstateId)
-        {
-            var realEstateEntity = _unitOfWork.RealEstateRepository.Get(realEstateId);
-
-            if (realEstateEntity == null)
-            {
-                return NotFound();
-            }
-            var realEstateDto = _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
-            return Ok(realEstateDto);
-        }
-
-        [Authorize]
-        [HttpGet("{id}/", Name = "GetRealEstate")]
-        public ActionResult GetRealEstateDetails(int realEstateId)
-        {
-            var realEstateEntity = _unitOfWork.RealEstateRepository.Get(realEstateId);
-
-            if(realEstateEntity == null)
-            {
-                return NotFound();
-            }
-            var realEstateDto = _mapper.Map<RealEstateFullDetailDto>(realEstateEntity);
-            return Ok(realEstateDto);
-        }
-        */
 
         [Authorize]
         [HttpPost]
