@@ -54,7 +54,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="skip">Optional number for comments to skip, default is 0</param>
         /// <param name="take">optional number for comments to take, default is 10, max is 100</param>
         /// <returns>All comments wanted</returns>
-        [HttpGet("{id}/", Name = "GetComment")]
+        [HttpGet("{id}", Name = "GetComment")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetComment(int id, int skip = 0, int take = 10)
@@ -131,16 +131,15 @@ namespace GroupAssignmentTeamBlue.API.Controllers
 
             //get current users Id, and adds it to the new comment
             comment.UserId = _unitOfWork.UserRepository.Get(username).Id;
-            
             _unitOfWork.CommentRepository.Add(comment);
             _unitOfWork.SaveChanges();
 
-            //TODO: Test return 201
-            return CreatedAtAction("GetComment", 
-                new { id = comment.Id } , 
-                new { comment.Content,
-                      username,
-                      CreatedOn = comment.TimeOfCreation});
+            var commentToReturn = _mapper.Map<CommentDto>(comment);
+
+            return CreatedAtRoute(
+                "GetComment", 
+                new { id = comment.RealEstateId } , 
+                commentToReturn);
         }
     }
 }

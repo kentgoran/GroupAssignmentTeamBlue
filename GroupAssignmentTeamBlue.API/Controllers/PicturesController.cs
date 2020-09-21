@@ -40,7 +40,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// </summary>
         /// <param name="id">Id of the realEstate</param>
         /// <returns>200 OK with a list of pictures</returns>
-        [HttpGet("{id}/", Name = "GetPicsForRealEstate")]
+        [HttpGet("{id}", Name = "GetPicsForRealEstate")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetPicsForRealEstate(int id)
@@ -70,12 +70,12 @@ namespace GroupAssignmentTeamBlue.API.Controllers
                 return NotFound($"RealEstate with id {picture.RealEstateId} was not found");
             }
             var picToAdd = _mapper.Map<Picture>(picture);
-            var picToReturn = _mapper.Map<PictureDto>(picture);
+            var picToReturn = _mapper.Map<PictureDto>(picToAdd);
             _unitOfWork.PictureRepository.Add(picToAdd);
             _unitOfWork.SaveChanges();
             //test if this works
             //also, return picToAdd instead? or pictureId is irrelevant?
-            return CreatedAtAction("GetPicsForRealEstate", new { picToAdd.Url }, picToReturn);
+            return CreatedAtRoute("GetPicsForRealEstate", new { id = picToAdd.RealEstateId }, picToReturn);
         }
     }
 }
