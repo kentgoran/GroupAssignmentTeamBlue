@@ -41,5 +41,6 @@ namespace GroupAssignmentTeamBlue.Model
         [Required]
         public DateTime DateOfAdvertCreation { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<Picture> Pictures { get; set; }
     }
 }

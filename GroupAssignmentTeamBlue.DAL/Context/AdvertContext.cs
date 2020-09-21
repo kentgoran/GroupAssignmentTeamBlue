@@ -20,6 +20,7 @@ namespace GroupAssignmentTeamBlue.DAL.Context
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<RealEstate> RealEstates { get; set; }
 
+        public DbSet<Picture> Pictures { get; set; }
 
         public AdvertContext(DbContextOptions<AdvertContext> options) : base(options)
         {
