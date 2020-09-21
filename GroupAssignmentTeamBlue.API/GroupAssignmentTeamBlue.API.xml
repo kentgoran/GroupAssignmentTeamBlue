@@ -453,6 +453,16 @@
             Constructor for CommentProfile, setting mapping for Comments and it's dto's
             </summary>
         </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Profiles.PictureProfile">
+            <summary>
+            Profile for mapping Picture with it's dto's
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Profiles.PictureProfile.#ctor">
+            <summary>
+            Constructor, adds the different profiles
+            </summary>
+        </member>
         <member name="T:GroupAssignmentTeamBlue.API.Profiles.RatingProfile">
             <summary>
             Profiler for using AutoMapper on Ratings and it's dto's

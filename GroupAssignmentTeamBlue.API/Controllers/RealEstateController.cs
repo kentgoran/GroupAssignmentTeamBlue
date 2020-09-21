@@ -73,7 +73,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// </summary>
         /// <param name="id">Id of the RealEstate to get</param>
         /// <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
-        [HttpGet("{id}/", Name = "GetRealEstate")]
+        [HttpGet("{id}", Name = "GetRealEstate")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetRealEstate(int id)
