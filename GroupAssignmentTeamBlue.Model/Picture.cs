@@ -13,5 +13,7 @@ namespace GroupAssignmentTeamBlue.Model
         [DataType(DataType.ImageUrl)]
         [Url]
         public string Url { get; set; }
+        [Required]
+        public int RealEstateId { get; set; }
     }
 }

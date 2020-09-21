@@ -115,7 +115,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="commentForCreation">Information about the comment to be created</param>
         /// <returns>200 OK with comment content, username and creation-time. BadRequest if RealEstate is not found</returns>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult PostComment(CommentForCreationDto commentForCreation)
         {
@@ -135,12 +135,12 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             _unitOfWork.CommentRepository.Add(comment);
             _unitOfWork.SaveChanges();
 
-            return Ok(new 
-            {
-                comment.Content,
-                username,
-                CreatedOn = comment.TimeOfCreation
-            });
+            //TODO: Test return 201
+            return CreatedAtAction("GetComment", 
+                new { id = comment.Id } , 
+                new { comment.Content,
+                      username,
+                      CreatedOn = comment.TimeOfCreation});
         }
     }
 }
