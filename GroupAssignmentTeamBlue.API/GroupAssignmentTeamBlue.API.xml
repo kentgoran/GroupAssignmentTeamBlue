@@ -61,6 +61,20 @@
             <param name="commentForCreation">Information about the comment to be created</param>
             <returns>200 OK with comment content, username and creation-time. BadRequest if RealEstate is not found</returns>
         </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.PicturesController.GetPicsForRealEstate(System.Int32)">
+            <summary>
+            GET method to get pictures for a given realEstate, by Id
+            </summary>
+            <param name="id">Id of the realEstate</param>
+            <returns>200 OK with a list of pictures</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.PicturesController.PostPic(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto)">
+            <summary>
+            POST method for creating a new picture, linked to given realEstate
+            </summary>
+            <param name="picture">Url and realEstateId</param>
+            <returns>201 Created, and the url attained together with id of the realestate</returns>
+        </member>
         <member name="T:GroupAssignmentTeamBlue.API.Controllers.RealEstateController">
             <summary>
             Controller for RealEstates
@@ -202,6 +216,21 @@
             The actual comment
             </summary>
         </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto">
+            <summary>
+            DTO for creation of a picture
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto.Url">
+            <summary>
+            Pictures given url
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto.RealEstateId">
+            <summary>
+            Id of given RealEstate from which the picture belongs
+            </summary>
+        </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto">
             <summary>
             A Rating for creation, with UserId and a Value
@@ -285,6 +314,16 @@
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto.ConfirmPassword">
             <summary>
             To confirm password, has to be exactly the same as password
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.PictureDto">
+            <summary>
+            DTO for pictures, only transferring the url
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.PictureDto.Url">
+            <summary>
+            Url of a given picture
             </summary>
         </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto">
