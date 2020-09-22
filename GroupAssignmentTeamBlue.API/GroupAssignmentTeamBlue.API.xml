@@ -235,7 +235,7 @@
         </member>
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto.Urls">
             <summary>
-            Pictures given url
+            list of urls to tie to the realEstate
             </summary>
         </member>
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto.RealEstateId">
@@ -340,47 +340,17 @@
         </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto">
             <summary>
-            RealEstate dto, with id-number, title, rent, sellprice and bools for isRentable and isSellable
+            RealEstate dto
             </summary>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Id">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Contact">
             <summary>
-            Id of the realEstate
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Title">
-            <summary>
-            Title of the object
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Rent">
-            <summary>
-            How much the rent is, per month
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.SellPrice">
-            <summary>
-            How much to buy the object
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.IsRentable">
-            <summary>
-            Boolean depicting whether the place is for rent or not
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.IsSellable">
-            <summary>
-            Boolean depicting whether the place is for sale or not
+            Contact information
             </summary>
         </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto">
             <summary>
             A Real Estate Dto with full details
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Contact">
-            <summary>
-            Contact information
             </summary>
         </member>
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Comments">
@@ -391,6 +361,36 @@
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto">
             <summary>
             Real Estate dto, partly detailed
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Id">
+            <summary>
+            Id of the realEstate
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Title">
+            <summary>
+            Title of the object
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Rent">
+            <summary>
+            How much the rent is, per month
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.SellPrice">
+            <summary>
+            How much to buy the object
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.IsRentable">
+            <summary>
+            Boolean depicting whether the place is for rent or not
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.IsSellable">
+            <summary>
+            Boolean depicting whether the place is for sale or not
             </summary>
         </member>
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Description">

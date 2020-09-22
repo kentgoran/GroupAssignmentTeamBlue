@@ -9,12 +9,9 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels
     /// <summary>
     /// A Real Estate Dto with full details
     /// </summary>
-    public class RealEstateFullDetailDto : RealEstatePartlyDetailedDto
+    public class RealEstateFullDetailDto : RealEstateDto
     {
-        /// <summary>
-        /// Contact information
-        /// </summary>
-        public string Contact { get; set; }
+
         /// <summary>
         /// List of comments made about the object
         /// </summary>
