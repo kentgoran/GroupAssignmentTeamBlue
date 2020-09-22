@@ -2,6 +2,8 @@
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.DAL.Context;
+using GroupAssignmentTeamBlue.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,7 +17,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class UserControllerTests : ControllerTestsBase
     {
-        public UserControllerTests(WebApplicationFactory<Startup> factory) : base(factory, "http://localhost:5000/api/users/")
+        public UserControllerTests(UserManager<User> userManager, 
+            WebApplicationFactory<Startup> factory) : base(factory, 
+                "http://localhost:5000/api/users/")
         {
         }
 
@@ -32,7 +36,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var expectedUserDto = mapper.Map<UserDto>(expectedUser);
 
             // Act + Assert
-            // Ensures that the response statuscode is in the 200 range
+            // GetFromJsonAsync will throw an exception if the response statuscode is not in the 200 range
             var response = await _client.GetFromJsonAsync<UserDto>(expectedUser.UserName);
 
             // Assert

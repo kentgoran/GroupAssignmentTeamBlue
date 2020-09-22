@@ -2,8 +2,11 @@
 using FluentAssertions;
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
+using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.API.Profiles;
 using GroupAssignmentTeamBlue.DAL.Repositories;
+using GroupAssignmentTeamBlue.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account.Manage;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System;
@@ -18,11 +21,14 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class RealEstateControllerTests : ControllerTestsBase
     {
-        public RealEstateControllerTests(WebApplicationFactory<Startup> factory) : base(factory, "http://localhost:5000/api/realestates/")
+                            // TODO: Set
+        private readonly RealEstateForCreationDto testRealEstate = new RealEstateForCreationDto{  };
+
+        public RealEstateControllerTests(UserManager<User> userManager, 
+            WebApplicationFactory<Startup> factory) : base(factory, 
+                "http://localhost:5000/api/realestates/")
         {
         }
-
-
 
         [Fact]
         public async Task GetRealEstate_Unauthenticated_ExistingRealEstate_ReturnsRealEstate()
@@ -44,7 +50,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         }
 
         [Fact]
-        public async Task GetRealEstate_Unauthenticated_NonexistingRealEstate_ReturnsRealEstate()
+        public async Task GetRealEstate_Unauthorized_NonexistingRealEstate_ReturnsRealEstate()
         {
             if (db.RealEstateRepository.EntityExists(-1))
             {
@@ -54,6 +60,27 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var response = await _client.GetAsync("-1");
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetRealEstate_Authorized_ExistingRealEstate_ReturnsRealEstate()
+        {
+            if (db.RealEstateRepository.EntityExists(-1))
+            {
+                throw new ArgumentNullException("A real estate with the given id was found :(");
+            }
+
+            // login testuser here!!
+
+            var response = await _client.GetFromJsonAsync<RealEstateFullDetailDto>("1");
+
+
+        }
+
+        [Fact]
+        public async Task CreateRealEstate_ValidRealEstate_ReturnsRealEstate()
+        {
+
         }
     }
 }
