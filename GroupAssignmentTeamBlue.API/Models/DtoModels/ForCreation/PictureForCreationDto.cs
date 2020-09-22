@@ -13,7 +13,7 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
     public class PictureForCreationDto
     {
         /// <summary>
-        /// Pictures given url
+        /// list of urls to tie to the realEstate
         /// </summary>
         [Required(ErrorMessage ="Url's are required")]
         [ListOfUrlsValidateAll(ErrorMessage = "All given urls must be actual urls")]
