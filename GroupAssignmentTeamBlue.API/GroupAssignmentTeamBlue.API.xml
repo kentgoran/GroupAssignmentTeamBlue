@@ -84,7 +84,7 @@
             <summary>
             POST method for creating a new picture, linked to given realEstate
             </summary>
-            <param name="picture">Url and realEstateId</param>
+            <param name="pictureDto">Urls and realEstateId</param>
             <returns>201 Created, and the url attained together with id of the realestate</returns>
         </member>
         <member name="T:GroupAssignmentTeamBlue.API.Controllers.RealEstateController">
@@ -233,7 +233,7 @@
             DTO for creation of a picture
             </summary>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto.Url">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto.Urls">
             <summary>
             Pictures given url
             </summary>
@@ -548,6 +548,19 @@
         <member name="M:GroupAssignmentTeamBlue.API.ValidationAttributes.HasToBeForSaleOrRentable.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)">
             <summary>
             Validates the rule
+            </summary>
+            <param name="value"></param>
+            <param name="validationContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.ValidationAttributes.ListOfUrlsValidateAll">
+            <summary>
+            Validates a list of strings, so that all urls are valid
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.ValidationAttributes.ListOfUrlsValidateAll.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates a list of strings, so that they are all valid urls using UrlAttribute.IsValid()
             </summary>
             <param name="value"></param>
             <param name="validationContext"></param>
