@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using GroupAssignmentTeamBlue.API.ErrorService;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.DAL.Context;
@@ -52,14 +55,14 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetRealEstates(int skip = 0, int take = 10)
-        {
+        { 
             if (skip < 0)
             {
-                return BadRequest("Skip can't be a negative number");
+                return BadRequest("400 Bad Request - Skip can't be a negative number");
             }
             if (take < 1 || take > 100)
             {
-                return BadRequest("Take must be 1-100");
+                return BadRequest("400 Bad Request - Take must be 1-100");
             }
 
             var realEstateEntities = _unitOfWork.RealEstateRepository
@@ -81,7 +84,18 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             var realEstateEntity = _unitOfWork.RealEstateRepository.GetAndIncludeComments(id);
             if (realEstateEntity == null)
             {
-                return NotFound($"RealEstate with id {id} not found");
+                return NotFound(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                        new ApiError()
+                        {
+                            Code = $"{id}NotFound",
+                            Description = $"Could not found a Real Estate with id {id}"
+                        }
+                    }
+                });
             }
 
             //If the user is logged in, returns the fully detailed RealEstate, else returns less detailed data
