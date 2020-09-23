@@ -25,19 +25,21 @@ namespace GroupAssignmentTeamBlue.API.Profiles
         public RealEstateProfile()
         {
 
-            CreateMap<RealEstate, RealEstateDto>();
+            CreateMap<RealEstate, RealEstateDto>()
+                .ForMember(dto => dto.Type, opt => opt.MapFrom(source => source.Type.ToString()))
+                .ForMember(dto => dto.Address
+                , opt => opt.MapFrom(source => source.Address));
 
             CreateMap<RealEstate, RealEstateFullDetailDto>()
                 .ForMember(dto => dto.Comments, opt => opt.MapFrom(source => source.Comments));
-                
-                //.ForMember(dto => dto.Address, 
-                //opt => opt.MapFrom(source => $"{source.Address.StreetName} {source.Address.StreetNumber}"));
+
+            //.ForMember(dto => dto.Address, 
+            //opt => opt.MapFrom(source => $"{source.Address.StreetName} {source.Address.StreetNumber}"));
 
             CreateMap<RealEstate, RealEstatePartlyDetailedDto>()
                 .ForMember(dto => dto.Type, opt => opt.MapFrom(source => source.Type.ToString()))
                 .ForMember(dto => dto.Address
-                , opt => opt.MapFrom(source => source.Address))
-                .ForMember(dto => dto.Type, opt => opt.MapFrom(source => nameof(source.Type)));
+                , opt => opt.MapFrom(source => source.Address));
 
             CreateMap<RealEstateForCreationDto, RealEstate>()
                 .ForMember(entity => entity.IsSellable, 

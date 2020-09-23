@@ -107,7 +107,13 @@ namespace GroupAssignmentTeamBlue.API
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "BlueFast API",
-                        Version = "1"
+                        Version = "0.1",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                        {
+                            Email = "simonwestman88@gmail.com",
+                            Name = "Simon Westman, Linnea Smedberg, Oskar Wennström MUT19"
+                        },
+                        Description = "(Closed beta)\nAPI for consumption by SUT19 team blue. Other use prohibited."
                     });
 
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

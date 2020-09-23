@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroupAssignmentTeamBlue.API.ValidationAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,11 +13,11 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
     public class PictureForCreationDto
     {
         /// <summary>
-        /// Pictures given url
+        /// list of urls to tie to the realEstate
         /// </summary>
-        [Url]
-        [Required(ErrorMessage = "The url for the picture is required")]
-        public string Url { get; set; }
+        [Required(ErrorMessage ="Url's are required")]
+        [ListOfUrlsValidateAll(ErrorMessage = "All given urls must be actual urls")]
+        public List<string> Urls { get; set; }
         /// <summary>
         /// Id of given RealEstate from which the picture belongs
         /// </summary>
