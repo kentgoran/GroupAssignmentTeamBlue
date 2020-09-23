@@ -43,23 +43,14 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>200 OK with a list of pictures</returns>
         [HttpGet("{id}", Name = "GetPicsForRealEstate")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult GetPicsForRealEstate(int id)
         {
             if (!_unitOfWork.RealEstateRepository.EntityExists(id))
             {
-                return NotFound(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                        new ApiError()
-                        {
-                            Code = $"RealEstateNotFound",
-                            Description = $"Could not found a Real Estate with id {id}"
-                        }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {id}" });
+                return NotFound(errorResponse);
             }
             var pictures = _unitOfWork.PictureRepository.GetAllPicturesForRealEstate(id).ToList();
             var mappedPictures = _mapper.Map<List<PictureDto>>(pictures);
@@ -74,30 +65,20 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult PostPic(PictureForCreationDto picture)
         {
             if (!_unitOfWork.RealEstateRepository.EntityExists(picture.RealEstateId))
             {
-                return NotFound(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                        new ApiError()
-                        {
-                            Code = $"RealEstateNotFound",
-                            Description = $"Could not found a Real Estate with id {picture.RealEstateId}"
-                        }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {picture.RealEstateId}" });
+                return NotFound(errorResponse);
             }
             var picToAdd = _mapper.Map<Picture>(picture);
             var picToReturn = _mapper.Map<PictureDto>(picToAdd);
             _unitOfWork.PictureRepository.Add(picToAdd);
             _unitOfWork.SaveChanges();
-            //test if this works
-            //also, return picToAdd instead? or pictureId is irrelevant?
+
             return CreatedAtRoute("GetPicsForRealEstate", new { id = picToAdd.RealEstateId }, picToReturn);
         }
     }

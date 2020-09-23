@@ -57,31 +57,27 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>All comments wanted</returns>
         [HttpGet("{id}", Name = "GetComment")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult GetComment(int id, int skip = 0, int take = 10)
         {
             if (skip < 0)
             {
-                return BadRequest(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                            new ApiError()
-                            {
-                                Code = "NegativeSkipValue",
-                                Description = "Skip needs to be a positive number between 1-100"
-                            }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Skip", new string[] { "Skip cannot be negative" });
+                return BadRequest(errorResponse);
             }
             if (take < 1 || take > 100)
             {
-                return BadRequest("Take must be 1-100");
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Take", new string[] { "Take needs to be a number between 1-100" });
+                return BadRequest(errorResponse);
             }
             if (!_unitOfWork.RealEstateRepository.EntityExists(id))
             {
-                return NotFound($"Real Estate Id {id} was not found.");
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {id}" });
+                return NotFound(errorResponse);
             }
 
             var comments = _unitOfWork.CommentRepository.GetCommentsForRealEstate(id, skip, take);
@@ -99,53 +95,27 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>200 OK, with a list of comments</returns>
         [HttpGet("byuser/{username}/", Name = "GetCommentByUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult GetComment(string username, int skip = 0, int take = 10)
         {
             if (skip < 0)
             {
-                return BadRequest(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>() 
-                    {
-                            new ApiError()
-                            {
-                                Code = "NegativeSkipValue",
-                                Description = "Skip needs to be a number between 1-100"
-                            }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Skip", new string[] { "Skip cannot be negative" });
+                return BadRequest(errorResponse);
             }
             if (take < 1 || take > 100)
             {
-                return BadRequest(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                            new ApiError()
-                            {
-                                Code = "IllicitTakeValue",
-                                Description = "Take needs to be a number between 1-100"
-                            }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Take", new string[] { "Take needs to be a number between 1-100" });
+                return BadRequest(errorResponse);
             }
             if (_unitOfWork.UserRepository.Get(username) == null)
             {
-                return NotFound(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                            new ApiError()
-                            {
-                                Code = "UserNotFound",
-                                Description = $"Could not found a user with username: {username}"
-                            }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Username", new string[] { $"Could not find a User with name {username}" });
+                return NotFound(errorResponse);
             }
 
             var comments = _unitOfWork.CommentRepository.GetCommentsByUser(username, skip, take);
@@ -161,7 +131,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>200 OK with comment content, username and creation-time. BadRequest if RealEstate is not found</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult PostComment(CommentForCreationDto commentForCreation)
         {
             //Gets username from the token
@@ -171,18 +141,9 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             //Check if the realestate-id maps to an actual entity
             if (!_unitOfWork.RealEstateRepository.EntityExists(comment.RealEstateId))
             {
-                return NotFound(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                        new ApiError()
-                        {
-                            Code = $"RealEstateNotFound",
-                            Description = $"Could not found a Real Estate with id {comment.RealEstateId}"
-                        }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {comment.RealEstateId}" });
+                return NotFound(errorResponse);
             }
 
             //get current users Id, and adds it to the new comment

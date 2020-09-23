@@ -54,37 +54,20 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
         public IActionResult GetRealEstates(int skip = 0, int take = 10)
         { 
             if (skip < 0)
             {
-                return BadRequest(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                            new ApiError()
-                            {
-                                Code = "NegativeSkipValue",
-                                Description = "Skip needs to be a number between 1-100"
-                            }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Skip", new string[] { "Skip cannot be negative" });
+                return BadRequest(errorResponse);
             }
             if (take < 1 || take > 100)
             {
-                return BadRequest(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                            new ApiError()
-                            {
-                                Code = "NegativeSkipValue",
-                                Description = "Skip needs to be a number between 1-100"
-                            }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Take", new string[] { "Take needs to be a number between 1-100" });
+                return BadRequest(errorResponse);
             }
 
             var realEstateEntities = _unitOfWork.RealEstateRepository
@@ -100,24 +83,16 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
         [HttpGet("{id}", Name = "GetRealEstate")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult GetRealEstate(int id)
         {
             var realEstateEntity = _unitOfWork.RealEstateRepository.GetAndIncludeComments(id);
             if (realEstateEntity == null)
             {
-                return NotFound(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                        new ApiError()
-                        {
-                            Code = $"RealEstateNotFound",
-                            Description = $"Could not found a Real Estate with id {id}"
-                        }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {id}" });
+                return NotFound(errorResponse);
             }
 
             //If the user is logged in, returns the fully detailed RealEstate, else returns less detailed data

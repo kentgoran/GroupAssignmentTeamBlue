@@ -57,18 +57,9 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             var user = _unitOfWork.UserRepository.Get(userName);
             if(user == null)
             {
-                return NotFound(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                        new ApiError()
-                        {
-                            Code = $"UserNotFound",
-                            Description = $"Could not found a user with username {userName}"
-                        }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("User", new string[] { $"Could not found a user with name {userName}" });
+                return NotFound(errorResponse);
             }
 
             var userForReturn = _mapper.Map<UserDto>(user);
@@ -86,41 +77,24 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [Authorize]
         [HttpPut("rate/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public async Task<ActionResult> RateUser(RatingForCreationDto rating)
         {
             var ratedUser = _unitOfWork.UserRepository.Get(rating.UserId);
             if (ratedUser == null)
             {
-                return NotFound(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                        new ApiError()
-                        {
-                            Code = $"UserNotFound",
-                            Description = $"Could not found a user with id {rating.UserId}"
-                        }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("User", new string[] { $"Could not found a user with id {rating.UserId}" });
+                return NotFound(errorResponse);
             }
 
             var ratingUser = await _userManager.GetUserAsync(User);
             if(ratingUser.Id == ratedUser.Id)
             {
-                return BadRequest(new ApiErrorResponseBody()
-                {
-                    Succeded = false,
-                    Errors = new List<ApiError>()
-                    {
-                        new ApiError()
-                        {
-                            Code = $"IllicitRating",
-                            Description = $"A user can't rate give a rating on themself"
-                        }
-                    }
-                });
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("IllicitRating", new string[] { "A user can't give itself a rating" });
+                return BadRequest(errorResponse);
             }
 
             var foundRating = _unitOfWork.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
