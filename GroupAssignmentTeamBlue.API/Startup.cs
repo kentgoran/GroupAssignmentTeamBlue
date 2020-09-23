@@ -22,6 +22,7 @@ using System.Reflection;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using GroupAssignmentTeamBlue.API.ErrorService;
 
 namespace GroupAssignmentTeamBlue.API
 {

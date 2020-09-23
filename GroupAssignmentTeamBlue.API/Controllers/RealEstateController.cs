@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using GroupAssignmentTeamBlue.API.ErrorService;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.DAL.Context;
@@ -51,15 +54,20 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
         public IActionResult GetRealEstates(int skip = 0, int take = 10)
-        {
+        { 
             if (skip < 0)
             {
-                return BadRequest("Skip can't be a negative number");
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Skip", new string[] { "Skip cannot be negative" });
+                return BadRequest(errorResponse);
             }
             if (take < 1 || take > 100)
             {
-                return BadRequest("Take must be 1-100");
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Take", new string[] { "Take needs to be a number between 1-100" });
+                return BadRequest(errorResponse);
             }
 
             var realEstateEntities = _unitOfWork.RealEstateRepository
@@ -75,13 +83,16 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
         [HttpGet("{id}", Name = "GetRealEstate")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult GetRealEstate(int id)
         {
             var realEstateEntity = _unitOfWork.RealEstateRepository.GetAndIncludeComments(id);
             if (realEstateEntity == null)
             {
-                return NotFound($"RealEstate with id {id} not found");
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {id}" });
+                return NotFound(errorResponse);
             }
 
             //If the user is logged in, returns the fully detailed RealEstate, else returns less detailed data

@@ -188,6 +188,34 @@
             <returns> Returns a status code of 200 OK if the records was updated or created. 
             If no user with the given id was found a status code of 404 Not Found is returned.</returns>
         </member>
+        <member name="T:GroupAssignmentTeamBlue.API.ErrorService.ApiErrorResponseBody">
+            <summary>
+            Error class, used to throw errors in the correct syntax from the API
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.ErrorService.ApiErrorResponseBody.#ctor(System.Boolean)">
+            <summary>
+            Constructor, succeeded defaults to false
+            </summary>
+            <param name="succeded">indicates if the action was a success or not, defaults to false</param>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.ErrorService.ApiErrorResponseBody.Succeded">
+            <summary>
+            Indicates whether the action was successfull or not
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.ErrorService.ApiErrorResponseBody.Errors">
+            <summary>
+            A dictionary of errors
+            </summary>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.ErrorService.ApiErrorResponseBody.AddError(System.String,System.String[])">
+            <summary>
+            Used to add a new error to the responseBody
+            </summary>
+            <param name="errorParent">Parent name</param>
+            <param name="errors">an array of strings, containing all the errors of it's parent</param>
+        </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.CommentDto">
             <summary>
             Comment dto, contains username, Content, Time of creation and Parent comment

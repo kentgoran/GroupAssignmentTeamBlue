@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using GroupAssignmentTeamBlue.API.ErrorService;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.DAL.Context;
@@ -56,7 +57,9 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             var user = _unitOfWork.UserRepository.Get(userName);
             if(user == null)
             {
-                return NotFound("No user with the given username was found");
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("User", new string[] { $"Could not found a user with name {userName}" });
+                return NotFound(errorResponse);
             }
 
             var userForReturn = _mapper.Map<UserDto>(user);
@@ -74,19 +77,24 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [Authorize]
         [HttpPut("rate/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public async Task<ActionResult> RateUser(RatingForCreationDto rating)
         {
             var ratedUser = _unitOfWork.UserRepository.Get(rating.UserId);
             if (ratedUser == null)
             {
-                return NotFound("User could not be found");
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("User", new string[] { $"Could not found a user with id {rating.UserId}" });
+                return NotFound(errorResponse);
             }
 
             var ratingUser = await _userManager.GetUserAsync(User);
             if(ratingUser.Id == ratedUser.Id)
             {
-                return BadRequest("You can't rate yourself");
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("IllicitRating", new string[] { "A user can't give itself a rating" });
+                return BadRequest(errorResponse);
             }
 
             var foundRating = _unitOfWork.RatingRepository.Get(ratedUser.Id, ratingUser.Id);

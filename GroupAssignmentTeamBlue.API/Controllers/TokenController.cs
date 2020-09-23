@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using GroupAssignmentTeamBlue.API.ErrorService;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -44,6 +45,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [Route("/token")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
         public async Task<IActionResult> Create(string username, string password, string grant_type)
         {
             if(await IsValidUsernameAndPassword(username, password))
@@ -52,7 +54,9 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             }
             else
             {
-                return BadRequest("Invalid username or password");
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Username/Password", new string[] { "Invalid username or password" });
+                return BadRequest(errorResponse);
             }
         }
 
