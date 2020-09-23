@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using GroupAssignmentTeamBlue.API.ErrorService;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -52,7 +53,18 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             }
             else
             {
-                return BadRequest("Invalid username or password");
+                return BadRequest(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                        new ApiError()
+                        {
+                            Code = $"InvalidLoginDetails",
+                            Description = $"Invalid username or password"
+                        }
+                    }
+                });
             }
         }
 

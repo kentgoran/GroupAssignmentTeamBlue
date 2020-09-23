@@ -11,6 +11,7 @@ using AutoMapper;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using Microsoft.AspNetCore.Authorization;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
+using GroupAssignmentTeamBlue.API.ErrorService;
 
 namespace GroupAssignmentTeamBlue.API.Controllers
 {
@@ -47,7 +48,18 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         {
             if (!_unitOfWork.RealEstateRepository.EntityExists(id))
             {
-                return NotFound();
+                return NotFound(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                        new ApiError()
+                        {
+                            Code = $"RealEstateNotFound",
+                            Description = $"Could not found a Real Estate with id {id}"
+                        }
+                    }
+                });
             }
             var pictures = _unitOfWork.PictureRepository.GetAllPicturesForRealEstate(id).ToList();
             var mappedPictures = _mapper.Map<List<PictureDto>>(pictures);
@@ -67,7 +79,18 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         {
             if (!_unitOfWork.RealEstateRepository.EntityExists(picture.RealEstateId))
             {
-                return NotFound($"RealEstate with id {picture.RealEstateId} was not found");
+                return NotFound(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                        new ApiError()
+                        {
+                            Code = $"RealEstateNotFound",
+                            Description = $"Could not found a Real Estate with id {picture.RealEstateId}"
+                        }
+                    }
+                });
             }
             var picToAdd = _mapper.Map<Picture>(picture);
             var picToReturn = _mapper.Map<PictureDto>(picToAdd);

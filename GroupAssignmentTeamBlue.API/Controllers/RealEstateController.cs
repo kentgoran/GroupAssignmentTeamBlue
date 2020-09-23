@@ -58,11 +58,33 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         { 
             if (skip < 0)
             {
-                return BadRequest("400 Bad Request - Skip can't be a negative number");
+                return BadRequest(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                            new ApiError()
+                            {
+                                Code = "NegativeSkipValue",
+                                Description = "Skip needs to be a number between 1-100"
+                            }
+                    }
+                });
             }
             if (take < 1 || take > 100)
             {
-                return BadRequest("400 Bad Request - Take must be 1-100");
+                return BadRequest(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                            new ApiError()
+                            {
+                                Code = "NegativeSkipValue",
+                                Description = "Skip needs to be a number between 1-100"
+                            }
+                    }
+                });
             }
 
             var realEstateEntities = _unitOfWork.RealEstateRepository
@@ -91,7 +113,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
                     {
                         new ApiError()
                         {
-                            Code = $"{id}NotFound",
+                            Code = $"RealEstateNotFound",
                             Description = $"Could not found a Real Estate with id {id}"
                         }
                     }

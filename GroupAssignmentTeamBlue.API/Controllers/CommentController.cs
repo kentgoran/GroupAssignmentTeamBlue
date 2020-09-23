@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GroupAssignmentTeamBlue.API.ErrorService;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.DAL.Context;
@@ -59,11 +60,22 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetComment(int id, int skip = 0, int take = 10)
         {
-            if(skip < 0)
+            if (skip < 0)
             {
-                return BadRequest("Skip can't be a negative number");
+                return BadRequest(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                            new ApiError()
+                            {
+                                Code = "NegativeSkipValue",
+                                Description = "Skip needs to be a positive number between 1-100"
+                            }
+                    }
+                });
             }
-            if(take < 1 || take > 100)
+            if (take < 1 || take > 100)
             {
                 return BadRequest("Take must be 1-100");
             }
@@ -74,7 +86,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
 
             var comments = _unitOfWork.CommentRepository.GetCommentsForRealEstate(id, skip, take);
             var toReturn = _mapper.Map<List<CommentDto>>(comments);
-            
+
             return Ok(toReturn);
         }
 
@@ -92,15 +104,48 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         {
             if (skip < 0)
             {
-                return BadRequest("Skip can't be a negative number");
+                return BadRequest(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>() 
+                    {
+                            new ApiError()
+                            {
+                                Code = "NegativeSkipValue",
+                                Description = "Skip needs to be a number between 1-100"
+                            }
+                    }
+                });
             }
             if (take < 1 || take > 100)
             {
-                return BadRequest("Take must be 1-100");
+                return BadRequest(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                            new ApiError()
+                            {
+                                Code = "IllicitTakeValue",
+                                Description = "Take needs to be a number between 1-100"
+                            }
+                    }
+                });
             }
-            if(_unitOfWork.UserRepository.Get(username) == null)
+            if (_unitOfWork.UserRepository.Get(username) == null)
             {
-                return NotFound($"Username '{username}' was not found");
+                return NotFound(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                            new ApiError()
+                            {
+                                Code = "UserNotFound",
+                                Description = $"Could not found a user with username: {username}"
+                            }
+                    }
+                });
             }
 
             var comments = _unitOfWork.CommentRepository.GetCommentsByUser(username, skip, take);
@@ -124,9 +169,20 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             var comment = _mapper.Map<Comment>(commentForCreation);
 
             //Check if the realestate-id maps to an actual entity
-            if(!_unitOfWork.RealEstateRepository.EntityExists(comment.RealEstateId))
+            if (!_unitOfWork.RealEstateRepository.EntityExists(comment.RealEstateId))
             {
-                return NotFound($"RealEstate with id {comment.RealEstateId} was not found");
+                return NotFound(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                        new ApiError()
+                        {
+                            Code = $"RealEstateNotFound",
+                            Description = $"Could not found a Real Estate with id {comment.RealEstateId}"
+                        }
+                    }
+                });
             }
 
             //get current users Id, and adds it to the new comment
@@ -137,8 +193,8 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             var commentToReturn = _mapper.Map<CommentDto>(comment);
 
             return CreatedAtRoute(
-                "GetComment", 
-                new { id = comment.RealEstateId } , 
+                "GetComment",
+                new { id = comment.RealEstateId },
                 commentToReturn);
         }
     }

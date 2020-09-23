@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using GroupAssignmentTeamBlue.API.ErrorService;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.DAL.Context;
@@ -56,7 +57,18 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             var user = _unitOfWork.UserRepository.Get(userName);
             if(user == null)
             {
-                return NotFound("No user with the given username was found");
+                return NotFound(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                        new ApiError()
+                        {
+                            Code = $"UserNotFound",
+                            Description = $"Could not found a user with username {userName}"
+                        }
+                    }
+                });
             }
 
             var userForReturn = _mapper.Map<UserDto>(user);
@@ -80,13 +92,35 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             var ratedUser = _unitOfWork.UserRepository.Get(rating.UserId);
             if (ratedUser == null)
             {
-                return NotFound("User could not be found");
+                return NotFound(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                        new ApiError()
+                        {
+                            Code = $"UserNotFound",
+                            Description = $"Could not found a user with id {rating.UserId}"
+                        }
+                    }
+                });
             }
 
             var ratingUser = await _userManager.GetUserAsync(User);
             if(ratingUser.Id == ratedUser.Id)
             {
-                return BadRequest("You can't rate yourself");
+                return BadRequest(new ApiErrorResponseBody()
+                {
+                    Succeded = false,
+                    Errors = new List<ApiError>()
+                    {
+                        new ApiError()
+                        {
+                            Code = $"IllicitRating",
+                            Description = $"A user can't rate give a rating on themself"
+                        }
+                    }
+                });
             }
 
             var foundRating = _unitOfWork.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
