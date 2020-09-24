@@ -60,7 +60,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <summary>
         /// POST method for creating a new picture, linked to given realEstate
         /// </summary>
-        /// <param name="pictureDto">Urls and realEstateId</param>
+        /// <param name="picture">Urls and realEstateId</param>
         /// <returns>201 Created, and the url attained together with id of the realestate</returns>
         [Authorize]
         [HttpPost]
@@ -69,7 +69,8 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult PostPic(PictureForCreationDto picture)
         {
-            if (!_unitOfWork.RealEstateRepository.EntityExists(pictureDto.RealEstateId))
+            if (!_unitOfWork.RealEstateRepository.EntityExists(picture.RealEstateId))
+            { 
                 ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
                 errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {picture.RealEstateId}" });
                 return NotFound(errorResponse);
@@ -85,18 +86,18 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             */
 
             //This here is for implementing a list of urls, validation has been removed atm
-            foreach(var url in pictureDto.Urls)
+            foreach(var url in picture.Urls)
             {
                 var picToAdd = new Picture()
                 {
-                    RealEstateId = pictureDto.RealEstateId,
+                    RealEstateId = picture.RealEstateId,
                     Url = url
                 };
                 _unitOfWork.PictureRepository.Add(picToAdd);
             }
             _unitOfWork.SaveChanges();
 
-            return CreatedAtRoute("GetPicsForRealEstate", new { id = pictureDto.RealEstateId }, $"{pictureDto.Urls.Count()} url's added");
+            return CreatedAtRoute("GetPicsForRealEstate", new { id = picture.RealEstateId }, $"{picture.Urls.Count()} url's added");
         }
     }
 }

@@ -84,7 +84,7 @@
             <summary>
             POST method for creating a new picture, linked to given realEstate
             </summary>
-            <param name="pictureDto">Urls and realEstateId</param>
+            <param name="picture">Urls and realEstateId</param>
             <returns>201 Created, and the url attained together with id of the realestate</returns>
         </member>
         <member name="T:GroupAssignmentTeamBlue.API.Controllers.RealEstateController">
