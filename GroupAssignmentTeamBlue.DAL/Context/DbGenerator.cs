@@ -67,10 +67,10 @@ namespace GroupAssignmentTeamBlue.DAL.Context
                 {
                     return re.IsSellable ? Math.Round(f.Random.Decimal(100000, 3000000)) : 0;
                 })
-                .RuleFor(re => re.YearBuilt, f => f.Random.Int(1600, DateTime.Now.Year))
+                .RuleFor(re => re.ConstructionYear, f => f.Random.Int(1600, DateTime.Now.Year))
                 .RuleFor(re => re.DateOfAdvertCreation, (f, re) =>
                 {
-                    return f.Date.Between(new DateTime(re.YearBuilt, 01, 01), new DateTime(re.YearBuilt, 12, 31));
+                    return f.Date.Between(new DateTime(re.ConstructionYear, 01, 01), new DateTime(re.ConstructionYear, 12, 31));
                 });
 
             var users = realEstates.Generate(numberOfRealEstatesToGenerate);

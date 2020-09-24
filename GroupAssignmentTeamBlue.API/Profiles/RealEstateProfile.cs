@@ -42,9 +42,9 @@ namespace GroupAssignmentTeamBlue.API.Profiles
                 , opt => opt.MapFrom(source => source.Address));
 
             CreateMap<RealEstateForCreationDto, RealEstate>()
-                .ForMember(entity => entity.IsSellable, 
+                .ForMember(entity => entity.IsSellable,
                 opt => opt.MapFrom(source => source.SellingPrice == null ? false : true))
-                .ForMember(entity => entity.IsRentable, 
+                .ForMember(entity => entity.IsRentable,
                 opt => opt.MapFrom(source => source.RentingPrice == null ? false : true))
                 .ForMember(entity => entity.SellPrice, opt => opt.MapFrom(source => source.SellingPrice))
                 .ForMember(entity => entity.Rent, opt => opt.MapFrom(source => source.RentingPrice))

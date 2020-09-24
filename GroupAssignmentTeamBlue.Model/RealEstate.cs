@@ -37,7 +37,8 @@ namespace GroupAssignmentTeamBlue.Model
         //Can't set dynamic range (DateTime.Now.Year), so set 2 years from now,
         //so that properties not yet built can be input in the system
         [Range(1600, 2022)]
-        public int YearBuilt { get; set; }
+        [Column("YearBuilt")]
+        public int ConstructionYear { get; set; }
         [Required]
         public DateTime DateOfAdvertCreation { get; set; }
         public IEnumerable<Comment> Comments { get; set; }

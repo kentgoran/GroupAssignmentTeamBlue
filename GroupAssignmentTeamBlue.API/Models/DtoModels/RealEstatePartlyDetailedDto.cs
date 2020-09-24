@@ -49,7 +49,7 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels
         /// <summary>
         /// The year the object was built
         /// </summary>
-        public int YearBuilt { get; set; }
+        public int ConstructionYear { get; set; }
         /// <summary>
         /// Date and time of advert creating
         /// </summary>

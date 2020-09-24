@@ -326,7 +326,7 @@
             SellingPrice, nullable. However, either RentingPrice or SellingPrice has to be entered
             </summary>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.YearBuilt">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.ConstructionYear">
             <summary>
             The year the place was built
             </summary>
@@ -436,7 +436,7 @@
             Object type
             </summary>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.YearBuilt">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.ConstructionYear">
             <summary>
             The year the object was built
             </summary>

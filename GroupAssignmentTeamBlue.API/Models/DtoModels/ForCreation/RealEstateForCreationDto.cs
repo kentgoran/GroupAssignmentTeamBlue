@@ -60,6 +60,6 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         /// The year the place was built
         /// </summary>
 
-        public int YearBuilt { get; set; }
+        public int ConstructionYear { get; set; }
     }
 }
