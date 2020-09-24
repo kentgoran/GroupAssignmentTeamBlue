@@ -67,11 +67,6 @@ namespace GroupAssignmentTeamBlue.API
                     new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
             });
             
-
-            //services.AddControllersWithViews();
-            
-            //services.AddRazorPages();
-            
             services.AddControllers().AddNewtonsoftJson().
                 AddXmlDataContractSerializerFormatters();
 
@@ -101,6 +96,7 @@ namespace GroupAssignmentTeamBlue.API
                 options.Password.RequireNonAlphanumeric = false;
             });
 
+            //Swagger implementation
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("BlueFastAPISpecification",
@@ -116,6 +112,7 @@ namespace GroupAssignmentTeamBlue.API
                         Description = "(Closed beta)\nAPI for consumption by SUT19 team blue. Other use prohibited."
                     });
 
+                //Includes Xml comments in Swagger
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
                 setupAction.IncludeXmlComments(xmlFullPath);
@@ -148,17 +145,17 @@ namespace GroupAssignmentTeamBlue.API
             {
 
                 var context = scope.ServiceProvider.GetService<AdvertContext>();
-                context.Database.EnsureDeleted();
+                //Should work now without deleting the database
+                //context.Database.EnsureDeleted();
                 context.Database.Migrate();
             }
 
-                app.UseRouting();
+            app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSwagger();
-
             app.UseSwaggerUI(setupAction =>
             {
                 setupAction.SwaggerEndpoint("swagger/BlueFastAPISpecification/swagger.json",
@@ -166,6 +163,7 @@ namespace GroupAssignmentTeamBlue.API
                 setupAction.RoutePrefix = "";
             });
 
+            //Not needed anymore?
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

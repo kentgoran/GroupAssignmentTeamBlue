@@ -1,12 +1,8 @@
 {
   "dependencies": {
-    "mssql2": {
-      "type": "mssql",
-      "connectionId": "AppData"
-    },
     "mssql1": {
       "type": "mssql",
-      "connectionId": "DefaultConnection"
+      "connectionId": "AppData"
     }
   }
 }
