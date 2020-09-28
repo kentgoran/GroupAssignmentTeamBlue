@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
+using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -15,21 +16,15 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class AccountControllerTests : ControllerTestsBase
     {
-        public AccountControllerTests(UserManager<User> userManager, 
-            WebApplicationFactory<Startup> factory) : base(factory, 
-                "http://localhost:5000/account/")
+        public AccountControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
+            : base(factory, "http://localhost:5000/api/account/register/")
         {
         }
 
         [Fact]
         public async Task RegisterNewUser_ValidUser_ShouldRegisterUser()
         {
-            // Act + Assert
-            var response = await _client.PostAsJsonAsync("register", testUserForCreation);
 
-            // Assert
-            var user = db.UserRepository.Get(testUserForCreation.UserName);
-            Assert.NotNull(user);
         }
     }
 }

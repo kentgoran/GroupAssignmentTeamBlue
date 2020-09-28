@@ -2,6 +2,7 @@
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.DAL.Context;
+using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -17,9 +18,8 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class UserControllerTests : ControllerTestsBase
     {
-        public UserControllerTests(UserManager<User> userManager, 
-            WebApplicationFactory<Startup> factory) : base(factory, 
-                "http://localhost:5000/api/users/")
+        public UserControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
+            : base(factory, "http://localhost:5000/api/users/")
         {
         }
 
@@ -32,7 +32,6 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             {
                 throw new ArgumentNullException("Could not find sample user");
             }
-
             var expectedUserDto = mapper.Map<UserDto>(expectedUser);
 
             // Act + Assert

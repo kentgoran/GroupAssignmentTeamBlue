@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupAssignmentTeamBlue.DAL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupAssignmentTeamBlue.API", "GroupAssignmentTeamBlue.API\GroupAssignmentTeamBlue.API.csproj", "{9905B0B6-ECEE-487B-A0AD-3C2334E7C6FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupAssignmentTeamBlue.IntegrationTests", "GroupAssignmentTeamBlue.IntegrationTests\GroupAssignmentTeamBlue.IntegrationTests.csproj", "{CCBE57FC-307C-4AF1-AB54-3D8464052AB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupAssignmentTeamBlue.IntegrationTests", "GroupAssignmentTeamBlue.IntegrationTests\GroupAssignmentTeamBlue.IntegrationTests.csproj", "{CCBE57FC-307C-4AF1-AB54-3D8464052AB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupAssignmentTeamBlue.UnitTests", "GroupAssignmentTeamBlue.UnitTests\GroupAssignmentTeamBlue.UnitTests.csproj", "{9B49FCF1-1DE1-45B6-BDC8-4890ADFC6F76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CCBE57FC-307C-4AF1-AB54-3D8464052AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBE57FC-307C-4AF1-AB54-3D8464052AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCBE57FC-307C-4AF1-AB54-3D8464052AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B49FCF1-1DE1-45B6-BDC8-4890ADFC6F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B49FCF1-1DE1-45B6-BDC8-4890ADFC6F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B49FCF1-1DE1-45B6-BDC8-4890ADFC6F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B49FCF1-1DE1-45B6-BDC8-4890ADFC6F76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

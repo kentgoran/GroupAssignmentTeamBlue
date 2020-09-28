@@ -1,19 +1,10 @@
-﻿using AutoMapper;
-using FluentAssertions;
+﻿using FluentAssertions;
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
-using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
-using GroupAssignmentTeamBlue.API.Profiles;
-using GroupAssignmentTeamBlue.DAL.Repositories;
-using GroupAssignmentTeamBlue.Model;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account.Manage;
-using Microsoft.AspNetCore.Mvc.Testing;
+using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -21,12 +12,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class RealEstateControllerTests : ControllerTestsBase
     {
-                            // TODO: Set
-        private readonly RealEstateForCreationDto testRealEstate = new RealEstateForCreationDto{  };
 
-        public RealEstateControllerTests(UserManager<User> userManager, 
-            WebApplicationFactory<Startup> factory) : base(factory, 
-                "http://localhost:5000/api/realestates/")
+        public RealEstateControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
+            : base(factory, "http://localhost:5000/api/realestates/")
         {
         }
 
@@ -52,29 +40,56 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         [Fact]
         public async Task GetRealEstate_Unauthorized_NonexistingRealEstate_ReturnsRealEstate()
         {
+            // Arrange
             if (db.RealEstateRepository.EntityExists(-1))
             {
-                throw new ArgumentNullException("A real estate with the given id was found :(");
+                throw new ArgumentException("A real estate with the given id was found, please change the id");
             }
 
+            // Act 
             var response = await _client.GetAsync("-1");
 
+            // Assert
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
         [Fact]
         public async Task GetRealEstate_Authorized_ExistingRealEstate_ReturnsRealEstate()
         {
-            if (db.RealEstateRepository.EntityExists(-1))
+            // Arrange
+            var realEstateEntity = db.RealEstateRepository.Get(1);
+            if (realEstateEntity == null)
             {
-                throw new ArgumentNullException("A real estate with the given id was found :(");
+                throw new ArgumentNullException("Could not find sample real estate for test");
             }
+            var expectedRealEstate = mapper.Map<RealEstateFullDetailDto>(realEstateEntity);
 
-            // login testuser here!!
+            _client.SetFakeBearerToken((object)fakeToken);
 
+            // Act
             var response = await _client.GetFromJsonAsync<RealEstateFullDetailDto>("1");
 
+            // Assert
+            response.Should().BeEquivalentTo(expectedRealEstate);
+        }
 
+        [Fact]
+        public async Task GetRealEstate_Authorized_NonExistingRealEstate_ReturnsRealEstate()
+        {
+            // Arrange
+            var realEstateEntity = db.RealEstateRepository.Get(-1);
+            if (realEstateEntity != null)
+            {
+                throw new ArgumentException("Could not find sample real estate for test");
+            }
+
+            _client.SetFakeBearerToken((object)fakeToken);
+
+            // Act
+            var response = await _client.GetAsync("-1");
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
 
         [Fact]

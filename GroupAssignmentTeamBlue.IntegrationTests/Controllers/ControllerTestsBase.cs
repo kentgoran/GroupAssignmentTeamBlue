@@ -1,56 +1,48 @@
 ﻿using AutoMapper;
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
-using GroupAssignmentTeamBlue.API.Profiles;
 using GroupAssignmentTeamBlue.DAL.Context;
+using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
 using GroupAssignmentTeamBlue.Model;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Moq;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
+using System.Dynamic;
 using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
-    public abstract class ControllerTestsBase : IClassFixture<WebApplicationFactory<Startup>>, IDisposable
+    public abstract class ControllerTestsBase : IClassFixture<IntegrationTestsWebApplicationFactory<Startup>>, IDisposable
     {
         protected readonly HttpClient _client;
         protected readonly WebApplicationFactory<Startup> _factory;
         protected readonly UnitOfWork db;
         protected readonly IMapper mapper;
+        private readonly AdvertContext context;
         protected readonly UserForCreationDto testUserForCreation = new UserForCreationDto()
         { UserName = "TestUser", Email = "test@user.com", Password = "123", ConfirmPassword = "123" };
         protected readonly User testUserIdentity;
-        protected bool testUserWasCreated = false;
-        private readonly UserManager<User> _userManager;
+        protected dynamic fakeToken;
 
-        public ControllerTestsBase(WebApplicationFactory<Startup> factory,
+        public ControllerTestsBase(IntegrationTestsWebApplicationFactory<Startup> factory,
             string baseUri)
         {
-            var config = new MapperConfiguration(opt =>
-            {
-                opt.AddProfile(new UserProfile());
-                opt.AddProfile(new RealEstateProfile());
-                opt.AddProfile(new CommentProfile());
-            });
-            mapper = config.CreateMapper();
+            _factory = factory;
 
-            var dbContextBuilder = new DbContextOptionsBuilder<AdvertContext>()
-                // fixa så att det inte är hard coded  vv
-                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AdvertTeamBlue;Trusted_Connection=True;MultipleActiveResultSets=true");
+            mapper = _factory.Services.GetRequiredService<IMapper>();
 
-            var context = new AdvertContext(dbContextBuilder.Options);
+            context = _factory.Services.GetRequiredService<AdvertContext>();
+
+            context.Database.Migrate();
             db = new UnitOfWork(context);
 
-            var userMngrMock = new Mock<UserManager<User>>();
+            fakeToken = new ExpandoObject();
+            fakeToken.sub = Guid.NewGuid();
+            fakeToken.role = new[] { "sub-role", "admin" };
 
-
-            _factory = factory;
             if (!String.IsNullOrEmpty(baseUri))
             {
                 _factory.ClientOptions.BaseAddress = new Uri(baseUri);
@@ -59,35 +51,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             _client = _factory.CreateClient();
         }
 
-        private async Task CreateTestUserIdentity()
-        {
-            var user = mapper.Map<User>(testUserForCreation);
-            user.Id = 0;
-            user.EmailConfirmed = true;
-            await _userManager.CreateAsync(user);
-            await _userManager.AddPasswordAsync(user, testUserForCreation.Password);
-        }
-
-        protected void AddTestUserToDb()
-        {
-            CreateTestUserIdentity().Wait();
-
-            if (testUserIdentity != null)
-            {
-                db.UserRepository.Add(testUserIdentity);
-                db.SaveChanges();
-                testUserWasCreated = true;
-            }
-        }
-
         public void Dispose()
         {
-            // Removes the testuser from db if it was created and used for tests
-            if (testUserWasCreated)
-            {
-                var testUserFromDb = db.UserRepository.Get(testUserIdentity.UserName);
-                db.UserRepository.Remove(testUserFromDb.Id);
-            }
+            context.Database.EnsureDeleted();
         }
     }
 }
