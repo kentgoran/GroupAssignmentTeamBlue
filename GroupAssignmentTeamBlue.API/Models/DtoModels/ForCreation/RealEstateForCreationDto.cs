@@ -61,5 +61,33 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         /// </summary>
 
         public int ConstructionYear { get; set; }
+        /// <summary>
+        /// Primary pictures url
+        /// </summary>
+        [Required]
+        [Url]
+        public string ListingUrl { get; set; }
+        /// <summary>
+        /// City in question
+        /// </summary>
+        [Required(ErrorMessage ="An {0} is required.")]
+        public string City { get; set; }
+        /// <summary>
+        /// Square meters for given listing
+        /// </summary>
+        [Required(ErrorMessage = "{0} is required.")]
+        [Range(5,5000, ErrorMessage ="SquareMeters must be in range 5-5000")]
+        public int SquareMeters { get; set; }
+        /// <summary>
+        /// Amount of rooms, range of 1-50
+        /// </summary>
+        [Required(ErrorMessage = "{0} is required.")]
+        [Range(1,50, ErrorMessage ="Amount of rooms must be in range 1-50")]
+        public int Rooms { get; set; }
+        /// <summary>
+        /// Optional, additional pictures for given realEstate
+        /// </summary>
+        [ListOfUrlsValidateAll(ErrorMessage = "All given urls must be actual urls")]
+        public IEnumerable<string> Urls { get; set; }
     }
 }

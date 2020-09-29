@@ -197,9 +197,9 @@
             <summary>
             Constructor, succeeded defaults to false
             </summary>
-            <param name="succeded">indicates if the action was a success or not, defaults to false</param>
+            <param name="succeeded">indicates if the action was a success or not, defaults to false</param>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.ErrorService.ApiErrorResponseBody.Succeded">
+        <member name="P:GroupAssignmentTeamBlue.API.ErrorService.ApiErrorResponseBody.Succeeded">
             <summary>
             Indicates whether the action was successfull or not
             </summary>
@@ -331,6 +331,31 @@
             The year the place was built
             </summary>
         </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.ListingUrl">
+            <summary>
+            Primary pictures url
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.City">
+            <summary>
+            City in question
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.SquareMeters">
+            <summary>
+            Square meters for given listing
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Rooms">
+            <summary>
+            Amount of rooms, range of 1-50
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto.Urls">
+            <summary>
+            Optional, additional pictures for given realEstate
+            </summary>
+        </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.UserForCreationDto">
             <summary>
             A user for creation
@@ -376,14 +401,39 @@
             Contact information
             </summary>
         </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.ListingUrl">
+            <summary>
+            A listings primary picture url
+            </summary>
+        </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto">
             <summary>
             A Real Estate Dto with full details
             </summary>
         </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.City">
+            <summary>
+            City from where the RealEstate is
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.SquareMeters">
+            <summary>
+            Amount of square meters
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Rooms">
+            <summary>
+            Amount of rooms
+            </summary>
+        </member>
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Comments">
             <summary>
             List of comments made about the object
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Urls">
+            <summary>
+            Urls to pictures
             </summary>
         </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto">
