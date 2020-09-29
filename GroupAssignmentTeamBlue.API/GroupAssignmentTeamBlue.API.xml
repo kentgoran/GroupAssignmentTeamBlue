@@ -431,7 +431,7 @@
             Address of the object
             </summary>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Type">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.RealEstateType">
             <summary>
             Object type
             </summary>

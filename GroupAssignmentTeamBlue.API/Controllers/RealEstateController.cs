@@ -53,7 +53,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="take">Amount to take, has to be 1-100. default = 10</param>
         /// <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RealEstateDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
         public IActionResult GetRealEstates(int skip = 0, int take = 10)
         { 
