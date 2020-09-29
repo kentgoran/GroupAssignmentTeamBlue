@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using GroupAssignmentTeamBlue.API.ErrorService;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Http;
@@ -42,13 +43,20 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [Route("register")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
         public async Task<IActionResult> RegisterNewUser([FromForm]UserForCreationDto userForCreation)
         {
             var user = _mapper.Map<User>(userForCreation);
             var result = await _userManager.CreateAsync(user, userForCreation.Password);
             if (!result.Succeeded)
             {
-                return BadRequest(result);
+                //Create an errorResponeBody, and add all errors found in userManagers result
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                foreach(var error in result.Errors)
+                {
+                    errorResponse.AddError(error.Code, new string[] { error.Description });
+                }
+                return BadRequest(errorResponse);
             }
             return Ok();
         }

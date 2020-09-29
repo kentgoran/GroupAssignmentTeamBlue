@@ -82,7 +82,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="id">Id of the RealEstate to get</param>
         /// <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
         [HttpGet("{id}", Name = "GetRealEstate")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RealEstatePartlyDetailedDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult GetRealEstate(int id)

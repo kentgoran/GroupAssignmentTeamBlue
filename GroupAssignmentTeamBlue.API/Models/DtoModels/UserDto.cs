@@ -26,6 +26,6 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels
         /// <summary>
         /// Average rating recieved
         /// </summary>
-        public int RatingAvrage { get; set; }
+        public double RatingAvrage { get; set; }
     }
 }
