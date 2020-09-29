@@ -71,7 +71,11 @@ namespace GroupAssignmentTeamBlue.DAL.Context
                 .RuleFor(re => re.DateOfAdvertCreation, (f, re) =>
                 {
                     return f.Date.Between(new DateTime(re.ConstructionYear, 01, 01), new DateTime(re.ConstructionYear, 12, 31));
-                });
+                })
+                .RuleFor(re => re.City, f => f.Address.City())
+                .RuleFor(re => re.ListingUrl, f => f.Internet.Url())
+                .RuleFor(re => re.SquareMeters, f => f.Random.Int(5, 5000))
+                .RuleFor(re => re.Rooms, f => f.Random.Int(1,50));
 
             var users = realEstates.Generate(numberOfRealEstatesToGenerate);
             return users;

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroupAssignmentTeamBlue.DAL.Migrations
 {
     [DbContext(typeof(AdvertContext))]
-    [Migration("20200918105735_Seed-Deta")]
-    partial class SeedDeta
+    [Migration("20200929164247_SeedData")]
+    partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,483 +59,504 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Content = "Tempore aut odio sed similique pariatur neque aut in tenetur.",
-                            RealEstateId = 11,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 15, 30, 52, 790, DateTimeKind.Local).AddTicks(5600),
-                            UserId = 4
+                            Content = "Aspernatur non placeat consequatur quo qui ad quia recusandae eos.",
+                            RealEstateId = 17,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 5, 40, 51, 296, DateTimeKind.Local).AddTicks(4326),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 2,
-                            Content = "Fugiat assumenda ut repudiandae est tenetur.",
-                            RealEstateId = 16,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 4, 19, 33, 974, DateTimeKind.Local).AddTicks(1772),
-                            UserId = 2
+                            Content = "Et veritatis tenetur esse vel.",
+                            RealEstateId = 19,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 17, 46, 45, 39, DateTimeKind.Local).AddTicks(8690),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 3,
-                            Content = "Alias non eius.",
-                            RealEstateId = 11,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 2, 29, 26, 685, DateTimeKind.Local).AddTicks(1842),
+                            Content = "Ut commodi voluptate.",
+                            RealEstateId = 10,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 2, 31, 110, DateTimeKind.Local).AddTicks(6316),
                             UserId = 1
                         },
                         new
                         {
                             Id = 4,
-                            Content = "Repudiandae rerum autem omnis error necessitatibus.",
-                            RealEstateId = 17,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 21, 32, 19, 610, DateTimeKind.Local).AddTicks(2792),
+                            Content = "Voluptas voluptates omnis inventore nostrum facilis eveniet et.",
+                            RealEstateId = 11,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 23, 49, 10, 280, DateTimeKind.Local).AddTicks(2358),
                             UserId = 1
                         },
                         new
                         {
                             Id = 5,
-                            Content = "Qui voluptatum omnis est voluptatem quo accusamus est nulla.",
-                            RealEstateId = 11,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 4, 56, 55, 588, DateTimeKind.Local).AddTicks(5565),
-                            UserId = 2
+                            Content = "Quae corrupti distinctio.",
+                            RealEstateId = 16,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 11, 41, 21, 828, DateTimeKind.Local).AddTicks(6096),
+                            UserId = 4
                         },
                         new
                         {
                             Id = 6,
-                            Content = "Iure ut dicta.",
-                            RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 22, 29, 37, 511, DateTimeKind.Local).AddTicks(8591),
-                            UserId = 1
+                            Content = "Optio similique in qui dicta quasi.",
+                            RealEstateId = 13,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 23, 31, 37, 702, DateTimeKind.Local).AddTicks(3820),
+                            UserId = 4
                         },
                         new
                         {
                             Id = 7,
-                            Content = "Aliquid consequatur enim molestias quo porro cupiditate nihil.",
-                            RealEstateId = 8,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 8, 10, 7, 656, DateTimeKind.Local).AddTicks(2105),
-                            UserId = 2
+                            Content = "Et nulla corrupti.",
+                            RealEstateId = 18,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 7, 49, 45, 646, DateTimeKind.Local).AddTicks(7862),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 8,
-                            Content = "Ut adipisci et a voluptatem aliquid reiciendis.",
-                            RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 15, 55, 16, 798, DateTimeKind.Local).AddTicks(7117),
+                            Content = "Atque natus asperiores.",
+                            RealEstateId = 20,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 13, 36, 54, 265, DateTimeKind.Local).AddTicks(4280),
                             UserId = 2
                         },
                         new
                         {
                             Id = 9,
-                            Content = "Eos nulla tempore et ea cupiditate deleniti dolores voluptatem.",
-                            RealEstateId = 8,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 4, 35, 54, 266, DateTimeKind.Local).AddTicks(7875),
-                            UserId = 1
+                            Content = "Occaecati occaecati voluptas nesciunt officia in quisquam est.",
+                            RealEstateId = 20,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 48, 2, 208, DateTimeKind.Local).AddTicks(1670),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 10,
-                            Content = "Quia aliquam at corporis.",
-                            RealEstateId = 20,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 20, 50, 30, 674, DateTimeKind.Local).AddTicks(8496),
+                            Content = "Dignissimos dolor totam doloribus.",
+                            RealEstateId = 13,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 9, 40, 59, 921, DateTimeKind.Local).AddTicks(839),
                             UserId = 2
                         },
                         new
                         {
                             Id = 11,
-                            Content = "Illum voluptatem eveniet illum laudantium ad qui ipsa eius maiores.",
-                            RealEstateId = 7,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 9, 2, 7, 338, DateTimeKind.Local).AddTicks(5661),
+                            Content = "Voluptatem ducimus qui accusantium fugiat adipisci.",
+                            RealEstateId = 8,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 6, 22, 578, DateTimeKind.Local).AddTicks(8467),
                             UserId = 2
                         },
                         new
                         {
                             Id = 12,
-                            Content = "Distinctio dolorem sunt sed sit autem.",
-                            RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 7, 24, 44, 978, DateTimeKind.Local).AddTicks(9479),
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Content = "Temporibus nihil facere consequatur et cum inventore amet.",
-                            RealEstateId = 8,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 9, 40, 45, 683, DateTimeKind.Local).AddTicks(6753),
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Content = "Est vel earum dolore expedita qui aspernatur doloribus iure.",
-                            RealEstateId = 15,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 17, 9, 33, 875, DateTimeKind.Local).AddTicks(4717),
+                            Content = "Odio sed quae quod non error tempora id et itaque.",
+                            RealEstateId = 13,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 57, 58, 456, DateTimeKind.Local).AddTicks(8919),
                             UserId = 1
                         },
                         new
                         {
+                            Id = 13,
+                            Content = "Quas inventore pariatur.",
+                            RealEstateId = 6,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 52, 3, 667, DateTimeKind.Local).AddTicks(6271),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Content = "Omnis omnis aspernatur laboriosam architecto quasi illum.",
+                            RealEstateId = 17,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 17, 20, 74, DateTimeKind.Local).AddTicks(2721),
+                            UserId = 3
+                        },
+                        new
+                        {
                             Id = 15,
-                            Content = "Est numquam adipisci voluptatibus fuga officia soluta.",
-                            RealEstateId = 4,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 21, 29, 0, 99, DateTimeKind.Local).AddTicks(7622),
+                            Content = "Consequatur nam recusandae tenetur odit nihil ut.",
+                            RealEstateId = 7,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 9, 16, 49, 905, DateTimeKind.Local).AddTicks(5674),
                             UserId = 4
                         },
                         new
                         {
                             Id = 16,
-                            Content = "Cupiditate vel perspiciatis perspiciatis non aspernatur non placeat consequatur.",
-                            RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 7, 34, 18, 909, DateTimeKind.Local).AddTicks(1100),
-                            UserId = 1
+                            Content = "Ducimus qui quos quia laboriosam.",
+                            RealEstateId = 19,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 0, 26, 32, 688, DateTimeKind.Local).AddTicks(5171),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 17,
-                            Content = "Recusandae eos non eaque.",
-                            RealEstateId = 17,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 3, 29, 50, 805, DateTimeKind.Local).AddTicks(6867),
+                            Content = "Eos libero nisi nam possimus hic in eos dolores.",
+                            RealEstateId = 11,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 0, 9, 9, 22, DateTimeKind.Local).AddTicks(7684),
                             UserId = 2
                         },
                         new
                         {
                             Id = 18,
-                            Content = "Tenetur esse vel.",
-                            RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 6, 5, 54, 312, DateTimeKind.Local).AddTicks(573),
-                            UserId = 3
+                            Content = "Quisquam praesentium sunt.",
+                            RealEstateId = 9,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 54, 6, 258, DateTimeKind.Local).AddTicks(4653),
+                            UserId = 2
                         },
                         new
                         {
                             Id = 19,
-                            Content = "Ut commodi voluptate.",
-                            RealEstateId = 10,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 16, 17, 19, 923, DateTimeKind.Local).AddTicks(9955),
-                            UserId = 1
+                            Content = "Accusamus fugit consequatur itaque.",
+                            RealEstateId = 4,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 5, 25, 0, 855, DateTimeKind.Local).AddTicks(1366),
+                            UserId = 4
                         },
                         new
                         {
                             Id = 20,
-                            Content = "Voluptas voluptates omnis inventore nostrum facilis eveniet et.",
-                            RealEstateId = 11,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 18, 3, 59, 93, DateTimeKind.Local).AddTicks(5967),
-                            UserId = 1
+                            Content = "Et qui exercitationem omnis ab consequuntur nihil optio quia.",
+                            RealEstateId = 10,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 10, 49, 42, 767, DateTimeKind.Local).AddTicks(5494),
+                            UserId = 4
                         },
                         new
                         {
                             Id = 21,
-                            Content = "Quae corrupti distinctio.",
-                            RealEstateId = 16,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 5, 56, 10, 641, DateTimeKind.Local).AddTicks(9676),
-                            UserId = 4
+                            Content = "Fugiat ea aliquid magnam at.",
+                            RealEstateId = 6,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 2, 35, 917, DateTimeKind.Local).AddTicks(1404),
+                            UserId = 1
                         },
                         new
                         {
                             Id = 22,
-                            Content = "Optio similique in qui dicta quasi.",
-                            RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 17, 46, 26, 515, DateTimeKind.Local).AddTicks(7277),
-                            UserId = 4
+                            Content = "Neque delectus qui velit recusandae voluptatem vero ea.",
+                            RealEstateId = 9,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 38, 54, 386, DateTimeKind.Local).AddTicks(5917),
+                            UserId = 1
                         },
                         new
                         {
                             Id = 23,
-                            Content = "Et nulla corrupti.",
-                            RealEstateId = 18,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 2, 4, 34, 460, DateTimeKind.Local).AddTicks(1320),
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Content = "Atque natus asperiores.",
-                            RealEstateId = 20,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 7, 51, 43, 78, DateTimeKind.Local).AddTicks(7720),
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 25,
-                            Content = "Occaecati occaecati voluptas nesciunt officia in quisquam est.",
-                            RealEstateId = 20,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 9, 2, 51, 21, DateTimeKind.Local).AddTicks(5093),
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 26,
-                            Content = "Dignissimos dolor totam doloribus.",
-                            RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 3, 55, 48, 734, DateTimeKind.Local).AddTicks(4236),
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 27,
-                            Content = "Voluptatem ducimus qui accusantium fugiat adipisci.",
-                            RealEstateId = 8,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 8, 21, 11, 392, DateTimeKind.Local).AddTicks(1846),
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 28,
-                            Content = "Odio sed quae quod non error tempora id et itaque.",
-                            RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 9, 12, 47, 270, DateTimeKind.Local).AddTicks(2271),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 29,
-                            Content = "Quas inventore pariatur.",
-                            RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 17, 6, 52, 480, DateTimeKind.Local).AddTicks(9536),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 30,
-                            Content = "Omnis omnis aspernatur laboriosam architecto quasi illum.",
-                            RealEstateId = 17,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 12, 32, 8, 887, DateTimeKind.Local).AddTicks(5992),
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 31,
-                            Content = "Consequatur nam recusandae tenetur odit nihil ut.",
-                            RealEstateId = 7,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 3, 31, 38, 718, DateTimeKind.Local).AddTicks(8924),
+                            Content = "Enim assumenda sed vero nihil aut exercitationem.",
+                            RealEstateId = 5,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 25, 11, 745, DateTimeKind.Local).AddTicks(3952),
                             UserId = 4
                         },
                         new
                         {
-                            Id = 32,
-                            Content = "Ducimus qui quos quia laboriosam.",
-                            RealEstateId = 19,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 18, 41, 21, 501, DateTimeKind.Local).AddTicks(8394),
+                            Id = 24,
+                            Content = "Quibusdam voluptas eaque impedit praesentium.",
+                            RealEstateId = 16,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 12, 47, 10, 134, DateTimeKind.Local).AddTicks(200),
+                            UserId = 4
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Content = "Vel tempora similique voluptas minus pariatur consectetur.",
+                            RealEstateId = 14,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 4, 22, 3, 20, DateTimeKind.Local).AddTicks(6676),
+                            UserId = 4
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Content = "Voluptas nesciunt placeat.",
+                            RealEstateId = 9,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 32, 52, 532, DateTimeKind.Local).AddTicks(9722),
+                            UserId = 4
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Content = "Molestiae error quia enim reprehenderit aliquam.",
+                            RealEstateId = 12,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 3, 23, 58, 485, DateTimeKind.Local).AddTicks(1252),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Content = "Ipsam in quo et perspiciatis praesentium quod ipsa velit temporibus.",
+                            RealEstateId = 13,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 12, 51, 124, DateTimeKind.Local).AddTicks(1413),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Content = "Et voluptas pariatur deserunt rerum explicabo voluptatum quasi tempora nostrum.",
+                            RealEstateId = 3,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 4, 57, 2, 3, DateTimeKind.Local).AddTicks(2770),
                             UserId = 3
                         },
                         new
                         {
+                            Id = 30,
+                            Content = "Quo ipsam quisquam quo dolores nostrum sunt.",
+                            RealEstateId = 4,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 10, 56, 48, 889, DateTimeKind.Local).AddTicks(5453),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Content = "Cumque consequatur sint odio.",
+                            RealEstateId = 9,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 13, 45, 22, 858, DateTimeKind.Local).AddTicks(8368),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Content = "Incidunt aliquid et ea perferendis eum voluptatem nihil et.",
+                            RealEstateId = 9,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 12, 8, 56, 591, DateTimeKind.Local).AddTicks(83),
+                            UserId = 4
+                        },
+                        new
+                        {
                             Id = 33,
-                            Content = "Eos libero nisi nam possimus hic in eos dolores.",
-                            RealEstateId = 11,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 18, 23, 57, 836, DateTimeKind.Local).AddTicks(888),
+                            Content = "Quae sed quia rerum.",
+                            RealEstateId = 4,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 33, 50, 971, DateTimeKind.Local).AddTicks(4559),
                             UserId = 2
                         },
                         new
                         {
                             Id = 34,
-                            Content = "Quisquam praesentium sunt.",
-                            RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 3, 8, 55, 71, DateTimeKind.Local).AddTicks(7826),
-                            UserId = 2
+                            Content = "Aut deleniti sed voluptate quis itaque.",
+                            RealEstateId = 2,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 52, 30, 733, DateTimeKind.Local).AddTicks(7642),
+                            UserId = 1
                         },
                         new
                         {
                             Id = 35,
-                            Content = "Accusamus fugit consequatur itaque.",
-                            RealEstateId = 4,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 23, 39, 49, 668, DateTimeKind.Local).AddTicks(4523),
-                            UserId = 4
+                            Content = "Sit enim qui sit amet est voluptates impedit sit.",
+                            RealEstateId = 2,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 19, 43, 35, 875, DateTimeKind.Local).AddTicks(2261),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 36,
-                            Content = "Et qui exercitationem omnis ab consequuntur nihil optio quia.",
-                            RealEstateId = 10,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 5, 4, 31, 580, DateTimeKind.Local).AddTicks(8581),
+                            Content = "Repellendus repellat alias expedita et.",
+                            RealEstateId = 5,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 21, 51, 30, 812, DateTimeKind.Local).AddTicks(5251),
                             UserId = 4
                         },
                         new
                         {
                             Id = 37,
-                            Content = "Fugiat ea aliquid magnam at.",
-                            RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 8, 17, 24, 730, DateTimeKind.Local).AddTicks(4493),
-                            UserId = 1
+                            Content = "Omnis voluptatum nihil officiis rerum repellat facilis dignissimos quia.",
+                            RealEstateId = 7,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 5, 23, 34, 162, DateTimeKind.Local).AddTicks(6685),
+                            UserId = 2
                         },
                         new
                         {
                             Id = 38,
-                            Content = "Neque delectus qui velit recusandae voluptatem vero ea.",
-                            RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 2, 53, 43, 199, DateTimeKind.Local).AddTicks(8986),
-                            UserId = 1
+                            Content = "Dolores assumenda eos perferendis iusto aut.",
+                            RealEstateId = 10,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 4, 4, 55, 490, DateTimeKind.Local).AddTicks(3796),
+                            UserId = 2
                         },
                         new
                         {
                             Id = 39,
-                            Content = "Enim assumenda sed vero nihil aut exercitationem.",
-                            RealEstateId = 5,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 2, 40, 0, 558, DateTimeKind.Local).AddTicks(6994),
+                            Content = "A quia suscipit voluptate consequatur veniam veniam.",
+                            RealEstateId = 8,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 16, 49, 6, 740, DateTimeKind.Local).AddTicks(2788),
                             UserId = 4
                         },
                         new
                         {
                             Id = 40,
-                            Content = "Quibusdam voluptas eaque impedit praesentium.",
-                            RealEstateId = 16,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 7, 1, 58, 947, DateTimeKind.Local).AddTicks(3212),
-                            UserId = 4
+                            Content = "Sed aut omnis ipsam.",
+                            RealEstateId = 13,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 16, 51, 24, 446, DateTimeKind.Local).AddTicks(811),
+                            UserId = 2
                         },
                         new
                         {
                             Id = 41,
-                            Content = "Vel tempora similique voluptas minus pariatur consectetur.",
-                            RealEstateId = 14,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 22, 36, 51, 833, DateTimeKind.Local).AddTicks(9666),
-                            UserId = 4
+                            Content = "Inventore ea ut necessitatibus vel eos ut autem temporibus debitis.",
+                            RealEstateId = 17,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 20, 52, 53, 173, DateTimeKind.Local).AddTicks(9020),
+                            UserId = 1
                         },
                         new
                         {
                             Id = 42,
-                            Content = "Voluptas nesciunt placeat.",
-                            RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 16, 47, 41, 346, DateTimeKind.Local).AddTicks(2691),
+                            Content = "Hic laudantium nam laborum officia ad nesciunt saepe illum provident.",
+                            RealEstateId = 12,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 24, 59, 452, DateTimeKind.Local).AddTicks(4128),
                             UserId = 4
                         },
                         new
                         {
                             Id = 43,
-                            Content = "Molestiae error quia enim reprehenderit aliquam.",
-                            RealEstateId = 12,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 21, 38, 47, 298, DateTimeKind.Local).AddTicks(4152),
-                            UserId = 1
+                            Content = "Aut optio est et ullam consectetur temporibus quia quisquam.",
+                            RealEstateId = 20,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 12, 43, 24, 807, DateTimeKind.Local).AddTicks(9520),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 44,
-                            Content = "Ipsam in quo et perspiciatis praesentium quod ipsa velit temporibus.",
-                            RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 12, 27, 39, 937, DateTimeKind.Local).AddTicks(4344),
-                            UserId = 2
+                            Content = "Corrupti dolores assumenda dolores.",
+                            RealEstateId = 7,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 19, 45, 52, 200, DateTimeKind.Local).AddTicks(7604),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 45,
-                            Content = "Et voluptas pariatur deserunt rerum explicabo voluptatum quasi tempora nostrum.",
-                            RealEstateId = 3,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 23, 11, 50, 816, DateTimeKind.Local).AddTicks(5676),
+                            Content = "Exercitationem et numquam.",
+                            RealEstateId = 8,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 9, 49, 41, 36, DateTimeKind.Local).AddTicks(2132),
                             UserId = 3
                         },
                         new
                         {
                             Id = 46,
-                            Content = "Quo ipsam quisquam quo dolores nostrum sunt.",
-                            RealEstateId = 4,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 5, 11, 37, 702, DateTimeKind.Local).AddTicks(8329),
-                            UserId = 2
+                            Content = "Qui nihil repudiandae magni.",
+                            RealEstateId = 7,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 23, 47, 40, 731, DateTimeKind.Local).AddTicks(4661),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 47,
-                            Content = "Cumque consequatur sint odio.",
-                            RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 8, 0, 11, 672, DateTimeKind.Local).AddTicks(1222),
-                            UserId = 2
+                            Content = "Ut sint quo.",
+                            RealEstateId = 6,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 11, 39, 442, DateTimeKind.Local).AddTicks(9473),
+                            UserId = 3
                         },
                         new
                         {
                             Id = 48,
-                            Content = "Incidunt aliquid et ea perferendis eum voluptatem nihil et.",
-                            RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 6, 23, 45, 404, DateTimeKind.Local).AddTicks(2920),
+                            Content = "Ut et ipsa qui tempore qui ab aperiam.",
+                            RealEstateId = 12,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 15, 16, 33, 184, DateTimeKind.Local).AddTicks(8289),
                             UserId = 4
                         },
                         new
                         {
                             Id = 49,
-                            Content = "Quae sed quia rerum.",
-                            RealEstateId = 4,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 2, 48, 39, 784, DateTimeKind.Local).AddTicks(7316),
-                            UserId = 2
+                            Content = "Aut quae reprehenderit maxime molestias laudantium fuga ut sit.",
+                            RealEstateId = 12,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 21, 36, 30, 495, DateTimeKind.Local).AddTicks(5109),
+                            UserId = 4
                         },
                         new
                         {
                             Id = 50,
-                            Content = "Aut deleniti sed voluptate quis itaque.",
-                            RealEstateId = 2,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 3, 7, 19, 547, DateTimeKind.Local).AddTicks(407),
-                            UserId = 1
+                            Content = "Quibusdam ea quas voluptatibus nobis omnis praesentium velit.",
+                            RealEstateId = 9,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 52, 36, 635, DateTimeKind.Local).AddTicks(257),
+                            UserId = 2
                         },
                         new
                         {
                             Id = 51,
-                            Content = "Sit enim qui sit amet est voluptates impedit sit.",
-                            RealEstateId = 2,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 13, 58, 24, 688, DateTimeKind.Local).AddTicks(5003),
+                            Content = "Facilis inventore voluptas sed libero.",
+                            RealEstateId = 12,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 11, 26, 33, 551, DateTimeKind.Local).AddTicks(4638),
                             UserId = 3
                         },
                         new
                         {
                             Id = 52,
-                            Content = "Repellendus repellat alias expedita et.",
-                            RealEstateId = 5,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 16, 6, 19, 625, DateTimeKind.Local).AddTicks(7963),
-                            UserId = 4
+                            Content = "Necessitatibus ipsa officiis assumenda quia magni occaecati quis.",
+                            RealEstateId = 7,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 12, 42, 18, 517, DateTimeKind.Local).AddTicks(8064),
+                            UserId = 2
                         },
                         new
                         {
                             Id = 53,
-                            Content = "Omnis voluptatum nihil officiis rerum repellat facilis dignissimos quia.",
-                            RealEstateId = 7,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 23, 38, 22, 975, DateTimeKind.Local).AddTicks(9377),
-                            UserId = 2
+                            Content = "Ducimus officiis asperiores perspiciatis ab saepe aut ut sunt.",
+                            RealEstateId = 15,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 20, 3, 25, 35, DateTimeKind.Local).AddTicks(3484),
+                            UserId = 4
                         },
                         new
                         {
                             Id = 54,
-                            Content = "Dolores assumenda eos perferendis iusto aut.",
-                            RealEstateId = 10,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 22, 19, 44, 303, DateTimeKind.Local).AddTicks(6461),
-                            UserId = 2
+                            Content = "Et voluptate vero alias ut et.",
+                            RealEstateId = 5,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 0, 50, 47, 611, DateTimeKind.Local).AddTicks(6836),
+                            UserId = 4
                         },
                         new
                         {
                             Id = 55,
-                            Content = "A quia suscipit voluptate consequatur veniam veniam.",
-                            RealEstateId = 8,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 11, 3, 55, 553, DateTimeKind.Local).AddTicks(5430),
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 56,
-                            Content = "Sed aut omnis ipsam.",
-                            RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 11, 6, 13, 259, DateTimeKind.Local).AddTicks(3375),
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 57,
-                            Content = "Inventore ea ut necessitatibus vel eos ut autem temporibus debitis.",
-                            RealEstateId = 17,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 15, 7, 41, 987, DateTimeKind.Local).AddTicks(1594),
+                            Content = "Commodi et numquam deleniti est earum repudiandae fugiat ea minus.",
+                            RealEstateId = 12,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 11, 11, 576, DateTimeKind.Local).AddTicks(9291),
                             UserId = 1
                         },
                         new
                         {
+                            Id = 56,
+                            Content = "Doloribus et ducimus ratione est sunt facilis ullam ipsa.",
+                            RealEstateId = 11,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 1, 1, 756, DateTimeKind.Local).AddTicks(2713),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 57,
+                            Content = "Veniam autem debitis magnam id quam ut et.",
+                            RealEstateId = 6,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 10, 32, 58, 38, DateTimeKind.Local).AddTicks(1059),
+                            UserId = 3
+                        },
+                        new
+                        {
                             Id = 58,
-                            Content = "Hic laudantium nam laborum officia ad nesciunt saepe illum provident.",
-                            RealEstateId = 12,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 12, 39, 48, 265, DateTimeKind.Local).AddTicks(6672),
-                            UserId = 4
+                            Content = "Mollitia distinctio esse eum aspernatur hic.",
+                            RealEstateId = 19,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 36, 46, 13, DateTimeKind.Local).AddTicks(6004),
+                            UserId = 2
                         },
                         new
                         {
                             Id = 59,
-                            Content = "Aut optio est et ullam consectetur temporibus quia quisquam.",
-                            RealEstateId = 20,
-                            TimeOfCreation = new DateTime(2020, 9, 18, 6, 58, 13, 621, DateTimeKind.Local).AddTicks(2033),
-                            UserId = 3
+                            Content = "Qui dolorum molestiae.",
+                            RealEstateId = 14,
+                            TimeOfCreation = new DateTime(2020, 9, 29, 13, 18, 27, 292, DateTimeKind.Local).AddTicks(3396),
+                            UserId = 1
                         },
                         new
                         {
                             Id = 60,
-                            Content = "Corrupti dolores assumenda dolores.",
-                            RealEstateId = 7,
-                            TimeOfCreation = new DateTime(2020, 9, 17, 14, 0, 41, 14, DateTimeKind.Local).AddTicks(92),
-                            UserId = 3
+                            Content = "Qui repudiandae eos.",
+                            RealEstateId = 6,
+                            TimeOfCreation = new DateTime(2020, 9, 28, 20, 13, 55, 910, DateTimeKind.Local).AddTicks(3101),
+                            UserId = 2
                         });
+                });
+
+            modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Picture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("RealEstateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RealEstateId");
+
+                    b.ToTable("Pictures");
                 });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Rating", b =>
@@ -566,8 +587,8 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            RatedUserId = 2,
-                            RatingUserId = 2,
+                            RatedUserId = 4,
+                            RatingUserId = 4,
                             Score = 4
                         },
                         new
@@ -575,272 +596,272 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 2,
                             RatedUserId = 1,
                             RatingUserId = 1,
-                            Score = 2
+                            Score = 1
                         },
                         new
                         {
                             Id = 3,
                             RatedUserId = 4,
                             RatingUserId = 4,
-                            Score = 1
+                            Score = 5
                         },
                         new
                         {
                             Id = 4,
                             RatedUserId = 2,
                             RatingUserId = 2,
-                            Score = 4
+                            Score = 3
                         },
                         new
                         {
                             Id = 5,
-                            RatedUserId = 1,
-                            RatingUserId = 1,
+                            RatedUserId = 2,
+                            RatingUserId = 2,
                             Score = 5
                         },
                         new
                         {
                             Id = 6,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
-                            Score = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            RatedUserId = 1,
-                            RatingUserId = 1,
-                            Score = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
-                            Score = 3
-                        },
-                        new
-                        {
-                            Id = 9,
                             RatedUserId = 2,
                             RatingUserId = 2,
-                            Score = 5
-                        },
-                        new
-                        {
-                            Id = 10,
-                            RatedUserId = 2,
-                            RatingUserId = 2,
-                            Score = 3
-                        },
-                        new
-                        {
-                            Id = 11,
-                            RatedUserId = 4,
-                            RatingUserId = 4,
-                            Score = 3
-                        },
-                        new
-                        {
-                            Id = 12,
-                            RatedUserId = 1,
-                            RatingUserId = 1,
                             Score = 4
                         },
                         new
                         {
-                            Id = 13,
+                            Id = 7,
                             RatedUserId = 3,
                             RatingUserId = 3,
                             Score = 2
                         },
                         new
                         {
-                            Id = 14,
-                            RatedUserId = 2,
-                            RatingUserId = 2,
+                            Id = 8,
+                            RatedUserId = 1,
+                            RatingUserId = 1,
+                            Score = 5
+                        },
+                        new
+                        {
+                            Id = 9,
+                            RatedUserId = 1,
+                            RatingUserId = 1,
+                            Score = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            RatedUserId = 1,
+                            RatingUserId = 1,
                             Score = 4
+                        },
+                        new
+                        {
+                            Id = 11,
+                            RatedUserId = 3,
+                            RatingUserId = 3,
+                            Score = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            RatedUserId = 4,
+                            RatingUserId = 4,
+                            Score = 4
+                        },
+                        new
+                        {
+                            Id = 13,
+                            RatedUserId = 1,
+                            RatingUserId = 1,
+                            Score = 2
+                        },
+                        new
+                        {
+                            Id = 14,
+                            RatedUserId = 1,
+                            RatingUserId = 1,
+                            Score = 2
                         },
                         new
                         {
                             Id = 15,
                             RatedUserId = 4,
                             RatingUserId = 4,
-                            Score = 4
+                            Score = 1
                         },
                         new
                         {
                             Id = 16,
-                            RatedUserId = 1,
-                            RatingUserId = 1,
-                            Score = 3
+                            RatedUserId = 3,
+                            RatingUserId = 3,
+                            Score = 1
                         },
                         new
                         {
                             Id = 17,
-                            RatedUserId = 2,
-                            RatingUserId = 2,
-                            Score = 5
+                            RatedUserId = 3,
+                            RatingUserId = 3,
+                            Score = 3
                         },
                         new
                         {
                             Id = 18,
+                            RatedUserId = 2,
+                            RatingUserId = 2,
+                            Score = 1
+                        },
+                        new
+                        {
+                            Id = 19,
                             RatedUserId = 4,
                             RatingUserId = 4,
                             Score = 1
                         },
                         new
                         {
-                            Id = 19,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
-                            Score = 2
-                        },
-                        new
-                        {
                             Id = 20,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
-                            Score = 1
-                        },
-                        new
-                        {
-                            Id = 21,
                             RatedUserId = 1,
                             RatingUserId = 1,
                             Score = 3
                         },
                         new
                         {
-                            Id = 22,
+                            Id = 21,
                             RatedUserId = 3,
                             RatingUserId = 3,
-                            Score = 3
+                            Score = 5
+                        },
+                        new
+                        {
+                            Id = 22,
+                            RatedUserId = 1,
+                            RatingUserId = 1,
+                            Score = 4
                         },
                         new
                         {
                             Id = 23,
                             RatedUserId = 1,
                             RatingUserId = 1,
-                            Score = 4
+                            Score = 5
                         },
                         new
                         {
                             Id = 24,
-                            RatedUserId = 4,
-                            RatingUserId = 4,
+                            RatedUserId = 2,
+                            RatingUserId = 2,
                             Score = 2
                         },
                         new
                         {
                             Id = 25,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
-                            Score = 5
+                            RatedUserId = 4,
+                            RatingUserId = 4,
+                            Score = 3
                         },
                         new
                         {
                             Id = 26,
-                            RatedUserId = 4,
-                            RatingUserId = 4,
-                            Score = 4
+                            RatedUserId = 1,
+                            RatingUserId = 1,
+                            Score = 3
                         },
                         new
                         {
                             Id = 27,
-                            RatedUserId = 1,
-                            RatingUserId = 1,
-                            Score = 1
+                            RatedUserId = 4,
+                            RatingUserId = 4,
+                            Score = 5
                         },
                         new
                         {
                             Id = 28,
                             RatedUserId = 3,
                             RatingUserId = 3,
-                            Score = 3
+                            Score = 1
                         },
                         new
                         {
                             Id = 29,
-                            RatedUserId = 2,
-                            RatingUserId = 2,
+                            RatedUserId = 1,
+                            RatingUserId = 1,
                             Score = 1
                         },
                         new
                         {
                             Id = 30,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
-                            Score = 3
+                            RatedUserId = 1,
+                            RatingUserId = 1,
+                            Score = 5
                         },
                         new
                         {
                             Id = 31,
-                            RatedUserId = 2,
-                            RatingUserId = 2,
+                            RatedUserId = 1,
+                            RatingUserId = 1,
                             Score = 4
                         },
                         new
                         {
                             Id = 32,
-                            RatedUserId = 4,
-                            RatingUserId = 4,
-                            Score = 1
+                            RatedUserId = 3,
+                            RatingUserId = 3,
+                            Score = 3
                         },
                         new
                         {
                             Id = 33,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
+                            RatedUserId = 2,
+                            RatingUserId = 2,
                             Score = 3
                         },
                         new
                         {
                             Id = 34,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
-                            Score = 2
+                            RatedUserId = 1,
+                            RatingUserId = 1,
+                            Score = 4
                         },
                         new
                         {
                             Id = 35,
-                            RatedUserId = 4,
-                            RatingUserId = 4,
-                            Score = 2
+                            RatedUserId = 3,
+                            RatingUserId = 3,
+                            Score = 4
                         },
                         new
                         {
                             Id = 36,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
-                            Score = 1
+                            RatedUserId = 4,
+                            RatingUserId = 4,
+                            Score = 3
                         },
                         new
                         {
                             Id = 37,
-                            RatedUserId = 4,
-                            RatingUserId = 4,
-                            Score = 5
-                        },
-                        new
-                        {
-                            Id = 38,
-                            RatedUserId = 4,
-                            RatingUserId = 4,
-                            Score = 2
-                        },
-                        new
-                        {
-                            Id = 39,
                             RatedUserId = 3,
                             RatingUserId = 3,
                             Score = 3
                         },
                         new
                         {
+                            Id = 38,
+                            RatedUserId = 1,
+                            RatingUserId = 1,
+                            Score = 4
+                        },
+                        new
+                        {
+                            Id = 39,
+                            RatedUserId = 4,
+                            RatingUserId = 4,
+                            Score = 3
+                        },
+                        new
+                        {
                             Id = 40,
-                            RatedUserId = 3,
-                            RatingUserId = 3,
+                            RatedUserId = 4,
+                            RatingUserId = 4,
                             Score = 2
                         });
                 });
@@ -855,6 +876,14 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ConstructionYear")
+                        .HasColumnName("YearBuilt")
+                        .HasColumnType("int");
 
                     b.Property<string>("Contact")
                         .IsRequired()
@@ -873,11 +902,21 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.Property<bool>("IsSellable")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ListingUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal?>("Rent")
                         .HasColumnType("money");
 
+                    b.Property<int>("Rooms")
+                        .HasColumnType("int");
+
                     b.Property<decimal?>("SellPrice")
                         .HasColumnType("money");
+
+                    b.Property<int>("SquareMeters")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -888,9 +927,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("YearBuilt")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -904,321 +940,401 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         {
                             Id = 1,
                             Address = "91073 Feest Spurs, West Wilfridville, Senegal",
+                            City = "Littelville",
+                            ConstructionYear = 1644,
                             Contact = "Laurine Carroll, $1908 Antone Manors, South Araceli, Sri Lanka",
                             DateOfAdvertCreation = new DateTime(1644, 12, 23, 14, 5, 42, 386, DateTimeKind.Unspecified).AddTicks(4720),
                             Description = "Voluptatem fuga laudantium non ratione.",
                             IsRentable = false,
                             IsSellable = true,
+                            ListingUrl = "http://kaia.name",
                             Rent = 0m,
+                            Rooms = 50,
                             SellPrice = 1096466m,
+                            SquareMeters = 4412,
                             Title = "laboriosam",
                             Type = 0,
-                            UserId = 4,
-                            YearBuilt = 1644
+                            UserId = 4
                         },
                         new
                         {
                             Id = 2,
-                            Address = "930 Sonya Bridge, Feilshire, Philippines",
-                            Contact = "Jody Dietrich, $6304 Howell Roads, East Angusshire, Palestinian Territory",
-                            DateOfAdvertCreation = new DateTime(1649, 1, 23, 3, 0, 38, 110, DateTimeKind.Unspecified).AddTicks(377),
-                            Description = "Velit eaque sed quidem aut doloribus aut.",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 4866m,
-                            SellPrice = 0m,
-                            Title = "quo",
-                            Type = 2,
-                            UserId = 2,
-                            YearBuilt = 1649
+                            Address = "610 Zachariah River, North Josefort, Turkmenistan",
+                            City = "Port Arnoport",
+                            ConstructionYear = 1748,
+                            Contact = "Minnie Powlowski, $09659 Arthur Falls, Port Aglaeside, Haiti",
+                            DateOfAdvertCreation = new DateTime(1748, 6, 23, 12, 29, 43, 38, DateTimeKind.Unspecified).AddTicks(1469),
+                            Description = "Molestias adipisci voluptatem ducimus atque.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            ListingUrl = "https://eugenia.com",
+                            Rent = 0m,
+                            Rooms = 43,
+                            SellPrice = 2096745m,
+                            SquareMeters = 415,
+                            Title = "aut",
+                            Type = 0,
+                            UserId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Address = "62059 Hilpert Brooks, Lake Haylie, Turkmenistan",
-                            Contact = "Nico Hauck, $80258 Cole Turnpike, South Dellview, Andorra",
-                            DateOfAdvertCreation = new DateTime(1702, 11, 23, 20, 53, 52, 222, DateTimeKind.Unspecified).AddTicks(9110),
-                            Description = "Sint consequuntur provident est aliquid deleniti aut voluptatibus vitae.",
+                            Address = "013 Mueller Streets, Goyetteville, Bermuda",
+                            City = "Lake Benland",
+                            ConstructionYear = 1982,
+                            Contact = "Corrine Wolff, $59284 Gibson Bypass, Walshburgh, Mozambique",
+                            DateOfAdvertCreation = new DateTime(1982, 6, 17, 17, 37, 15, 369, DateTimeKind.Unspecified).AddTicks(4511),
+                            Description = "Illum architecto labore animi qui dolorem qui dolore dignissimos sit.",
                             IsRentable = true,
                             IsSellable = false,
-                            Rent = 9329m,
+                            ListingUrl = "https://lysanne.org",
+                            Rent = 8028m,
+                            Rooms = 15,
                             SellPrice = 0m,
-                            Title = "sint",
+                            SquareMeters = 225,
+                            Title = "dolores",
                             Type = 3,
-                            UserId = 2,
-                            YearBuilt = 1702
+                            UserId = 4
                         },
                         new
                         {
                             Id = 4,
-                            Address = "6552 Okuneva Haven, New Golden, Canada",
-                            Contact = "Verlie Bode, $117 Barton Springs, Scarletttown, French Guiana",
-                            DateOfAdvertCreation = new DateTime(1616, 5, 29, 9, 10, 21, 867, DateTimeKind.Unspecified).AddTicks(6542),
-                            Description = "Nulla sit qui corporis maiores minima sed.",
-                            IsRentable = false,
-                            IsSellable = true,
-                            Rent = 0m,
-                            SellPrice = 301994m,
-                            Title = "vero",
-                            Type = 0,
-                            UserId = 1,
-                            YearBuilt = 1616
+                            Address = "95585 Johnpaul Forge, West Vern, Madagascar",
+                            City = "Port Koreyburgh",
+                            ConstructionYear = 1638,
+                            Contact = "Kylee Hyatt, $40968 Bernhard Bypass, Veumshire, Slovenia",
+                            DateOfAdvertCreation = new DateTime(1638, 4, 28, 17, 28, 16, 899, DateTimeKind.Unspecified).AddTicks(664),
+                            Description = "Asperiores expedita quia cum cupiditate error quia.",
+                            IsRentable = true,
+                            IsSellable = false,
+                            ListingUrl = "http://mathew.biz",
+                            Rent = 11503m,
+                            Rooms = 6,
+                            SellPrice = 0m,
+                            SquareMeters = 4065,
+                            Title = "neque",
+                            Type = 2,
+                            UserId = 2
                         },
                         new
                         {
                             Id = 5,
-                            Address = "628 Goodwin Cape, New Dorrismouth, Belarus",
-                            Contact = "Wilton Mayert, $955 Hagenes Heights, Port Audra, Germany",
-                            DateOfAdvertCreation = new DateTime(1742, 1, 30, 16, 57, 59, 687, DateTimeKind.Unspecified).AddTicks(1157),
-                            Description = "Animi necessitatibus pariatur repudiandae a vel voluptatem amet atque excepturi.",
+                            Address = "9480 Stracke Parkway, South Royalstad, San Marino",
+                            City = "East Yessenia",
+                            ConstructionYear = 1600,
+                            Contact = "Arnaldo Powlowski, $2774 Moen Hills, Freemanville, American Samoa",
+                            DateOfAdvertCreation = new DateTime(1600, 3, 26, 11, 22, 23, 753, DateTimeKind.Unspecified).AddTicks(9992),
+                            Description = "Possimus beatae cumque molestias cupiditate.",
                             IsRentable = false,
                             IsSellable = true,
+                            ListingUrl = "https://delilah.info",
                             Rent = 0m,
-                            SellPrice = 1620100m,
-                            Title = "veritatis",
-                            Type = 2,
-                            UserId = 1,
-                            YearBuilt = 1742
+                            Rooms = 49,
+                            SellPrice = 1395514m,
+                            SquareMeters = 1212,
+                            Title = "optio",
+                            Type = 0,
+                            UserId = 2
                         },
                         new
                         {
                             Id = 6,
-                            Address = "57264 Jared Summit, East Elsieville, Yemen",
-                            Contact = "Elfrieda Rowe, $0758 Hills Ferry, Marquardtside, Italy",
-                            DateOfAdvertCreation = new DateTime(1701, 12, 22, 1, 58, 30, 272, DateTimeKind.Unspecified).AddTicks(5613),
-                            Description = "Animi illum id.",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 7236m,
-                            SellPrice = 0m,
-                            Title = "optio",
-                            Type = 2,
-                            UserId = 2,
-                            YearBuilt = 1701
-                        },
-                        new
-                        {
-                            Id = 7,
                             Address = "918 Lebsack Highway, Port Myronborough, Georgia",
+                            City = "Olsonburgh",
+                            ConstructionYear = 1937,
                             Contact = "Lyla Terry, $5500 Nick Shores, Briaside, Spain",
                             DateOfAdvertCreation = new DateTime(1937, 1, 18, 22, 18, 22, 769, DateTimeKind.Unspecified).AddTicks(174),
                             Description = "Temporibus minima id atque voluptatem repellat quos consequatur facilis tenetur.",
                             IsRentable = false,
                             IsSellable = true,
+                            ListingUrl = "https://eileen.org",
                             Rent = 0m,
+                            Rooms = 25,
                             SellPrice = 2463133m,
+                            SquareMeters = 2944,
                             Title = "nostrum",
                             Type = 3,
-                            UserId = 2,
-                            YearBuilt = 1937
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Address = "4394 Watsica Summit, North Oscarhaven, Marshall Islands",
+                            City = "East Alberthamouth",
+                            ConstructionYear = 1779,
+                            Contact = "Lilyan Kshlerin, $34772 Lind Place, South Enaberg, Madagascar",
+                            DateOfAdvertCreation = new DateTime(1779, 5, 1, 5, 46, 17, 18, DateTimeKind.Unspecified).AddTicks(322),
+                            Description = "Necessitatibus dolor maxime animi qui et tempora dolorum dolorem.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            ListingUrl = "http://colleen.com",
+                            Rent = 0m,
+                            Rooms = 49,
+                            SellPrice = 2061780m,
+                            SquareMeters = 3581,
+                            Title = "blanditiis",
+                            Type = 0,
+                            UserId = 1
                         },
                         new
                         {
                             Id = 8,
-                            Address = "2243 Myrtle Square, South Savannahmouth, Saint Barthelemy",
-                            Contact = "Oswaldo Rodriguez, $1164 Dante Plaza, Alfhaven, Maldives",
-                            DateOfAdvertCreation = new DateTime(1762, 12, 13, 0, 28, 4, 514, DateTimeKind.Unspecified).AddTicks(6217),
-                            Description = "Corporis eveniet nostrum ut officia atque blanditiis possimus.",
+                            Address = "874 Kilback Row, Port Shaylee, Sweden",
+                            City = "New Estefania",
+                            ConstructionYear = 1630,
+                            Contact = "Oral Zieme, $65166 Gino Loop, Anahishire, Belgium",
+                            DateOfAdvertCreation = new DateTime(1630, 3, 24, 13, 21, 47, 466, DateTimeKind.Unspecified).AddTicks(8661),
+                            Description = "Voluptatem minima ut ut ex quae nihil.",
                             IsRentable = false,
                             IsSellable = true,
+                            ListingUrl = "http://christophe.name",
                             Rent = 0m,
-                            SellPrice = 1504483m,
-                            Title = "vel",
-                            Type = 3,
-                            UserId = 4,
-                            YearBuilt = 1762
+                            Rooms = 42,
+                            SellPrice = 666453m,
+                            SquareMeters = 1818,
+                            Title = "et",
+                            Type = 1,
+                            UserId = 1
                         },
                         new
                         {
                             Id = 9,
-                            Address = "4179 Hermiston Canyon, North Houstonbury, Republic of Korea",
-                            Contact = "Mabel Padberg, $72207 Dominic Brooks, Morissettemouth, Eritrea",
-                            DateOfAdvertCreation = new DateTime(1884, 8, 15, 16, 41, 41, 892, DateTimeKind.Unspecified).AddTicks(3384),
-                            Description = "Eos dolor necessitatibus omnis.",
-                            IsRentable = false,
-                            IsSellable = true,
-                            Rent = 0m,
-                            SellPrice = 646934m,
-                            Title = "odio",
-                            Type = 2,
-                            UserId = 1,
-                            YearBuilt = 1884
+                            Address = "6002 Ally Knolls, New Bridie, Gambia",
+                            City = "Cecilborough",
+                            ConstructionYear = 1942,
+                            Contact = "Ludie Lang, $775 Wanda Flats, Leonieville, Mayotte",
+                            DateOfAdvertCreation = new DateTime(1942, 9, 4, 19, 4, 32, 70, DateTimeKind.Unspecified).AddTicks(6812),
+                            Description = "Non quis asperiores ab quia quis.",
+                            IsRentable = true,
+                            IsSellable = false,
+                            ListingUrl = "https://rowan.biz",
+                            Rent = 7232m,
+                            Rooms = 34,
+                            SellPrice = 0m,
+                            SquareMeters = 141,
+                            Title = "mollitia",
+                            Type = 0,
+                            UserId = 2
                         },
                         new
                         {
                             Id = 10,
-                            Address = "1538 Hartmann Burgs, Jeffrymouth, Finland",
-                            Contact = "Reta Kilback, $888 Johnston Hill, Port Cleta, Bangladesh",
-                            DateOfAdvertCreation = new DateTime(1721, 4, 6, 23, 51, 46, 885, DateTimeKind.Unspecified).AddTicks(6356),
-                            Description = "Doloribus vitae quaerat.",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 6150m,
-                            SellPrice = 0m,
-                            Title = "non",
-                            Type = 3,
-                            UserId = 4,
-                            YearBuilt = 1721
+                            Address = "371 Abbigail Flat, Lake Kaylahchester, New Zealand",
+                            City = "Isaiasmouth",
+                            ConstructionYear = 1899,
+                            Contact = "Kade Paucek, $52733 Murphy Field, Yadiramouth, Indonesia",
+                            DateOfAdvertCreation = new DateTime(1899, 5, 23, 21, 49, 14, 998, DateTimeKind.Unspecified).AddTicks(3718),
+                            Description = "Iusto perferendis vero eius nihil.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            ListingUrl = "https://seth.org",
+                            Rent = 0m,
+                            Rooms = 39,
+                            SellPrice = 1257418m,
+                            SquareMeters = 4776,
+                            Title = "aut",
+                            Type = 0,
+                            UserId = 4
                         },
                         new
                         {
                             Id = 11,
-                            Address = "65136 Evangeline Station, Friesentown, Palau",
-                            Contact = "Jocelyn Monahan, $0460 Moen Keys, East Jaimestad, Burkina Faso",
-                            DateOfAdvertCreation = new DateTime(1606, 11, 8, 22, 40, 36, 380, DateTimeKind.Unspecified).AddTicks(2113),
-                            Description = "Modi reiciendis praesentium aut incidunt cumque placeat.",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 7981m,
-                            SellPrice = 0m,
-                            Title = "facilis",
-                            Type = 0,
-                            UserId = 3,
-                            YearBuilt = 1606
+                            Address = "6990 Earlene Coves, South Sandrafurt, Equatorial Guinea",
+                            City = "Marvinberg",
+                            ConstructionYear = 1999,
+                            Contact = "Norwood Balistreri, $29490 Hellen Ridges, South Tomasatown, Cape Verde",
+                            DateOfAdvertCreation = new DateTime(1999, 8, 11, 17, 6, 12, 320, DateTimeKind.Unspecified).AddTicks(6539),
+                            Description = "Rerum nihil voluptatem.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            ListingUrl = "http://matteo.info",
+                            Rent = 0m,
+                            Rooms = 15,
+                            SellPrice = 1375355m,
+                            SquareMeters = 2602,
+                            Title = "odio",
+                            Type = 1,
+                            UserId = 1
                         },
                         new
                         {
                             Id = 12,
-                            Address = "75762 Cormier Bridge, Graysonchester, Hong Kong",
-                            Contact = "Cristopher Marks, $954 Ena Ports, Shieldstown, Afghanistan",
-                            DateOfAdvertCreation = new DateTime(1939, 11, 16, 13, 27, 43, 678, DateTimeKind.Unspecified).AddTicks(3721),
-                            Description = "Et provident nobis mollitia consequatur et.",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 10467m,
-                            SellPrice = 0m,
-                            Title = "eius",
-                            Type = 2,
-                            UserId = 3,
-                            YearBuilt = 1939
+                            Address = "31125 Schmitt Pines, Horaciochester, Greenland",
+                            City = "Jerrellland",
+                            ConstructionYear = 1728,
+                            Contact = "Frank Gutkowski, $21636 Delphia Island, Emmaleetown, Moldova",
+                            DateOfAdvertCreation = new DateTime(1728, 3, 31, 13, 15, 59, 191, DateTimeKind.Unspecified).AddTicks(3863),
+                            Description = "Accusamus blanditiis voluptas et recusandae molestiae explicabo possimus fugiat.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            ListingUrl = "https://irving.com",
+                            Rent = 0m,
+                            Rooms = 6,
+                            SellPrice = 1855715m,
+                            SquareMeters = 1280,
+                            Title = "illum",
+                            Type = 0,
+                            UserId = 3
                         },
                         new
                         {
                             Id = 13,
-                            Address = "0486 Wiegand Corners, West Meggie, Japan",
-                            Contact = "Charlie Jones, $00590 King Ways, Port Leonardburgh, Falkland Islands (Malvinas)",
-                            DateOfAdvertCreation = new DateTime(1842, 3, 22, 18, 22, 47, 197, DateTimeKind.Unspecified).AddTicks(7649),
-                            Description = "Est odio sunt rerum nihil voluptatem fugit voluptas accusantium aliquam.",
-                            IsRentable = false,
-                            IsSellable = true,
-                            Rent = 0m,
-                            SellPrice = 2967411m,
-                            Title = "earum",
-                            Type = 3,
-                            UserId = 1,
-                            YearBuilt = 1842
+                            Address = "54163 Ernestina Club, Port Meaghan, Zambia",
+                            City = "Lake Kiel",
+                            ConstructionYear = 1757,
+                            Contact = "Chyna Bartoletti, $769 Tracey Summit, Rosemaryview, Iraq",
+                            DateOfAdvertCreation = new DateTime(1757, 2, 26, 1, 42, 36, 325, DateTimeKind.Unspecified).AddTicks(6531),
+                            Description = "Ut et cupiditate esse ex sit.",
+                            IsRentable = true,
+                            IsSellable = false,
+                            ListingUrl = "http://delmer.name",
+                            Rent = 4636m,
+                            Rooms = 15,
+                            SellPrice = 0m,
+                            SquareMeters = 2812,
+                            Title = "eos",
+                            Type = 2,
+                            UserId = 4
                         },
                         new
                         {
                             Id = 14,
-                            Address = "305 Loren Orchard, Emmaleemouth, Sierra Leone",
-                            Contact = "Travis Walsh, $300 Nolan Island, East Frances, Eritrea",
-                            DateOfAdvertCreation = new DateTime(1660, 3, 24, 18, 17, 44, 236, DateTimeKind.Unspecified).AddTicks(9860),
-                            Description = "Deleniti occaecati ullam illum aut accusamus blanditiis voluptas.",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 5590m,
-                            SellPrice = 0m,
-                            Title = "nostrum",
+                            Address = "5323 Senger Station, New Winnifred, Ghana",
+                            City = "South Anjalichester",
+                            ConstructionYear = 1864,
+                            Contact = "Kyle Hintz, $2805 Rohan Drive, Croninchester, Anguilla",
+                            DateOfAdvertCreation = new DateTime(1864, 12, 5, 5, 29, 40, 144, DateTimeKind.Unspecified).AddTicks(6619),
+                            Description = "Consectetur quisquam ut tempore voluptatem quia expedita qui dicta.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            ListingUrl = "http://kendra.info",
+                            Rent = 0m,
+                            Rooms = 17,
+                            SellPrice = 185109m,
+                            SquareMeters = 1788,
+                            Title = "magni",
                             Type = 2,
-                            UserId = 2,
-                            YearBuilt = 1660
+                            UserId = 2
                         },
                         new
                         {
                             Id = 15,
-                            Address = "919 Alexandria Camp, Sawaynfurt, Uganda",
-                            Contact = "Marshall Kunze, $114 Bianka Fork, Port Judebury, Guatemala",
-                            DateOfAdvertCreation = new DateTime(1775, 1, 11, 4, 58, 47, 660, DateTimeKind.Unspecified).AddTicks(8044),
-                            Description = "Et qui laboriosam numquam hic id nemo.",
-                            IsRentable = false,
-                            IsSellable = true,
-                            Rent = 0m,
-                            SellPrice = 1449966m,
-                            Title = "deserunt",
-                            Type = 2,
-                            UserId = 1,
-                            YearBuilt = 1775
+                            Address = "01992 Toni Wall, West Ismael, Colombia",
+                            City = "New Emelia",
+                            ConstructionYear = 1691,
+                            Contact = "Luigi Hills, $207 Grady Shoals, Berniermouth, Sri Lanka",
+                            DateOfAdvertCreation = new DateTime(1691, 1, 25, 4, 43, 57, 562, DateTimeKind.Unspecified).AddTicks(4736),
+                            Description = "Labore minima natus.",
+                            IsRentable = true,
+                            IsSellable = false,
+                            ListingUrl = "http://fidel.org",
+                            Rent = 5169m,
+                            Rooms = 18,
+                            SellPrice = 0m,
+                            SquareMeters = 3242,
+                            Title = "odio",
+                            Type = 3,
+                            UserId = 3
                         },
                         new
                         {
                             Id = 16,
-                            Address = "8172 Greenholt Crescent, Alannaville, Norfolk Island",
-                            Contact = "Brandi Pfannerstill, $60031 Purdy Well, Lake Kiel, Equatorial Guinea",
-                            DateOfAdvertCreation = new DateTime(1846, 5, 16, 13, 55, 26, 780, DateTimeKind.Unspecified).AddTicks(9997),
-                            Description = "Voluptas dicta mollitia.",
+                            Address = "68998 Watsica Highway, McKenzieside, India",
+                            City = "Abbottside",
+                            ConstructionYear = 1986,
+                            Contact = "Isabell Parker, $5486 Eloisa Street, Abnerborough, Canada",
+                            DateOfAdvertCreation = new DateTime(1986, 7, 24, 11, 38, 17, 70, DateTimeKind.Unspecified).AddTicks(8565),
+                            Description = "Delectus autem quos id occaecati repellendus quis ut nemo ullam.",
                             IsRentable = true,
                             IsSellable = false,
-                            Rent = 6655m,
+                            ListingUrl = "https://axel.net",
+                            Rent = 10702m,
+                            Rooms = 41,
                             SellPrice = 0m,
-                            Title = "dolore",
+                            SquareMeters = 4081,
+                            Title = "quis",
                             Type = 1,
-                            UserId = 2,
-                            YearBuilt = 1846
+                            UserId = 3
                         },
                         new
                         {
                             Id = 17,
-                            Address = "7069 Hansen Rapid, South Anjalichester, Czech Republic",
-                            Contact = "Kellen Vandervort, $988 Maddison Locks, Ellisburgh, Ghana",
-                            DateOfAdvertCreation = new DateTime(1740, 6, 8, 21, 48, 17, 663, DateTimeKind.Unspecified).AddTicks(2573),
-                            Description = "Optio placeat dolorem incidunt at.",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 7356m,
-                            SellPrice = 0m,
-                            Title = "veritatis",
-                            Type = 2,
-                            UserId = 1,
-                            YearBuilt = 1740
+                            Address = "135 Kihn Junction, Declanport, Tokelau",
+                            City = "South Rossville",
+                            ConstructionYear = 1646,
+                            Contact = "Franco Lueilwitz, $66463 Violet Station, Stephanyland, Turks and Caicos Islands",
+                            DateOfAdvertCreation = new DateTime(1646, 6, 9, 20, 1, 14, 970, DateTimeKind.Unspecified).AddTicks(4711),
+                            Description = "Ipsam quod corrupti.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            ListingUrl = "http://gregoria.org",
+                            Rent = 0m,
+                            Rooms = 18,
+                            SellPrice = 2048930m,
+                            SquareMeters = 3765,
+                            Title = "officiis",
+                            Type = 3,
+                            UserId = 2
                         },
                         new
                         {
                             Id = 18,
-                            Address = "24341 Vilma Villages, Ferryton, Croatia",
-                            Contact = "Nicholas Padberg, $78078 Grady Corners, Annettaton, Ukraine",
-                            DateOfAdvertCreation = new DateTime(1732, 1, 13, 11, 1, 40, 240, DateTimeKind.Unspecified).AddTicks(7676),
-                            Description = "Minima natus sunt facilis.",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 9966m,
-                            SellPrice = 0m,
-                            Title = "aperiam",
-                            Type = 0,
-                            UserId = 2,
-                            YearBuilt = 1732
+                            Address = "4760 Nikko Passage, Strosinchester, Suriname",
+                            City = "North Goldenville",
+                            ConstructionYear = 1605,
+                            Contact = "Hubert Bailey, $61496 Cyrus Station, Rowemouth, Togo",
+                            DateOfAdvertCreation = new DateTime(1605, 5, 21, 13, 11, 30, 167, DateTimeKind.Unspecified).AddTicks(8604),
+                            Description = "Fugiat assumenda ut repudiandae est tenetur.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            ListingUrl = "http://lonnie.info",
+                            Rent = 0m,
+                            Rooms = 14,
+                            SellPrice = 809079m,
+                            SquareMeters = 1842,
+                            Title = "ipsam",
+                            Type = 1,
+                            UserId = 3
                         },
                         new
                         {
                             Id = 19,
-                            Address = "07936 Carlee Ford, Ziemeshire, Svalbard & Jan Mayen Islands",
-                            Contact = "Wade Hackett, $5238 Marisa Lakes, Harveyhaven, Niue",
-                            DateOfAdvertCreation = new DateTime(1769, 6, 30, 18, 0, 26, 696, DateTimeKind.Unspecified).AddTicks(6466),
-                            Description = "Est ea quis delectus delectus autem quos id occaecati repellendus.",
+                            Address = "4222 Wendy Ramp, Haagburgh, Cayman Islands",
+                            City = "Kohlerburgh",
+                            ConstructionYear = 1609,
+                            Contact = "Vicenta Gislason, $788 Faustino Cove, Loganbury, Macedonia",
+                            DateOfAdvertCreation = new DateTime(1609, 11, 24, 3, 8, 52, 455, DateTimeKind.Unspecified).AddTicks(8981),
+                            Description = "Porro cupiditate nihil enim debitis blanditiis culpa ut adipisci.",
                             IsRentable = false,
                             IsSellable = true,
+                            ListingUrl = "https://allison.biz",
                             Rent = 0m,
-                            SellPrice = 2799231m,
-                            Title = "ex",
-                            Type = 3,
-                            UserId = 2,
-                            YearBuilt = 1769
+                            Rooms = 15,
+                            SellPrice = 2470543m,
+                            SquareMeters = 4937,
+                            Title = "molestias",
+                            Type = 1,
+                            UserId = 4
                         },
                         new
                         {
                             Id = 20,
-                            Address = "9195 Harris Roads, Rauview, Holy See (Vatican City State)",
-                            Contact = "Savanna Brakus, $532 Gerhard Island, Port Rahul, Myanmar",
-                            DateOfAdvertCreation = new DateTime(1858, 3, 30, 10, 57, 49, 18, DateTimeKind.Unspecified).AddTicks(3645),
-                            Description = "Sint natus delectus alias eveniet molestias aspernatur eligendi illum.",
-                            IsRentable = true,
-                            IsSellable = false,
-                            Rent = 8703m,
-                            SellPrice = 0m,
-                            Title = "ut",
-                            Type = 0,
-                            UserId = 4,
-                            YearBuilt = 1858
+                            Address = "409 Franecki Ports, East Lukas, Seychelles",
+                            City = "Laishafurt",
+                            ConstructionYear = 1682,
+                            Contact = "Brielle Moen, $460 Rolfson Avenue, New Reubentown, Somalia",
+                            DateOfAdvertCreation = new DateTime(1682, 12, 23, 23, 20, 0, 724, DateTimeKind.Unspecified).AddTicks(2177),
+                            Description = "Voluptate distinctio dolorem sunt sed sit autem.",
+                            IsRentable = false,
+                            IsSellable = true,
+                            ListingUrl = "http://dandre.com",
+                            Rent = 0m,
+                            Rooms = 27,
+                            SellPrice = 725558m,
+                            SquareMeters = 3792,
+                            Title = "incidunt",
+                            Type = 2,
+                            UserId = 2
                         });
                 });
 
@@ -1504,6 +1620,15 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.HasOne("GroupAssignmentTeamBlue.Model.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Picture", b =>
+                {
+                    b.HasOne("GroupAssignmentTeamBlue.Model.RealEstate", null)
+                        .WithMany("Pictures")
+                        .HasForeignKey("RealEstateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
