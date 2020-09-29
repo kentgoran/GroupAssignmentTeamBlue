@@ -50,7 +50,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns> Returns a 200 Ok together with a representatino of the user if the entity was found.
         /// If no entity with the given username was found a status code of 404 Not Found is returned.</returns>
         [HttpGet("{userName}/", Name = "GetUser")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetUser(string userName)
         {

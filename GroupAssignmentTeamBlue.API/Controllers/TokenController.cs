@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using GroupAssignmentTeamBlue.API.ErrorService;
+using GroupAssignmentTeamBlue.API.Models;
 using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -44,7 +45,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <returns>A token, expiration time etc</returns>
         [Route("/token")]
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(JwtTokenModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
         public async Task<IActionResult> Create(string username, string password, string grant_type)
         {

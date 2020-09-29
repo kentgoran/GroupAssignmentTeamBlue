@@ -471,6 +471,41 @@
             Average rating recieved
             </summary>
         </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.JwtTokenModel">
+            <summary>
+            Model only used for modelling in swagger
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.JwtTokenModel.Access_Token">
+            <summary>
+            The actual token
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.JwtTokenModel.Token_Type">
+            <summary>
+            Type of token
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.JwtTokenModel.Expires_In">
+            <summary>
+            Seconds until expiration
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.JwtTokenModel.UserName">
+            <summary>
+            a users name
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.JwtTokenModel.Issued">
+            <summary>
+            Time of issuing
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.JwtTokenModel.Expires">
+            <summary>
+            Time of expiration
+            </summary>
+        </member>
         <member name="T:GroupAssignmentTeamBlue.API.Profiles.CommentProfile">
             <summary>
             Profiler for using AutoMapper with Comments

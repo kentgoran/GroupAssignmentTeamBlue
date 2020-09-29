@@ -42,7 +42,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="id">Id of the realEstate</param>
         /// <returns>200 OK with a list of pictures</returns>
         [HttpGet("{id}", Name = "GetPicsForRealEstate")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<PictureDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult GetPicsForRealEstate(int id)
         {
@@ -75,17 +75,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
                 errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {picture.RealEstateId}" });
                 return NotFound(errorResponse);
             }
-            /*
-             This below is a method for doing this with single urls
-            var picToAdd = _mapper.Map<Picture>(picture);
-            var picToReturn = _mapper.Map<PictureDto>(picToAdd);
-            _unitOfWork.PictureRepository.Add(picToAdd);
-            _unitOfWork.SaveChanges();
 
-            return CreatedAtRoute("GetPicsForRealEstate", new { id = picToAdd.RealEstateId }, picToReturn);
-            */
-
-            //This here is for implementing a list of urls, validation has been removed atm
             foreach(var url in picture.Urls)
             {
                 var picToAdd = new Picture()
