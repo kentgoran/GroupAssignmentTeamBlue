@@ -53,7 +53,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// <param name="take">Amount to take, has to be 1-100. default = 10</param>
         /// <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RealEstateDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
         public IActionResult GetRealEstates(int skip = 0, int take = 10)
         { 
@@ -114,7 +114,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         public async Task<IActionResult> CreateRealEstate(RealEstateForCreationDto realEstate)
         {
             var realEstateToAdd = _mapper.Map<RealEstate>(realEstate);
-
+            realEstateToAdd.Pictures = ConvertToPictures(realEstate.Urls);
             var user = await _userManager.GetUserAsync(User);
             realEstateToAdd.User = user;
             _unitOfWork.RealEstateRepository.Add(realEstateToAdd);
@@ -122,6 +122,19 @@ namespace GroupAssignmentTeamBlue.API.Controllers
 
             var realEstateForReturn = _mapper.Map<RealEstateDto>(realEstateToAdd);
             return CreatedAtRoute("GetRealEstate", new { id = realEstateForReturn.Id }, realEstateForReturn);
+        }
+
+        private IEnumerable<Picture> ConvertToPictures(IEnumerable<string> stringUrls)
+        {
+            var toReturn = new List<Picture>();
+            foreach(var url in stringUrls)
+            {
+                toReturn.Add(new Picture()
+                {
+                    Url = url
+                });
+            }
+            return toReturn;
         }
     }
 }

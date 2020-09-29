@@ -45,7 +45,7 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels
         /// <summary>
         /// Object type
         /// </summary>
-        public string Type { get; set; }
+        public int RealEstateType { get; set; }
         /// <summary>
         /// The year the object was built
         /// </summary>

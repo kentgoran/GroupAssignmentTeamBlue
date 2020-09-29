@@ -14,5 +14,9 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels
         /// Contact information
         /// </summary>
         public string Contact { get; set; }
+        /// <summary>
+        /// A listings primary picture url
+        /// </summary>
+        public string ListingUrl { get; set; }
     }
 }

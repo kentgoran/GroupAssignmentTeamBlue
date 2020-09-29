@@ -26,7 +26,7 @@ namespace GroupAssignmentTeamBlue.API.Profiles
         {
 
             CreateMap<RealEstate, RealEstateDto>()
-                .ForMember(dto => dto.Type, opt => opt.MapFrom(source => source.Type.ToString()))
+                .ForMember(dto => dto.RealEstateType, opt => opt.MapFrom(source => (int)source.Type))
                 .ForMember(dto => dto.Address
                 , opt => opt.MapFrom(source => source.Address));
 
@@ -37,7 +37,7 @@ namespace GroupAssignmentTeamBlue.API.Profiles
             //opt => opt.MapFrom(source => $"{source.Address.StreetName} {source.Address.StreetNumber}"));
 
             CreateMap<RealEstate, RealEstatePartlyDetailedDto>()
-                .ForMember(dto => dto.Type, opt => opt.MapFrom(source => source.Type.ToString()))
+                .ForMember(dto => dto.RealEstateType, opt => opt.MapFrom(source => (int)source.Type))
                 .ForMember(dto => dto.Address
                 , opt => opt.MapFrom(source => source.Address));
 
