@@ -14,16 +14,16 @@ namespace GroupAssignmentTeamBlue.API.ErrorService
         /// <summary>
         /// Constructor, succeeded defaults to false
         /// </summary>
-        /// <param name="succeded">indicates if the action was a success or not, defaults to false</param>
-        public ApiErrorResponseBody(bool succeded = false)
+        /// <param name="succeeded">indicates if the action was a success or not, defaults to false</param>
+        public ApiErrorResponseBody(bool succeeded = false)
         {
-            Succeded = succeded;
+            Succeeded = succeeded;
             Errors = new Dictionary<string, string[]>();
         }
         /// <summary>
         /// Indicates whether the action was successfull or not
         /// </summary>
-        public bool Succeded { get; set; }
+        public bool Succeeded { get; set; }
         /// <summary>
         /// A dictionary of errors
         /// </summary>
