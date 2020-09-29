@@ -36,7 +36,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 
             context = _factory.Services.GetRequiredService<AdvertContext>();
 
-            context.Database.Migrate();
+            context.Database.EnsureCreated();
             db = new UnitOfWork(context);
 
             fakeToken = new ExpandoObject();

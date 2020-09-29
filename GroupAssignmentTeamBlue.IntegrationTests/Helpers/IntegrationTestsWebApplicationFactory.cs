@@ -55,8 +55,8 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                 var contextOptions = new DbContextOptionsBuilder<AdvertContext>();
                 contextOptions.UseSqlServer(
                     $"Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;Trusted_Connection=True;MultipleActiveResultSets=true");
-                var context = new AdvertContext(contextOptions.Options);
-                context.Database.EnsureCreated();
+                //var context = new AdvertContext(contextOptions.Options);
+                //context.Database.EnsureCreated();
                 services.AddSingleton(new AdvertContext(contextOptions.Options));
 
                 //services.AddScoped<AdvertContext>();
