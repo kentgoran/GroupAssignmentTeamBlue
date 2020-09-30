@@ -34,12 +34,23 @@ namespace GroupAssignmentTeamBlue.Model
         public decimal? Rent { get; set; }
         [DataType(DataType.Currency)]
         public decimal? SellPrice { get; set; }
-        //Can't set dynamic range (DateTime.Now.Year), so set 2 years from now,
-        //so that properties not yet built can be input in the system
         [Range(1600, 2022)]
-        public int YearBuilt { get; set; }
+        [Column("YearBuilt")]
+        public int ConstructionYear { get; set; }
         [Required]
         public DateTime DateOfAdvertCreation { get; set; }
+        [Required]
+        [DataType(DataType.ImageUrl)]
+        public string ListingUrl { get; set; }
+        [Required]
+        public string City { get; set; }
+        [Required]
+        [Range(5,5000)]
+        public int SquareMeters { get; set; }
+        [Required]
+        [Range(1,50)]
+        public int Rooms { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<Picture> Pictures { get; set; }
     }
 }

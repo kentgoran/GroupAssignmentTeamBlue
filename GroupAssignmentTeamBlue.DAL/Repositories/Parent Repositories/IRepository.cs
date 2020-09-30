@@ -11,7 +11,7 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         void Add(TEntity entityToAdd);
         TEntity Get(int Id);
         void Update(TEntity entityToUpdate);
-        void Remove(int Id);
+        void Remove(TEntity Id);
         bool EntityExists(int id);
     }
 }

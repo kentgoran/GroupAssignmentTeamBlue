@@ -7,16 +7,20 @@ using System;
 
 namespace GroupAssignmentTeamBlue.API.Profiles
 {
+    /// <summary>
+    /// Profiler for using AutoMapper with Comments
+    /// </summary>
     public class CommentProfile : Profile
     {
 
-        
+        /// <summary>
+        /// Constructor for CommentProfile, setting mapping for Comments and it's dto's
+        /// </summary>
         public CommentProfile()
         {
             CreateMap<Comment, CommentDto>()
                 .ForMember(dto => dto.UserName, opt => opt.MapFrom(source => source.User.UserName));
 
-            //Possible to map realestateId to RealEstate?
             CreateMap<CommentForCreationDto, Comment>()
                 .ForMember(dto => dto.TimeOfCreation, 
                 opt => opt.MapFrom(source => DateTime.UtcNow));

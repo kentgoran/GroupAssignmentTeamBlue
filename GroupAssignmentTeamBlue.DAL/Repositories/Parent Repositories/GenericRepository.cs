@@ -21,15 +21,9 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
             context.Set<TEntity>().Add(entityToAdd);
         }
 
-        public virtual void Remove(int Id)
-        {          
-            if (EntityExists(Id))
-            {
-                var entityToRemove = Get(Id);
-                context.Set<TEntity>().Remove(entityToRemove);
-            }
-
-            //TODO: vad gör vi om entityn inte hittas?
+        public virtual void Remove(TEntity entityToRemove)
+        {
+            context.Set<TEntity>().Remove(entityToRemove);
         }
 
         public virtual TEntity Get(int Id)

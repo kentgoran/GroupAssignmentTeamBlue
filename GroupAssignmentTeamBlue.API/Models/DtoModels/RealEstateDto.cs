@@ -5,13 +5,18 @@ using System.Threading.Tasks;
 
 namespace GroupAssignmentTeamBlue.API.Models.DtoModels
 {
-    public class RealEstateDto
+    /// <summary>
+    /// RealEstate dto
+    /// </summary>
+    public class RealEstateDto : RealEstatePartlyDetailedDto
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public decimal? Rent { get; set; }
-        public decimal? SellPrice { get; set; }
-        public bool IsRentable { get; set; }
-        public bool IsSellable { get; set; }
+        /// <summary>
+        /// Contact information
+        /// </summary>
+        public string Contact { get; set; }
+        /// <summary>
+        /// A listings primary picture url
+        /// </summary>
+        public string ListingUrl { get; set; }
     }
 }

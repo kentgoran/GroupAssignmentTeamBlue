@@ -18,19 +18,36 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Reflection;
+using System.IO;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using GroupAssignmentTeamBlue.API.ErrorService;
 
 namespace GroupAssignmentTeamBlue.API
 {
+    /// <summary>
+    /// Startup class, sets up the api
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
+        /// <summary>
+        /// Holds configuration options
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AdvertContext>(options =>
@@ -40,12 +57,15 @@ namespace GroupAssignmentTeamBlue.API
             options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AdvertContext>();
 
-
-
-
-            services.AddControllersWithViews();
-            
-            services.AddRazorPages();
+            services.AddMvc(setupAction =>
+            {
+                setupAction.Filters.Add(
+                    new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
+                setupAction.Filters.Add(
+                    new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
+                setupAction.Filters.Add(
+                    new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+            });
             
             services.AddControllers().AddNewtonsoftJson().
                 AddXmlDataContractSerializerFormatters();
@@ -75,9 +95,35 @@ namespace GroupAssignmentTeamBlue.API
             {
                 options.Password.RequireNonAlphanumeric = false;
             });
+
+            //Swagger implementation
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("BlueFastAPISpecification",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "BlueFast API",
+                        Version = "0.1",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                        {
+                            Email = "simonwestman88@gmail.com",
+                            Name = "Simon Westman, Linnea Smedberg, Oskar Wennström MUT19"
+                        },
+                        Description = "(Closed beta)\nAPI for consumption by SUT19 team blue. Other use prohibited."
+                    });
+
+                //Includes Xml comments in Swagger
+                var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+                setupAction.IncludeXmlComments(xmlFullPath);
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -97,14 +143,27 @@ namespace GroupAssignmentTeamBlue.API
             //Below ensures that un-applied migrations are applied at runtime
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                scope.ServiceProvider.GetService<AdvertContext>().Database.Migrate();
+
+                var context = scope.ServiceProvider.GetService<AdvertContext>();
+                //Should work now without deleting the database
+                //context.Database.EnsureDeleted();
+                context.Database.Migrate();
             }
 
-                app.UseRouting();
+            app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(setupAction =>
+            {
+                setupAction.SwaggerEndpoint("swagger/BlueFastAPISpecification/swagger.json",
+                    "BlueFast API");
+                setupAction.RoutePrefix = "";
+            });
+
+            //Not needed anymore?
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
