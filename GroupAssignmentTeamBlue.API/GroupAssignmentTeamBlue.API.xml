@@ -61,32 +61,6 @@
             <param name="commentForCreation">Information about the comment to be created</param>
             <returns>200 OK with comment content, username and creation-time. BadRequest if RealEstate is not found</returns>
         </member>
-        <member name="T:GroupAssignmentTeamBlue.API.Controllers.PicturesController">
-            <summary>
-            Controller for GET/POST/DELETE of pictures
-            </summary>
-        </member>
-        <member name="M:GroupAssignmentTeamBlue.API.Controllers.PicturesController.#ctor(GroupAssignmentTeamBlue.DAL.Context.AdvertContext,AutoMapper.IMapper)">
-            <summary>
-            Constructor for PicturesController
-            </summary>
-            <param name="context">Dbcontext to be injected</param>
-            <param name="mapper">Mapper to be injected</param>
-        </member>
-        <member name="M:GroupAssignmentTeamBlue.API.Controllers.PicturesController.GetPicsForRealEstate(System.Int32)">
-            <summary>
-            GET method to get pictures for a given realEstate, by Id
-            </summary>
-            <param name="id">Id of the realEstate</param>
-            <returns>200 OK with a list of pictures</returns>
-        </member>
-        <member name="M:GroupAssignmentTeamBlue.API.Controllers.PicturesController.PostPic(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto)">
-            <summary>
-            POST method for creating a new picture, linked to given realEstate
-            </summary>
-            <param name="picture">Urls and realEstateId</param>
-            <returns>201 Created, and the url attained together with id of the realestate</returns>
-        </member>
         <member name="T:GroupAssignmentTeamBlue.API.Controllers.RealEstateController">
             <summary>
             Controller for RealEstates
@@ -254,21 +228,6 @@
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto.Content">
             <summary>
             The actual comment
-            </summary>
-        </member>
-        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto">
-            <summary>
-            DTO for creation of a picture
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto.Urls">
-            <summary>
-            list of urls to tie to the realEstate
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.PictureForCreationDto.RealEstateId">
-            <summary>
-            Id of given RealEstate from which the picture belongs
             </summary>
         </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto">
