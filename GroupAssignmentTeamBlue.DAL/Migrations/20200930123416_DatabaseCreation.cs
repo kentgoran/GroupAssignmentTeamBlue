@@ -3,27 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GroupAssignmentTeamBlue.DAL.Migrations
 {
-    public partial class AddingAuthentication : Migration
+    public partial class DatabaseCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StreetName = table.Column<string>(maxLength: 50, nullable: false),
-                    StreetNumber = table.Column<string>(maxLength: 10, nullable: false),
-                    ZipCode = table.Column<string>(maxLength: 10, nullable: false),
-                    StateProvince = table.Column<string>(maxLength: 20, nullable: false),
-                    Country = table.Column<string>(maxLength: 30, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -63,21 +46,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Contacts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contacts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,8 +94,8 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false)
                 },
@@ -171,8 +139,8 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -180,34 +148,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
-                    Content = table.Column<string>(maxLength: 1500, nullable: false),
-                    TimeOfCreation = table.Column<DateTime>(nullable: false),
-                    ParentCommentId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comments_Comments_ParentCommentId",
-                        column: x => x.ParentCommentId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -231,14 +171,12 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         name: "FK_Ratings_AspNetUsers_RatedUserId",
                         column: x => x.RatedUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Ratings_AspNetUsers_RatingUserId",
                         column: x => x.RatingUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -247,36 +185,85 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(maxLength: 50, nullable: false),
+                    Description = table.Column<string>(maxLength: 500, nullable: true),
                     UserId = table.Column<int>(nullable: false),
-                    ContactId = table.Column<int>(nullable: false),
-                    AddressId = table.Column<int>(nullable: false),
+                    Contact = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
                     Type = table.Column<int>(nullable: false),
                     IsRentable = table.Column<bool>(nullable: false),
                     IsSellable = table.Column<bool>(nullable: false),
-                    Rent = table.Column<decimal>(nullable: false),
-                    SellPrice = table.Column<decimal>(nullable: false),
-                    YearBuilt = table.Column<DateTime>(nullable: false),
-                    DateOfAdvertCreation = table.Column<DateTime>(nullable: false)
+                    Rent = table.Column<decimal>(type: "money", nullable: true),
+                    SellPrice = table.Column<decimal>(type: "money", nullable: true),
+                    YearBuilt = table.Column<int>(nullable: false),
+                    DateOfAdvertCreation = table.Column<DateTime>(nullable: false),
+                    ListingUrl = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    SquareMeters = table.Column<int>(nullable: false),
+                    Rooms = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RealEstates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RealEstates_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RealEstates_Contacts_ContactId",
-                        column: x => x.ContactId,
-                        principalTable: "Contacts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_RealEstates_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    Content = table.Column<string>(maxLength: 1500, nullable: false),
+                    TimeOfCreation = table.Column<DateTime>(nullable: false),
+                    ParentCommentId = table.Column<int>(nullable: true),
+                    RealEstateId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Comments_ParentCommentId",
+                        column: x => x.ParentCommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comments_RealEstates_RealEstateId",
+                        column: x => x.RealEstateId,
+                        principalTable: "RealEstates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pictures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(nullable: false),
+                    RealEstateId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pictures", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pictures_RealEstates_RealEstateId",
+                        column: x => x.RealEstateId,
+                        principalTable: "RealEstates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -326,9 +313,19 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 column: "ParentCommentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_RealEstateId",
+                table: "Comments",
+                column: "RealEstateId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserId",
                 table: "Comments",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pictures_RealEstateId",
+                table: "Pictures",
+                column: "RealEstateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_RatedUserId",
@@ -339,16 +336,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 name: "IX_Ratings_RatingUserId",
                 table: "Ratings",
                 column: "RatingUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RealEstates_AddressId",
-                table: "RealEstates",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RealEstates_ContactId",
-                table: "RealEstates",
-                column: "ContactId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RealEstates_UserId",
@@ -377,19 +364,16 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Ratings");
+                name: "Pictures");
 
             migrationBuilder.DropTable(
-                name: "RealEstates");
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
-
-            migrationBuilder.DropTable(
-                name: "Contacts");
+                name: "RealEstates");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

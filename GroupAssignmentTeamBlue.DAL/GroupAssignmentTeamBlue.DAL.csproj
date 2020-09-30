@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200911075905_RealEstateModelChange.cs" />
-    <Compile Remove="Migrations\20200911075905_RealEstateModelChange.Designer.cs" />
-    <Compile Remove="Migrations\20200916171405_IdsForRelationsAddedToModel.cs" />
-    <Compile Remove="Migrations\20200916171405_IdsForRelationsAddedToModel.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Bogus" Version="31.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />

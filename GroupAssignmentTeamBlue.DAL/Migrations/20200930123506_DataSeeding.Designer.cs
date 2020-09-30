@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroupAssignmentTeamBlue.DAL.Migrations
 {
     [DbContext(typeof(AdvertContext))]
-    [Migration("20200929164247_SeedData")]
-    partial class SeedData
+    [Migration("20200930123506_DataSeeding")]
+    partial class DataSeeding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,7 +61,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 1,
                             Content = "Aspernatur non placeat consequatur quo qui ad quia recusandae eos.",
                             RealEstateId = 17,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 5, 40, 51, 296, DateTimeKind.Local).AddTicks(4326),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 1, 33, 10, 484, DateTimeKind.Local).AddTicks(2246),
                             UserId = 3
                         },
                         new
@@ -69,7 +69,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 2,
                             Content = "Et veritatis tenetur esse vel.",
                             RealEstateId = 19,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 17, 46, 45, 39, DateTimeKind.Local).AddTicks(8690),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 13, 39, 4, 227, DateTimeKind.Local).AddTicks(4539),
                             UserId = 3
                         },
                         new
@@ -77,7 +77,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 3,
                             Content = "Ut commodi voluptate.",
                             RealEstateId = 10,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 2, 31, 110, DateTimeKind.Local).AddTicks(6316),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 17, 54, 50, 298, DateTimeKind.Local).AddTicks(2105),
                             UserId = 1
                         },
                         new
@@ -85,7 +85,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 4,
                             Content = "Voluptas voluptates omnis inventore nostrum facilis eveniet et.",
                             RealEstateId = 11,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 23, 49, 10, 280, DateTimeKind.Local).AddTicks(2358),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 19, 41, 29, 467, DateTimeKind.Local).AddTicks(8132),
                             UserId = 1
                         },
                         new
@@ -93,7 +93,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 5,
                             Content = "Quae corrupti distinctio.",
                             RealEstateId = 16,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 11, 41, 21, 828, DateTimeKind.Local).AddTicks(6096),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 7, 33, 41, 16, DateTimeKind.Local).AddTicks(1849),
                             UserId = 4
                         },
                         new
@@ -101,7 +101,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 6,
                             Content = "Optio similique in qui dicta quasi.",
                             RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 23, 31, 37, 702, DateTimeKind.Local).AddTicks(3820),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 19, 23, 56, 889, DateTimeKind.Local).AddTicks(9458),
                             UserId = 4
                         },
                         new
@@ -109,7 +109,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 7,
                             Content = "Et nulla corrupti.",
                             RealEstateId = 18,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 7, 49, 45, 646, DateTimeKind.Local).AddTicks(7862),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 3, 42, 4, 834, DateTimeKind.Local).AddTicks(3519),
                             UserId = 3
                         },
                         new
@@ -117,7 +117,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 8,
                             Content = "Atque natus asperiores.",
                             RealEstateId = 20,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 13, 36, 54, 265, DateTimeKind.Local).AddTicks(4280),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 9, 29, 13, 452, DateTimeKind.Local).AddTicks(9928),
                             UserId = 2
                         },
                         new
@@ -125,7 +125,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 9,
                             Content = "Occaecati occaecati voluptas nesciunt officia in quisquam est.",
                             RealEstateId = 20,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 48, 2, 208, DateTimeKind.Local).AddTicks(1670),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 10, 40, 21, 395, DateTimeKind.Local).AddTicks(7307),
                             UserId = 3
                         },
                         new
@@ -133,7 +133,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 10,
                             Content = "Dignissimos dolor totam doloribus.",
                             RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 9, 40, 59, 921, DateTimeKind.Local).AddTicks(839),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 5, 33, 19, 108, DateTimeKind.Local).AddTicks(6456),
                             UserId = 2
                         },
                         new
@@ -141,7 +141,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 11,
                             Content = "Voluptatem ducimus qui accusantium fugiat adipisci.",
                             RealEstateId = 8,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 6, 22, 578, DateTimeKind.Local).AddTicks(8467),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 9, 58, 41, 766, DateTimeKind.Local).AddTicks(4071),
                             UserId = 2
                         },
                         new
@@ -149,7 +149,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 12,
                             Content = "Odio sed quae quod non error tempora id et itaque.",
                             RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 57, 58, 456, DateTimeKind.Local).AddTicks(8919),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 10, 50, 17, 644, DateTimeKind.Local).AddTicks(4506),
                             UserId = 1
                         },
                         new
@@ -157,7 +157,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 13,
                             Content = "Quas inventore pariatur.",
                             RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 52, 3, 667, DateTimeKind.Local).AddTicks(6271),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 44, 22, 855, DateTimeKind.Local).AddTicks(1779),
                             UserId = 1
                         },
                         new
@@ -165,7 +165,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 14,
                             Content = "Omnis omnis aspernatur laboriosam architecto quasi illum.",
                             RealEstateId = 17,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 17, 20, 74, DateTimeKind.Local).AddTicks(2721),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 14, 9, 39, 261, DateTimeKind.Local).AddTicks(8212),
                             UserId = 3
                         },
                         new
@@ -173,7 +173,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 15,
                             Content = "Consequatur nam recusandae tenetur odit nihil ut.",
                             RealEstateId = 7,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 9, 16, 49, 905, DateTimeKind.Local).AddTicks(5674),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 5, 9, 9, 93, DateTimeKind.Local).AddTicks(1186),
                             UserId = 4
                         },
                         new
@@ -181,7 +181,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 16,
                             Content = "Ducimus qui quos quia laboriosam.",
                             RealEstateId = 19,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 0, 26, 32, 688, DateTimeKind.Local).AddTicks(5171),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 20, 18, 51, 876, DateTimeKind.Local).AddTicks(667),
                             UserId = 3
                         },
                         new
@@ -189,7 +189,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 17,
                             Content = "Eos libero nisi nam possimus hic in eos dolores.",
                             RealEstateId = 11,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 0, 9, 9, 22, DateTimeKind.Local).AddTicks(7684),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 20, 1, 28, 210, DateTimeKind.Local).AddTicks(3169),
                             UserId = 2
                         },
                         new
@@ -197,7 +197,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 18,
                             Content = "Quisquam praesentium sunt.",
                             RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 54, 6, 258, DateTimeKind.Local).AddTicks(4653),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 4, 46, 25, 446, DateTimeKind.Local).AddTicks(117),
                             UserId = 2
                         },
                         new
@@ -205,7 +205,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 19,
                             Content = "Accusamus fugit consequatur itaque.",
                             RealEstateId = 4,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 5, 25, 0, 855, DateTimeKind.Local).AddTicks(1366),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 1, 17, 20, 42, DateTimeKind.Local).AddTicks(6819),
                             UserId = 4
                         },
                         new
@@ -213,7 +213,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 20,
                             Content = "Et qui exercitationem omnis ab consequuntur nihil optio quia.",
                             RealEstateId = 10,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 10, 49, 42, 767, DateTimeKind.Local).AddTicks(5494),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 6, 42, 1, 955, DateTimeKind.Local).AddTicks(883),
                             UserId = 4
                         },
                         new
@@ -221,7 +221,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 21,
                             Content = "Fugiat ea aliquid magnam at.",
                             RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 2, 35, 917, DateTimeKind.Local).AddTicks(1404),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 9, 54, 55, 104, DateTimeKind.Local).AddTicks(6771),
                             UserId = 1
                         },
                         new
@@ -229,7 +229,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 22,
                             Content = "Neque delectus qui velit recusandae voluptatem vero ea.",
                             RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 38, 54, 386, DateTimeKind.Local).AddTicks(5917),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 4, 31, 13, 574, DateTimeKind.Local).AddTicks(1336),
                             UserId = 1
                         },
                         new
@@ -237,7 +237,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 23,
                             Content = "Enim assumenda sed vero nihil aut exercitationem.",
                             RealEstateId = 5,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 25, 11, 745, DateTimeKind.Local).AddTicks(3952),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 4, 17, 30, 932, DateTimeKind.Local).AddTicks(9358),
                             UserId = 4
                         },
                         new
@@ -245,7 +245,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 24,
                             Content = "Quibusdam voluptas eaque impedit praesentium.",
                             RealEstateId = 16,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 12, 47, 10, 134, DateTimeKind.Local).AddTicks(200),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 8, 39, 29, 321, DateTimeKind.Local).AddTicks(5586),
                             UserId = 4
                         },
                         new
@@ -253,7 +253,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 25,
                             Content = "Vel tempora similique voluptas minus pariatur consectetur.",
                             RealEstateId = 14,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 4, 22, 3, 20, DateTimeKind.Local).AddTicks(6676),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 0, 14, 22, 208, DateTimeKind.Local).AddTicks(2048),
                             UserId = 4
                         },
                         new
@@ -261,7 +261,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 26,
                             Content = "Voluptas nesciunt placeat.",
                             RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 32, 52, 532, DateTimeKind.Local).AddTicks(9722),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 25, 11, 720, DateTimeKind.Local).AddTicks(5080),
                             UserId = 4
                         },
                         new
@@ -269,7 +269,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 27,
                             Content = "Molestiae error quia enim reprehenderit aliquam.",
                             RealEstateId = 12,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 3, 23, 58, 485, DateTimeKind.Local).AddTicks(1252),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 23, 16, 17, 672, DateTimeKind.Local).AddTicks(6548),
                             UserId = 1
                         },
                         new
@@ -277,7 +277,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 28,
                             Content = "Ipsam in quo et perspiciatis praesentium quod ipsa velit temporibus.",
                             RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 12, 51, 124, DateTimeKind.Local).AddTicks(1413),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 14, 5, 10, 311, DateTimeKind.Local).AddTicks(6687),
                             UserId = 2
                         },
                         new
@@ -285,7 +285,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 29,
                             Content = "Et voluptas pariatur deserunt rerum explicabo voluptatum quasi tempora nostrum.",
                             RealEstateId = 3,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 4, 57, 2, 3, DateTimeKind.Local).AddTicks(2770),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 0, 49, 21, 190, DateTimeKind.Local).AddTicks(8093),
                             UserId = 3
                         },
                         new
@@ -293,7 +293,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 30,
                             Content = "Quo ipsam quisquam quo dolores nostrum sunt.",
                             RealEstateId = 4,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 10, 56, 48, 889, DateTimeKind.Local).AddTicks(5453),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 6, 49, 8, 77, DateTimeKind.Local).AddTicks(760),
                             UserId = 2
                         },
                         new
@@ -301,7 +301,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 31,
                             Content = "Cumque consequatur sint odio.",
                             RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 13, 45, 22, 858, DateTimeKind.Local).AddTicks(8368),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 9, 37, 42, 46, DateTimeKind.Local).AddTicks(3662),
                             UserId = 2
                         },
                         new
@@ -309,7 +309,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 32,
                             Content = "Incidunt aliquid et ea perferendis eum voluptatem nihil et.",
                             RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 12, 8, 56, 591, DateTimeKind.Local).AddTicks(83),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 8, 1, 15, 778, DateTimeKind.Local).AddTicks(5367),
                             UserId = 4
                         },
                         new
@@ -317,7 +317,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 33,
                             Content = "Quae sed quia rerum.",
                             RealEstateId = 4,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 33, 50, 971, DateTimeKind.Local).AddTicks(4559),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 4, 26, 10, 158, DateTimeKind.Local).AddTicks(9770),
                             UserId = 2
                         },
                         new
@@ -325,7 +325,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 34,
                             Content = "Aut deleniti sed voluptate quis itaque.",
                             RealEstateId = 2,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 52, 30, 733, DateTimeKind.Local).AddTicks(7642),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 4, 44, 49, 921, DateTimeKind.Local).AddTicks(2838),
                             UserId = 1
                         },
                         new
@@ -333,7 +333,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 35,
                             Content = "Sit enim qui sit amet est voluptates impedit sit.",
                             RealEstateId = 2,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 19, 43, 35, 875, DateTimeKind.Local).AddTicks(2261),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 15, 35, 55, 62, DateTimeKind.Local).AddTicks(7476),
                             UserId = 3
                         },
                         new
@@ -341,7 +341,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 36,
                             Content = "Repellendus repellat alias expedita et.",
                             RealEstateId = 5,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 21, 51, 30, 812, DateTimeKind.Local).AddTicks(5251),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 17, 43, 50, 0, DateTimeKind.Local).AddTicks(448),
                             UserId = 4
                         },
                         new
@@ -349,7 +349,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 37,
                             Content = "Omnis voluptatum nihil officiis rerum repellat facilis dignissimos quia.",
                             RealEstateId = 7,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 5, 23, 34, 162, DateTimeKind.Local).AddTicks(6685),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 1, 15, 53, 350, DateTimeKind.Local).AddTicks(1868),
                             UserId = 2
                         },
                         new
@@ -357,7 +357,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 38,
                             Content = "Dolores assumenda eos perferendis iusto aut.",
                             RealEstateId = 10,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 4, 4, 55, 490, DateTimeKind.Local).AddTicks(3796),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 23, 57, 14, 677, DateTimeKind.Local).AddTicks(8960),
                             UserId = 2
                         },
                         new
@@ -365,7 +365,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 39,
                             Content = "A quia suscipit voluptate consequatur veniam veniam.",
                             RealEstateId = 8,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 16, 49, 6, 740, DateTimeKind.Local).AddTicks(2788),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 12, 41, 25, 927, DateTimeKind.Local).AddTicks(7935),
                             UserId = 4
                         },
                         new
@@ -373,7 +373,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 40,
                             Content = "Sed aut omnis ipsam.",
                             RealEstateId = 13,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 16, 51, 24, 446, DateTimeKind.Local).AddTicks(811),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 12, 43, 43, 633, DateTimeKind.Local).AddTicks(5888),
                             UserId = 2
                         },
                         new
@@ -381,7 +381,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 41,
                             Content = "Inventore ea ut necessitatibus vel eos ut autem temporibus debitis.",
                             RealEstateId = 17,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 20, 52, 53, 173, DateTimeKind.Local).AddTicks(9020),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 16, 45, 12, 361, DateTimeKind.Local).AddTicks(4116),
                             UserId = 1
                         },
                         new
@@ -389,7 +389,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 42,
                             Content = "Hic laudantium nam laborum officia ad nesciunt saepe illum provident.",
                             RealEstateId = 12,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 24, 59, 452, DateTimeKind.Local).AddTicks(4128),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 14, 17, 18, 639, DateTimeKind.Local).AddTicks(9206),
                             UserId = 4
                         },
                         new
@@ -397,7 +397,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 43,
                             Content = "Aut optio est et ullam consectetur temporibus quia quisquam.",
                             RealEstateId = 20,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 12, 43, 24, 807, DateTimeKind.Local).AddTicks(9520),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 8, 35, 43, 995, DateTimeKind.Local).AddTicks(4578),
                             UserId = 3
                         },
                         new
@@ -405,7 +405,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 44,
                             Content = "Corrupti dolores assumenda dolores.",
                             RealEstateId = 7,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 19, 45, 52, 200, DateTimeKind.Local).AddTicks(7604),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 15, 38, 11, 388, DateTimeKind.Local).AddTicks(2643),
                             UserId = 3
                         },
                         new
@@ -413,7 +413,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 45,
                             Content = "Exercitationem et numquam.",
                             RealEstateId = 8,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 9, 49, 41, 36, DateTimeKind.Local).AddTicks(2132),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 5, 42, 0, 223, DateTimeKind.Local).AddTicks(7160),
                             UserId = 3
                         },
                         new
@@ -421,7 +421,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 46,
                             Content = "Qui nihil repudiandae magni.",
                             RealEstateId = 7,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 23, 47, 40, 731, DateTimeKind.Local).AddTicks(4661),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 19, 39, 59, 918, DateTimeKind.Local).AddTicks(9568),
                             UserId = 3
                         },
                         new
@@ -429,7 +429,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 47,
                             Content = "Ut sint quo.",
                             RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 8, 11, 39, 442, DateTimeKind.Local).AddTicks(9473),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 4, 3, 58, 630, DateTimeKind.Local).AddTicks(4359),
                             UserId = 3
                         },
                         new
@@ -437,7 +437,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 48,
                             Content = "Ut et ipsa qui tempore qui ab aperiam.",
                             RealEstateId = 12,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 15, 16, 33, 184, DateTimeKind.Local).AddTicks(8289),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 11, 8, 52, 372, DateTimeKind.Local).AddTicks(3196),
                             UserId = 4
                         },
                         new
@@ -445,7 +445,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 49,
                             Content = "Aut quae reprehenderit maxime molestias laudantium fuga ut sit.",
                             RealEstateId = 12,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 21, 36, 30, 495, DateTimeKind.Local).AddTicks(5109),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 17, 28, 49, 683, DateTimeKind.Local).AddTicks(2),
                             UserId = 4
                         },
                         new
@@ -453,7 +453,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 50,
                             Content = "Quibusdam ea quas voluptatibus nobis omnis praesentium velit.",
                             RealEstateId = 9,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 52, 36, 635, DateTimeKind.Local).AddTicks(257),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 44, 55, 822, DateTimeKind.Local).AddTicks(5135),
                             UserId = 2
                         },
                         new
@@ -461,7 +461,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 51,
                             Content = "Facilis inventore voluptas sed libero.",
                             RealEstateId = 12,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 11, 26, 33, 551, DateTimeKind.Local).AddTicks(4638),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 7, 18, 52, 738, DateTimeKind.Local).AddTicks(9499),
                             UserId = 3
                         },
                         new
@@ -469,7 +469,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 52,
                             Content = "Necessitatibus ipsa officiis assumenda quia magni occaecati quis.",
                             RealEstateId = 7,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 12, 42, 18, 517, DateTimeKind.Local).AddTicks(8064),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 8, 34, 37, 705, DateTimeKind.Local).AddTicks(2911),
                             UserId = 2
                         },
                         new
@@ -477,7 +477,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 53,
                             Content = "Ducimus officiis asperiores perspiciatis ab saepe aut ut sunt.",
                             RealEstateId = 15,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 20, 3, 25, 35, DateTimeKind.Local).AddTicks(3484),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 15, 55, 44, 222, DateTimeKind.Local).AddTicks(8263),
                             UserId = 4
                         },
                         new
@@ -485,7 +485,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 54,
                             Content = "Et voluptate vero alias ut et.",
                             RealEstateId = 5,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 0, 50, 47, 611, DateTimeKind.Local).AddTicks(6836),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 20, 43, 6, 799, DateTimeKind.Local).AddTicks(1626),
                             UserId = 4
                         },
                         new
@@ -493,7 +493,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 55,
                             Content = "Commodi et numquam deleniti est earum repudiandae fugiat ea minus.",
                             RealEstateId = 12,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 11, 11, 576, DateTimeKind.Local).AddTicks(9291),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 14, 3, 30, 764, DateTimeKind.Local).AddTicks(4069),
                             UserId = 1
                         },
                         new
@@ -501,7 +501,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 56,
                             Content = "Doloribus et ducimus ratione est sunt facilis ullam ipsa.",
                             RealEstateId = 11,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 14, 1, 1, 756, DateTimeKind.Local).AddTicks(2713),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 9, 53, 20, 943, DateTimeKind.Local).AddTicks(7472),
                             UserId = 1
                         },
                         new
@@ -509,7 +509,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 57,
                             Content = "Veniam autem debitis magnam id quam ut et.",
                             RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 10, 32, 58, 38, DateTimeKind.Local).AddTicks(1059),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 6, 25, 17, 225, DateTimeKind.Local).AddTicks(5804),
                             UserId = 3
                         },
                         new
@@ -517,7 +517,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 58,
                             Content = "Mollitia distinctio esse eum aspernatur hic.",
                             RealEstateId = 19,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 22, 36, 46, 13, DateTimeKind.Local).AddTicks(6004),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 18, 29, 5, 201, DateTimeKind.Local).AddTicks(736),
                             UserId = 2
                         },
                         new
@@ -525,7 +525,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 59,
                             Content = "Qui dolorum molestiae.",
                             RealEstateId = 14,
-                            TimeOfCreation = new DateTime(2020, 9, 29, 13, 18, 27, 292, DateTimeKind.Local).AddTicks(3396),
+                            TimeOfCreation = new DateTime(2020, 9, 30, 9, 10, 46, 479, DateTimeKind.Local).AddTicks(8036),
                             UserId = 1
                         },
                         new
@@ -533,7 +533,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                             Id = 60,
                             Content = "Qui repudiandae eos.",
                             RealEstateId = 6,
-                            TimeOfCreation = new DateTime(2020, 9, 28, 20, 13, 55, 910, DateTimeKind.Local).AddTicks(3101),
+                            TimeOfCreation = new DateTime(2020, 9, 29, 16, 6, 15, 97, DateTimeKind.Local).AddTicks(7725),
                             UserId = 2
                         });
                 });
