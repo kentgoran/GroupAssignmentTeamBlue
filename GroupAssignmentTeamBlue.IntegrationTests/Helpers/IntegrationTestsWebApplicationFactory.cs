@@ -30,8 +30,8 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                 /*
                 services.AddDbContext<AdvertContext>(opt =>
                 {
-                    opt.UseSqlServer($"Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue{Guid.NewGuid()};Trusted_Connection=True;MultipleActiveResultSets=true");
-                    
+                    opt.UseSqlServer($"Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;" +
+                        $"Trusted_Connection=True;MultipleActiveResultSets=true");
                 });
                 */
 
@@ -43,21 +43,15 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                 });
                 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-                /*
+                
                 var contextOptions = new DbContextOptionsBuilder<AdvertContext>();
                 contextOptions.UseSqlServer(
-                    $"Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue{Guid.NewGuid()};Trusted_Connection=True;MultipleActiveResultSets=true");
+                    $"Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;Trusted_Connection=True" +
+                    $";MultipleActiveResultSets=true");
                 var context = new AdvertContext(contextOptions.Options);
-                context.Database.Migrate();
+                context.Database.EnsureCreated();
                 services.AddSingleton(new AdvertContext(contextOptions.Options));
-                */
-
-                var contextOptions = new DbContextOptionsBuilder<AdvertContext>();
-                contextOptions.UseSqlServer(
-                    $"Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;Trusted_Connection=True;MultipleActiveResultSets=true");
-                //var context = new AdvertContext(contextOptions.Options);
-                //context.Database.EnsureCreated();
-                services.AddSingleton(new AdvertContext(contextOptions.Options));
+                
 
                 //services.AddScoped<AdvertContext>();
 
@@ -69,6 +63,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                     context.Database.Migrate();
                 }
                 */
+                
 
             });
         }

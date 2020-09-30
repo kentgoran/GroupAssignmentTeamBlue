@@ -21,7 +21,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         protected readonly WebApplicationFactory<Startup> _factory;
         protected readonly UnitOfWork db;
         protected readonly IMapper mapper;
-        private readonly AdvertContext context;
+        protected readonly AdvertContext context;
         protected readonly UserForCreationDto testUserForCreation = new UserForCreationDto()
         { UserName = "TestUser", Email = "test@user.com", Password = "123", ConfirmPassword = "123" };
         protected readonly User testUserIdentity;
@@ -53,7 +53,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 
         public void Dispose()
         {
-            context.Database.EnsureDeleted();
+            context.Database.RollbackTransaction();
         }
     }
 }

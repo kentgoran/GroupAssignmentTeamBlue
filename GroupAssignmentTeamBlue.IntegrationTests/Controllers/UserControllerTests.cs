@@ -1,15 +1,12 @@
 ﻿using FluentAssertions;
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
-using GroupAssignmentTeamBlue.DAL.Context;
+using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
-using GroupAssignmentTeamBlue.Model;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using System;
+using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Xunit;
@@ -18,6 +15,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class UserControllerTests : ControllerTestsBase
     {
+
         public UserControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
             : base(factory, "http://localhost:5000/api/users/")
         {
@@ -46,12 +44,53 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         [Fact]
         public async Task GetUser_UnexsistingUser_ShouldReturn404NotFound()
         {
-                                  // Ändra string vv 
+            // Ändra string vv 
             var response = await _client.GetAsync(" ");
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
-        // Rate user test here!
+        [Fact]
+        public async Task RateUser_ExsistingUser_ShouldCreateRating()
+        {
+            var ratingUser = db.UserRepository.Get(1);
+            var ratedUser = db.UserRepository.Get(2);
+            if (ratingUser == null || ratedUser == null)
+            {
+                throw new ArgumentNullException("Could not find sample users");
+            }
+
+            try
+            {
+                // Arrange
+                var rating = new RatingForCreationDto() { RatedUserId = ratingUser.Id, Score = 2 };
+
+                _client.SetFakeBearerToken(ratingUser.UserName, null, (object)ratingUser.Id);
+
+                // Act
+                var response = await _client.PostAsJsonAsync<RatingForCreationDto>("rate", rating);
+
+                // Asssert
+                response.Content.Should().BeEquivalentTo("");
+            }
+            catch (Exception)
+            {
+                // Cleanup incase of test failure
+                RemoveAddedRatingFromTestDb(ratingUser.Id, ratedUser.Id);
+                this.Dispose();
+            }
+
+            // Cleanup
+            RemoveAddedRatingFromTestDb(ratingUser.Id, ratedUser.Id);
+        }
+
+        private void RemoveAddedRatingFromTestDb(int ratingUserId, int ratedUserId)
+        {
+            var rating = db.RatingRepository.Get(ratingUserId, ratedUserId);
+            if(rating != null)
+            {
+                db.RatingRepository.Remove(rating.Id);
+            }
+        }
     }
 }
