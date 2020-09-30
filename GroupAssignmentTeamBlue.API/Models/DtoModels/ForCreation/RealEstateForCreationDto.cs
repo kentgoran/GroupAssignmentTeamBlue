@@ -64,7 +64,7 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         /// <summary>
         /// Primary pictures url
         /// </summary>
-        [Required]
+        [Required(ErrorMessage ="A {0} is required.")]
         [Url]
         public string ListingUrl { get; set; }
         /// <summary>
