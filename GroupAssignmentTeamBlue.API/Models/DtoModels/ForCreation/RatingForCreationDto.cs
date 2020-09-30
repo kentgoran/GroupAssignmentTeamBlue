@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
 {
     /// <summary>
-    /// A Rating for creation, with UserId and a Value
+    /// A Rating for creation, with Username and a Value
     /// </summary>
     public class RatingForCreationDto
     {
         /// <summary>
-        /// Id of the user being rated
+        /// Username of the user being rated
         /// </summary>
         [Required(ErrorMessage = "A {0} is required")]
-        public int UserId { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// Value, the score to give, between 1-5
         /// </summary>

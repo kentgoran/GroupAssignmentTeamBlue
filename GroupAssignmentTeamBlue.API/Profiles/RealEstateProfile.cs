@@ -31,7 +31,9 @@ namespace GroupAssignmentTeamBlue.API.Profiles
                 , opt => opt.MapFrom(source => source.Address));
 
             CreateMap<RealEstate, RealEstateFullDetailDto>()
-                .ForMember(dto => dto.Comments, opt => opt.MapFrom(source => source.Comments));
+                .ForMember(dto => dto.Comments, opt => opt.MapFrom(source => source.Comments))
+                .ForMember(dto => dto.Urls, opt => opt.MapFrom(source => source.Pictures))
+                .ForMember(dto => dto.UserName, opt => opt.MapFrom(source => source.User.UserName));
 
             //.ForMember(dto => dto.Address, 
             //opt => opt.MapFrom(source => $"{source.Address.StreetName} {source.Address.StreetNumber}"));

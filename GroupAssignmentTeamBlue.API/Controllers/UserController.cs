@@ -81,11 +81,11 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public async Task<ActionResult> RateUser(RatingForCreationDto rating)
         {
-            var ratedUser = _unitOfWork.UserRepository.Get(rating.UserId);
+            var ratedUser = _unitOfWork.UserRepository.Get(rating.UserName);
             if (ratedUser == null)
             {
                 ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
-                errorResponse.AddError("User", new string[] { $"Could not found a user with id {rating.UserId}" });
+                errorResponse.AddError("User", new string[] { $"Could not found a user with name {rating.UserName}" });
                 return NotFound(errorResponse);
             }
 
@@ -102,6 +102,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             {
                 var ratingToAdd = _mapper.Map<Rating>(rating);
                 ratingToAdd.RatingUserId = ratingUser.Id;
+                ratingToAdd.RatedUserId = ratedUser.Id;
                 _unitOfWork.RatingRepository.Add(ratingToAdd);
             }
             else

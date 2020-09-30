@@ -87,7 +87,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult GetRealEstate(int id)
         {
-            var realEstateEntity = _unitOfWork.RealEstateRepository.GetAndIncludeComments(id);
+            var realEstateEntity = _unitOfWork.RealEstateRepository.GetWithIncludes(id);
             if (realEstateEntity == null)
             {
                 ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);

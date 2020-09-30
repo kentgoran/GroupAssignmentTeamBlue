@@ -20,7 +20,6 @@ namespace GroupAssignmentTeamBlue.API.Profiles
         public RatingProfile()
         {
             CreateMap<RatingForCreationDto, Rating>()
-                .ForMember(dto => dto.RatedUserId, opt => opt.MapFrom(source => source.UserId))
                 .ForMember(dto => dto.Score, opt => opt.MapFrom(source => source.Value));
         }
     }

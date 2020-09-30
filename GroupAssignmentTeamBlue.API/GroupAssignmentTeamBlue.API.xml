@@ -273,12 +273,12 @@
         </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto">
             <summary>
-            A Rating for creation, with UserId and a Value
+            A Rating for creation, with Username and a Value
             </summary>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto.UserId">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto.UserName">
             <summary>
-            Id of the user being rated
+            Username of the user being rated
             </summary>
         </member>
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RatingForCreationDto.Value">
@@ -424,6 +424,11 @@
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Rooms">
             <summary>
             Amount of rooms
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.UserName">
+            <summary>
+            Name of the user who created the listing
             </summary>
         </member>
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Comments">
