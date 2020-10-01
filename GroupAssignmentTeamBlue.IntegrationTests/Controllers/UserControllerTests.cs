@@ -2,6 +2,7 @@
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
+using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using System;

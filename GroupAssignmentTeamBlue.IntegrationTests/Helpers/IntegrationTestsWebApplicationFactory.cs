@@ -3,6 +3,7 @@ using FluentAssertions.Common;
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Profiles;
 using GroupAssignmentTeamBlue.DAL.Context;
+using GroupAssignmentTeamBlue.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -25,13 +26,13 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                     opt.DefaultChallengeScheme = FakeJwtBearerDefaults.AuthenticationScheme;
                 }).AddFakeJwtBearer();
 
-                /*
+                
                 services.AddDbContext<AdvertContext>(opt =>
                 {
-                    opt.UseSqlServer($"Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;" +
-                        $"Trusted_Connection=True;MultipleActiveResultSets=true");
+                    opt.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;" +
+                        "Trusted_Connection=True;MultipleActiveResultSets=true");
                 });
-                */
+                
 
                 var config = new MapperConfiguration(opt =>
                 {
@@ -41,25 +42,13 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                 });
                 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-                
-                var contextOptions = new DbContextOptionsBuilder<AdvertContext>();
-                contextOptions.UseSqlServer(
-                    $"Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;Trusted_Connection=True" +
-                    $";MultipleActiveResultSets=true");
-                var context = new AdvertContext(contextOptions.Options);
-                context.Database.EnsureCreated();
-                services.AddSingleton(new AdvertContext(contextOptions.Options));
-
-                var serviceProvider = services.BuildServiceProvider();
-
-                //services.AddScoped<AdvertContext>();
 
                 /*
                 using (var scope = serviceProvider.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
                     var context = scopedServices.GetRequiredService<AdvertContext>();
-                    context.Database.Migrate();
+                    context.Database.EnsureCreated();
                 }
                 */
 

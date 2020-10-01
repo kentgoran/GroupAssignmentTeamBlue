@@ -21,10 +21,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         protected readonly WebApplicationFactory<Startup> _factory;
         protected readonly UnitOfWork db;
         protected readonly IMapper mapper;
+        private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;" +
+                        "Trusted_Connection=True;MultipleActiveResultSets=true";
         protected readonly AdvertContext context;
-        protected readonly UserForCreationDto testUserForCreation = new UserForCreationDto()
-        { UserName = "TestUser", Email = "test@user.com", Password = "123", ConfirmPassword = "123" };
-        protected readonly User testUserIdentity;
         protected dynamic fakeToken;
 
         public ControllerTestsBase(IntegrationTestsWebApplicationFactory<Startup> factory,
@@ -34,8 +33,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 
             mapper = _factory.Services.GetRequiredService<IMapper>();
 
-            context = _factory.Services.GetRequiredService<AdvertContext>();
-
+            context = ConfigureTestDbContext();
             context.Database.EnsureCreated();
             db = new UnitOfWork(context);
 
@@ -49,6 +47,13 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             }
 
             _client = _factory.CreateClient();
+        }
+
+        private AdvertContext ConfigureTestDbContext()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AdvertContext>()
+                .UseSqlServer(connectionString);
+            return new AdvertContext(optionsBuilder.Options);
         }
 
         public void Dispose()

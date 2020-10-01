@@ -14,10 +14,10 @@ using Xunit;
 
 namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
-    public class AccountControllerTests : ControllerTestsBase
+    public class AccountControllerTests //: ControllerTestsBase
     {
         public AccountControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
-            : base(factory, "http://localhost:5000/api/account/register/")
+            //: base(factory, "http://localhost:5000/api/account/register/")
         {
         }
 

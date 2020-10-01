@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
+using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
 using System;
 using System.Net;
