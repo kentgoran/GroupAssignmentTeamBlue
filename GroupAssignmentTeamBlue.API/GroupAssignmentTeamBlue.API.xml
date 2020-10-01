@@ -96,6 +96,13 @@
             <param name="realEstate">Contains all the information needed to create a new RealEstate</param>
             <returns>201 Created, with some of the info input</returns>
         </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.ConvertToPictures(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Converts an IEnumerable of strings into an IEnumerable of Pictures
+            </summary>
+            <param name="stringUrls"></param>
+            <returns></returns>
+        </member>
         <member name="T:GroupAssignmentTeamBlue.API.Controllers.TokenController">
             <summary>
             Controller for tokens. Called upon to create an access token
