@@ -114,7 +114,9 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         public async Task<IActionResult> CreateRealEstate(RealEstateForCreationDto realEstate)
         {
             var realEstateToAdd = _mapper.Map<RealEstate>(realEstate);
+            //Pictures aren't mapped automatically, so made manually
             realEstateToAdd.Pictures = ConvertToPictures(realEstate.Urls);
+
             var user = await _userManager.GetUserAsync(User);
             realEstateToAdd.User = user;
             _unitOfWork.RealEstateRepository.Add(realEstateToAdd);
@@ -124,6 +126,11 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             return CreatedAtRoute("GetRealEstate", new { id = realEstateForReturn.Id }, realEstateForReturn);
         }
 
+        /// <summary>
+        /// Converts an IEnumerable of strings into an IEnumerable of Pictures
+        /// </summary>
+        /// <param name="stringUrls"></param>
+        /// <returns></returns>
         private IEnumerable<Picture> ConvertToPictures(IEnumerable<string> stringUrls)
         {
             var toReturn = new List<Picture>();

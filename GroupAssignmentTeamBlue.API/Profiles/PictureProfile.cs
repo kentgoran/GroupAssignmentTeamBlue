@@ -19,10 +19,6 @@ namespace GroupAssignmentTeamBlue.API.Profiles
         /// </summary>
         public PictureProfile()
         {
-            //CreateMap<Comment, CommentDto>()
-            //    .ForMember(dto => dto.UserName, opt => opt.MapFrom(source => source.User.UserName));
-
-            CreateMap<PictureForCreationDto, Picture>();
             CreateMap<Picture, PictureDto>();
         }
     }
