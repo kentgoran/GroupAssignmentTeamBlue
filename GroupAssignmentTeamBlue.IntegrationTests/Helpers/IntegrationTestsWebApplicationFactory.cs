@@ -25,8 +25,6 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                     opt.DefaultChallengeScheme = FakeJwtBearerDefaults.AuthenticationScheme;
                 }).AddFakeJwtBearer();
 
-                var serviceProvider = services.BuildServiceProvider();
-
                 /*
                 services.AddDbContext<AdvertContext>(opt =>
                 {
@@ -51,7 +49,8 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                 var context = new AdvertContext(contextOptions.Options);
                 context.Database.EnsureCreated();
                 services.AddSingleton(new AdvertContext(contextOptions.Options));
-                
+
+                var serviceProvider = services.BuildServiceProvider();
 
                 //services.AddScoped<AdvertContext>();
 
@@ -63,7 +62,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                     context.Database.Migrate();
                 }
                 */
-                
+
 
             });
         }

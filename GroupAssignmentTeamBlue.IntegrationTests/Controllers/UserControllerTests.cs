@@ -63,7 +63,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             try
             {
                 // Arrange
-                var rating = new RatingForCreationDto() { RatedUserId = ratingUser.Id, Score = 2 };
+                var rating = new RatingForCreationDto() { UserName = ratedUser.UserName, Value = 2 };
 
                 _client.SetFakeBearerToken(ratingUser.UserName, null, (object)ratingUser.Id);
 
@@ -89,7 +89,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var rating = db.RatingRepository.Get(ratingUserId, ratedUserId);
             if(rating != null)
             {
-                db.RatingRepository.Remove(rating.Id);
+                db.RatingRepository.Remove(rating);
             }
         }
     }
