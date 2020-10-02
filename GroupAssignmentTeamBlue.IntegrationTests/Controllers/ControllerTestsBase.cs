@@ -34,7 +34,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             mapper = _factory.Services.GetRequiredService<IMapper>();
 
             context = ConfigureTestDbContext();
-            context.Database.EnsureCreated();
+            context.Database.Migrate();
             db = new UnitOfWork(context);
 
             fakeToken = new ExpandoObject();
