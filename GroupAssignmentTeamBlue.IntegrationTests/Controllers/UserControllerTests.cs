@@ -2,11 +2,9 @@
 using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
-using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
-using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using System;
-using System.Linq;
+using System.Dynamic;
 using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -16,6 +14,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class UserControllerTests : ControllerTestsBase
     {
+        private dynamic fakeTokenForExistingUser = new ExpandoObject();
 
         public UserControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
             : base(factory, "http://localhost:5000/api/users/")
@@ -31,7 +30,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             {
                 throw new ArgumentNullException("Could not find sample user");
             }
-            var expectedUserDto = mapper.Map<UserDto>(expectedUser);
+            var expectedUserWithIncludes = db.UserRepository.Get(expectedUser.UserName);
+
+            var expectedUserDto = _mapper.Map<UserDto>(expectedUserWithIncludes);
 
             // Act + Assert
             // GetFromJsonAsync will throw an exception if the response statuscode is not in the 200 range
@@ -52,8 +53,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         }
 
         [Fact]
-        public async Task RateUser_ExsistingUser_ShouldCreateRating()
+        public async Task RateUser_ExsistingUsers_ShouldCreateRating()
         {
+            // Arrange
             var ratingUser = db.UserRepository.Get(1);
             var ratedUser = db.UserRepository.Get(2);
             if (ratingUser == null || ratedUser == null)
@@ -61,36 +63,50 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 throw new ArgumentNullException("Could not find sample users");
             }
 
+            var oldRating = db.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
+            int? oldScore = oldRating == null ? null : oldRating.Score as int?;
+
+            FakeToken.CreateFakeTokenByUser(ratingUser);
+
+            var rating = new RatingForCreationDto() { UserName = ratedUser.UserName, Value = 2 };
+
+            _client.SetFakeBearerToken((object)fakeTokenForExistingUser);
+
             try
             {
-                // Arrange
-                var rating = new RatingForCreationDto() { UserName = ratedUser.UserName, Value = 2 };
-
-                _client.SetFakeBearerToken(ratingUser.UserName, null, (object)ratingUser.Id);
-
                 // Act
                 var response = await _client.PostAsJsonAsync<RatingForCreationDto>("rate", rating);
 
-                // Asssert
-                response.Content.Should().BeEquivalentTo("");
+                // Assert
+                var addedRating = db.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
+                addedRating.Should().NotBeNull();
+                addedRating.Score.Should().Be(rating.Value);
             }
-            catch (Exception)
+            // Finally to ensure that the test-cleanup is always executed
+            finally
             {
                 // Cleanup incase of test failure
-                RemoveAddedRatingFromTestDb(ratingUser.Id, ratedUser.Id);
+                RemoveAddedRatingFromTestDb(ratedUser.Id, ratingUser.Id, oldScore);
                 this.Dispose();
             }
-
-            // Cleanup
-            RemoveAddedRatingFromTestDb(ratingUser.Id, ratedUser.Id);
         }
 
-        private void RemoveAddedRatingFromTestDb(int ratingUserId, int ratedUserId)
+        private void RemoveAddedRatingFromTestDb(int ratedUserId, int ratingUserId, int? oldScore)
         {
-            var rating = db.RatingRepository.Get(ratingUserId, ratedUserId);
-            if(rating != null)
+            var rating = db.RatingRepository.Get(ratedUserId, ratingUserId);
+
+            if (rating != null)
             {
-                db.RatingRepository.Remove(rating);
+                if (oldScore != null)
+                {
+                    rating.Score = Int32.Parse(oldScore.ToString());
+                }
+                else
+                {
+                    db.RatingRepository.Remove(rating);
+                }
+
+                db.SaveChanges();
             }
         }
     }

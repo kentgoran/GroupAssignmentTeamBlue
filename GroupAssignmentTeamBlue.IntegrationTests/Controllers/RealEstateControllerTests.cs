@@ -29,7 +29,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 throw new ArgumentNullException("Could not find sample real estate for test");
             }
 
-            var expectedRealEstate = mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
+            var expectedRealEstate = _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
 
             // Act + Assert
             var reponse = await _client.GetFromJsonAsync<RealEstatePartlyDetailedDto>("1");
@@ -63,7 +63,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             {
                 throw new ArgumentNullException("Could not find sample real estate for test");
             }
-            var expectedRealEstate = mapper.Map<RealEstateFullDetailDto>(realEstateEntity);
+            var expectedRealEstate = _mapper.Map<RealEstateFullDetailDto>(realEstateEntity);
 
             _client.SetFakeBearerToken((object)fakeToken);
 

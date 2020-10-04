@@ -20,8 +20,8 @@ namespace GroupAssignmentTeamBlue.UnitTests
         {
             var isValid = validationAttribute.IsValid(new RealEstateForCreationDto() 
                 { Title = "", Description = "", Contact = "", Address = "", 
-                Type = EstateType.Apartment, Rent = 1, SellPrice = null, 
-                YearBuilt = 0 });
+                Type = EstateType.Apartment, RentingPrice = 1, SellingPrice = null, 
+                ConstructionYear = 0 });
 
             Assert.True(isValid);
         }
@@ -36,9 +36,9 @@ namespace GroupAssignmentTeamBlue.UnitTests
                 Contact = "",
                 Address = "",
                 Type = EstateType.Apartment,
-                Rent = null,
-                SellPrice = 1,
-                YearBuilt = 0
+                RentingPrice = null,
+                SellingPrice = 1,
+                ConstructionYear = 0
             });
 
             Assert.True(isValid);
@@ -54,9 +54,9 @@ namespace GroupAssignmentTeamBlue.UnitTests
                 Contact = "",
                 Address = "",
                 Type = EstateType.Apartment,
-                Rent = null,
-                SellPrice = null,
-                YearBuilt = 0
+                RentingPrice = null,
+                SellingPrice = null,
+                ConstructionYear = 0
             });
 
             Assert.False(isValid);

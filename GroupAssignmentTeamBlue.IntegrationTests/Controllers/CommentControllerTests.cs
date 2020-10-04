@@ -45,7 +45,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 throw new ArgumentNullException("No sample comments were found, " +
                     "please change the real estate id or add test comments");
             }
-            var expectedCommentsDto = mapper.Map<IEnumerable<CommentDto>>(expectedCommentsFromDb);
+            var expectedCommentsDto = _mapper.Map<IEnumerable<CommentDto>>(expectedCommentsFromDb);
 
             _client.SetFakeBearerToken((object)fakeToken);
 
@@ -57,24 +57,25 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         }
 
         [Theory]
-        [InlineData(1, 0, 1)]
+        [InlineData(-1, 0, 1)]
         public async Task GetCommentsForRealEstate_AutheticatedUser_UnexsistingRealEstate_ShouldReturn404(int id, int skip, int take)
         {
             // Arrange
             var expectedCommentsFromDb = db.CommentRepository.GetCommentsForRealEstate(id, skip, take);
-            if (expectedCommentsFromDb != null || expectedCommentsFromDb.Count > 0)
+            if (expectedCommentsFromDb.Count > 0)
             {
-                throw new ArgumentNullException("One or more comments were found for the realEstate");
+                throw new ArgumentNullException("One or more comments were found for the real estate, " +
+                    "please change the real estate id.");
             }
-            var expectedCommentsDto = mapper.Map<IEnumerable<CommentDto>>(expectedCommentsFromDb);
+            var expectedCommentsDto = _mapper.Map<IEnumerable<CommentDto>>(expectedCommentsFromDb);
 
             _client.SetFakeBearerToken((object)fakeToken);
 
             // Act
-            var response = await _client.GetFromJsonAsync<IEnumerable<CommentDto>>($"{id}?skip={skip}&take={take}");
+            var response = await _client.GetAsync($"{id}?skip={skip}&take={take}");
 
             // Assert
-            response.Should().BeEquivalentTo(expectedCommentsDto);
+            response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
 
         [Theory]
@@ -90,7 +91,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 throw new ArgumentNullException("No sample comments were found, " +
                     "please change the real estate id or add test comments");
             }
-            var expectedCommentsDto = mapper.Map<IEnumerable<CommentDto>>(expectedCommentsFromDb);
+            var expectedCommentsDto = _mapper.Map<IEnumerable<CommentDto>>(expectedCommentsFromDb);
 
             _client.SetFakeBearerToken((object)fakeToken);
 

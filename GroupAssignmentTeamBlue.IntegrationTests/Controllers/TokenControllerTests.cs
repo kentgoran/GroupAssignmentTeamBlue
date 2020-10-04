@@ -30,9 +30,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class TokenControllerTests : ControllerTestsBase
     {
-        private readonly TokenRequestContent content = 
+        private readonly TokenRequestContent content =
             new TokenRequestContent() { UserName = "Test", Password = "123BestPassword", Grant_Type = "password" };
-        public TokenControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory) 
+        public TokenControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
             : base(factory, "http://localhost:5000/token/")
         {
         }
@@ -57,30 +57,29 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
 
-        [Fact] // Ens värt att testa?? Borde isåfall sätta in testuser i actual db och det går inte att göra odentligt utan usermanager...
+        [Fact]
         public async Task Create_ValidUserNameAndPassword_ShouldReturnToken()
         {
-            // Arrange
-            //_client.SetFakeBearerToken((object)fakeToken);
-            // Mock new db here??
-            //var client = CreateClientWithMockDb();
+            var user = db.UserRepository.Get(1);
+            if(user == null)
+            {
+                throw new Exception("Could not find sample user," +
+                    "please change the user id.");
+            }
+
+            
 
             var contentDictionary = new Dictionary<string, string>()
             {
-                { "username", content.UserName },
-                { "password", content.Password },
+                { "username", user.UserName },
+                { "password", user.PasswordHash },
                 { "grant_type", content.Grant_Type }
             };
 
             var encodedContent = new FormUrlEncodedContent(contentDictionary);
-
-            // Act
-            var response = await _client.PostAsync("", encodedContent);
-
-            // Assert
-            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
 
+        
 
         /*
         private HttpClient CreateClientWithMockDb()

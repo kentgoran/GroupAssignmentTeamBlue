@@ -4,34 +4,42 @@ using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
 using GroupAssignmentTeamBlue.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Dynamic;
 using System.Net.Http;
+using System.Transactions;
 using Xunit;
 
 namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
-    public abstract class ControllerTestsBase : IClassFixture<IntegrationTestsWebApplicationFactory<Startup>>, IDisposable
+    public abstract class ControllerTestsBase : 
+        IClassFixture<IntegrationTestsWebApplicationFactory<Startup>>, IDisposable
     {
         protected readonly HttpClient _client;
-        protected readonly WebApplicationFactory<Startup> _factory;
+        protected readonly IntegrationTestsWebApplicationFactory<Startup> _factory;
         protected readonly UnitOfWork db;
-        protected readonly IMapper mapper;
+        protected readonly IMapper _mapper;
         private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;" +
                         "Trusted_Connection=True;MultipleActiveResultSets=true";
         protected readonly AdvertContext context;
         protected dynamic fakeToken;
+        protected readonly UserManager<User> _userManager;
 
         public ControllerTestsBase(IntegrationTestsWebApplicationFactory<Startup> factory,
             string baseUri)
         {
             _factory = factory;
 
-            mapper = _factory.Services.GetRequiredService<IMapper>();
+            _mapper = _factory.Services.GetRequiredService<IMapper>();
+
+            //_userManager = _factory.Services.GetRequiredService<UserManager<User>>();
+            
 
             context = ConfigureTestDbContext();
             context.Database.Migrate();
@@ -58,7 +66,10 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 
         public void Dispose()
         {
-            context.Database.RollbackTransaction();
+            if(context.Database.GetEnlistedTransaction() != null)
+            {
+                context.Database.RollbackTransaction();
+            }
         }
     }
 }

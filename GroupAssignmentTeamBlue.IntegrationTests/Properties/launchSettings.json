@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "GroupAssignmentTeamBlue.IntegrationTests": {
+      "commandName": "Project",
+      "sqlDebugging": false,
+      "nativeDebugging": false
+    }
+  }
+}
