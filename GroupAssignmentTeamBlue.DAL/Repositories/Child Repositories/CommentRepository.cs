@@ -43,5 +43,19 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
                 OrderBy(c => c.TimeOfCreation).Skip(skip).Take(take).
                 Include(c => c.User).ToList();
         }
+
+        /// <summary>
+        /// Gets comments for a given username
+        /// </summary>
+        /// <param name="username">the username in question</param>
+        /// <param name="skip">The amount of comments to skip</param>
+        /// <param name="take">The amount of comments to take</param>
+        /// <returns>an ICollection of comments</returns>
+        public Comment GetCommentByUser(string username, string content)
+        {
+            return context.Comments
+                .Where(c => c.User.UserName == username && c.Content == content)
+                .OrderBy(c => c.TimeOfCreation).Include(c => c.User).FirstOrDefault();
+        }
     }
 }

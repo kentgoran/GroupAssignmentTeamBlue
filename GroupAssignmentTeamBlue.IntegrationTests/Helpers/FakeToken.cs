@@ -1,5 +1,7 @@
 ﻿using GroupAssignmentTeamBlue.Model;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,7 +12,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
 {
     internal static class FakeToken
     {
-        internal static JwtSecurityToken CreateFakeTokenByUser(User user)
+        internal static string CreateFakeTokenByUser(User user)
         {
             DateTimeOffset issuedTime = new DateTimeOffset(DateTime.Now);
             DateTimeOffset expiresTime = new DateTimeOffset(DateTime.Now.AddDays(14));
@@ -31,7 +33,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                         SecurityAlgorithms.HmacSha256)),
                     new JwtPayload(claims));
 
-            return token;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
     }

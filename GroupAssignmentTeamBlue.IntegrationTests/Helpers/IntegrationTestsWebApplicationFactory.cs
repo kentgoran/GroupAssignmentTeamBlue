@@ -33,11 +33,11 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
         {
             builder.ConfigureServices(services =>
             {
-                services.AddAuthentication(opt =>
-                {
-                    opt.DefaultAuthenticateScheme = FakeJwtBearerDefaults.AuthenticationScheme;
-                    opt.DefaultChallengeScheme = FakeJwtBearerDefaults.AuthenticationScheme;
-                }).AddFakeJwtBearer();
+                //services.AddAuthentication(opt =>
+                //{
+                //    opt.DefaultAuthenticateScheme = FakeJwtBearerDefaults.AuthenticationScheme;
+                //    opt.DefaultChallengeScheme = FakeJwtBearerDefaults.AuthenticationScheme;
+                //}).AddFakeJwtBearer();
 
                 
                 services.AddDbContext<AdvertContext>(opt =>

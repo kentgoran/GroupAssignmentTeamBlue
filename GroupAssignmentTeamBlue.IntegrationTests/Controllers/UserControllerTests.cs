@@ -3,6 +3,7 @@ using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
+using IdentityModel.Client;
 using System;
 using System.Dynamic;
 using System.Net;
@@ -52,10 +53,8 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
-        [Theory]
-        [InlineData("test@user.com", "")]
-        public async Task RateUser_ExsistingUsers_ShouldCreateRating(
-            string userName, string password)
+        [Fact]
+        public async Task RateUser_ExsistingUsers_ShouldCreateRating()
         {
             // Arrange
             var ratingUser = db.UserRepository.Get(1);
@@ -68,11 +67,11 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var oldRating = db.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
             int? oldScore = oldRating == null ? null : oldRating.Score as int?;
 
-            FakeToken.CreateFakeTokenByUser(ratingUser);
-
             var rating = new RatingForCreationDto() { UserName = ratedUser.UserName, Value = 2 };
 
-            _client.SetFakeBearerToken((object)fakeTokenForExistingUser);
+            var token = FakeToken.CreateFakeTokenByUser(ratingUser);
+            _client.SetBearerToken(token);
+
 
             try
             {
@@ -80,6 +79,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 var response = await _client.PostAsJsonAsync<RatingForCreationDto>("rate", rating);
 
                 // Assert
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var addedRating = db.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
                 addedRating.Should().NotBeNull();
                 addedRating.Score.Should().Be(rating.Value);

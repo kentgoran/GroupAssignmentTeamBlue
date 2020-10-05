@@ -1,28 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
+using GroupAssignmentTeamBlue.DAL.Context;
+using GroupAssignmentTeamBlue.Model;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using GroupAssignmentTeamBlue.DAL.Context;
-using GroupAssignmentTeamBlue.Model;
-using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Text;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Reflection;
-using System.IO;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using GroupAssignmentTeamBlue.API.ErrorService;
 
 namespace GroupAssignmentTeamBlue.API
 {
@@ -54,8 +44,8 @@ namespace GroupAssignmentTeamBlue.API
                 options.UseSqlServer(
                     "Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;" +
                         "Trusted_Connection=True;MultipleActiveResultSets=true"));
-            services.AddDefaultIdentity<User>(options => 
-            options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<User>(/*options =>
+            options.SignIn.RequireConfirmedAccount = true*/)
                 .AddEntityFrameworkStores<AdvertContext>();
 
             services.AddMvc(setupAction =>
@@ -67,7 +57,7 @@ namespace GroupAssignmentTeamBlue.API
                 setupAction.Filters.Add(
                     new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
             });
-            
+
             services.AddControllers().AddNewtonsoftJson().
                 AddXmlDataContractSerializerFormatters();
 
@@ -83,7 +73,8 @@ namespace GroupAssignmentTeamBlue.API
                 JwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("PasswordKey"))),
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes("Hash12938934KjYzzGAISfkoffTrollBoll2878huu4738higu3")),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ValidateLifetime = true,
@@ -106,7 +97,7 @@ namespace GroupAssignmentTeamBlue.API
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

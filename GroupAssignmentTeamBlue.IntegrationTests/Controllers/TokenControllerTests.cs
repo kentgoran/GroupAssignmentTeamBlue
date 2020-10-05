@@ -60,14 +60,13 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         [Fact]
         public async Task Create_ValidUserNameAndPassword_ShouldReturnToken()
         {
+            //TODO: Add test user to db
             var user = db.UserRepository.Get(1);
             if(user == null)
             {
                 throw new Exception("Could not find sample user," +
                     "please change the user id.");
             }
-
-            
 
             var contentDictionary = new Dictionary<string, string>()
             {
@@ -78,29 +77,5 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 
             var encodedContent = new FormUrlEncodedContent(contentDictionary);
         }
-
-        
-
-        /*
-        private HttpClient CreateClientWithMockDb()
-        {
-            _factory.WithWebHostBuilder(config =>
-            {
-                config.ConfigureServices(services =>
-                {
-                    var memCache = new MemoryCache();
-                    DbContextOptions contextOptions = new DbContextOptionsBuilder().UseMemoryCache();
-
-                    Mock dbMock = new Mock<AdvertContext>();
-                    dbMock.Setups.(a => a);
-                    services.AddDbContext(sc =>
-                    {
-                        sc.use
-                    });
-                });
-            });
-
-        }
-        */
     }
 }
