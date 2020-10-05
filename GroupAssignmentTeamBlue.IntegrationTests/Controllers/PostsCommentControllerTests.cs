@@ -9,7 +9,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
     public class CommentControllerPostsTests : ControllerTestsBase
     {
         public CommentControllerPostsTests(
-            IntegrationTestsWebApplicationFactory<Startup> _factory)
+            IntegrationTestsWebApplicationFactory<TestStartup> _factory)
             : base(_factory, "http://localhost:5000/api/comments/")
         {
 

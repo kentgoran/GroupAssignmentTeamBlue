@@ -16,7 +16,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
     {
         private dynamic fakeTokenForExistingUser = new ExpandoObject();
 
-        public UserControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
+        public UserControllerTests(IntegrationTestsWebApplicationFactory<TestStartup> factory)
             : base(factory, "http://localhost:5000/api/users/")
         {
         }
@@ -52,8 +52,10 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
-        [Fact]
-        public async Task RateUser_ExsistingUsers_ShouldCreateRating()
+        [Theory]
+        [InlineData("test@user.com", "")]
+        public async Task RateUser_ExsistingUsers_ShouldCreateRating(
+            string userName, string password)
         {
             // Arrange
             var ratingUser = db.UserRepository.Get(1);
@@ -86,12 +88,12 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             finally
             {
                 // Cleanup incase of test failure
-                RemoveAddedRatingFromTestDb(ratedUser.Id, ratingUser.Id, oldScore);
+                RemoveRatingFromDb(ratedUser.Id, ratingUser.Id, oldScore);
                 this.Dispose();
             }
         }
 
-        private void RemoveAddedRatingFromTestDb(int ratedUserId, int ratingUserId, int? oldScore)
+        private void RemoveRatingFromDb(int ratedUserId, int ratingUserId, int? oldScore)
         {
             var rating = db.RatingRepository.Get(ratedUserId, ratingUserId);
 

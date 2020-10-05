@@ -19,10 +19,10 @@ using Xunit;
 namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public abstract class ControllerTestsBase : 
-        IClassFixture<IntegrationTestsWebApplicationFactory<Startup>>, IDisposable
+        IClassFixture<IntegrationTestsWebApplicationFactory<TestStartup>>, IDisposable
     {
         protected readonly HttpClient _client;
-        protected readonly IntegrationTestsWebApplicationFactory<Startup> _factory;
+        protected readonly IntegrationTestsWebApplicationFactory<TestStartup> _factory;
         protected readonly UnitOfWork db;
         protected readonly IMapper _mapper;
         private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;" +
@@ -31,7 +31,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         protected dynamic fakeToken;
         protected readonly UserManager<User> _userManager;
 
-        public ControllerTestsBase(IntegrationTestsWebApplicationFactory<Startup> factory,
+        public ControllerTestsBase(IntegrationTestsWebApplicationFactory<TestStartup> factory,
             string baseUri)
         {
             _factory = factory;

@@ -32,7 +32,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
     {
         private readonly TokenRequestContent content =
             new TokenRequestContent() { UserName = "Test", Password = "123BestPassword", Grant_Type = "password" };
-        public TokenControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
+        public TokenControllerTests(IntegrationTestsWebApplicationFactory<TestStartup> factory)
             : base(factory, "http://localhost:5000/token/")
         {
         }

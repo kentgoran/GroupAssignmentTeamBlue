@@ -14,7 +14,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
     public class RealEstateControllerTests : ControllerTestsBase
     {
 
-        public RealEstateControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
+        public RealEstateControllerTests(IntegrationTestsWebApplicationFactory<TestStartup> factory)
             : base(factory, "http://localhost:5000/api/realestates/")
         {
         }

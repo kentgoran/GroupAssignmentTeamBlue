@@ -21,12 +21,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class AccountControllerTests : ControllerTestsBase
     {
-        private readonly AccountController accountController;
-
-        public AccountControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
-            : base(factory, "http://localhost:5000/api/account/register/")
+        public AccountControllerTests(IntegrationTestsWebApplicationFactory<TestStartup> factory)
+            : base(factory, "http://localhost:5000/api/account/")
         {
-            
         }
 
         [Theory]
@@ -34,28 +31,35 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         public async Task RegisterNewUser_ValidUser_ShouldRegisterUser(
             string userName, string email, string password)
         {
+            // Arrange
             var user = db.UserRepository.Get(userName);
             if (user != null)
             {
-                throw new Exception("User already exists, " +
-                    "please change the pre-made user or remove the user");
+                RemoveUserFromDb(userName);
+                user = db.UserRepository.Get(userName);
+                if (user != null)
+                {
+                    throw new Exception("Unable to remove user from database");
+                }
             }
 
-            var testUser = new UserForCreationDto() 
-            { UserName = userName, Email = email, Password = password, ConfirmPassword = password};
-
-
-            // Arrange
+            var requestContent = new Dictionary<string, string>()
+            {
+                { "username", userName },
+                { "email", email },
+                { "password", password},
+                { "confirmPassword", password}
+            };
+            
+            var encodedContent = new FormUrlEncodedContent(requestContent);
 
             try
             {
                 // Act
-                var response = accountController.RegisterNewUser(testUser);
-
-                var statusCode = Enum.Parse(typeof(HttpStatusCode), response.Result.ToString());
+                var response = await _client.PostAsync("register", encodedContent);
 
                 // Assert
-                statusCode.Should().Be(HttpStatusCode.OK);
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var addedUser = db.UserRepository.Get(userName);
                 addedUser.Should().NotBeNull();
             }
@@ -67,23 +71,16 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 
 
         [Theory]
-        [InlineData("test@user.com", "test@user.com", "SuchAGoodPassword123!")]
+        [InlineData("test@user.com", "SuchAGoodPassword123!")]
         public async Task RegisterNewUser_InvalidUser_ShouldRegisterUser(
-        string userName, string email, string password)
+        string userName, string password)
         {
-            var user = db.UserRepository.Get(userName);
-            if (user != null)
-            {
-                throw new Exception("User already exists, " +
-                    "please change the pre-made user or remove the user");
-            }
-
 
             // Arrange
             var contentDictionary = new Dictionary<string, string>()
             {
-                { "username", null },
-                { "email", email },
+                { "username", userName },
+                { "email", null },
                 { "password", password },
                 { "confirmPassword", password}
             };
@@ -93,12 +90,12 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             try
             {
                 // Act
-                var response = await _client.PostAsync("", encodedContent);
+                var response = await _client.PostAsync("register", encodedContent);
 
                 // Assert
                 response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
                 var addedUser = db.UserRepository.Get(userName);
-                addedUser.Should().NotBeNull();
+                addedUser.Should().BeNull();
             }
             finally
             {
@@ -112,6 +109,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             if (userToRemove != null)
             {
                 db.UserRepository.Remove(userToRemove);
+                db.SaveChanges();
             }
         }
     }

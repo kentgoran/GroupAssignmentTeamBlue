@@ -15,10 +15,10 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class CommentControllerTests : ControllerTestsBase
     {
-        private readonly CommentForCreationDto testComment = 
-            new CommentForCreationDto { RealEstateId = 1, Content = "Don't mind this comment"};
+        private readonly CommentForCreationDto testComment =
+            new CommentForCreationDto { RealEstateId = 1, Content = "Don't mind this comment" };
 
-        public CommentControllerTests(IntegrationTestsWebApplicationFactory<Startup> factory)
+        public CommentControllerTests(IntegrationTestsWebApplicationFactory<TestStartup> factory)
             : base(factory, "http://localhost:5000/api/comments/")
         {
         }
@@ -103,10 +103,31 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             response.Should().BeEquivalentTo(expectedCommentsDto);
         }
 
-        [Fact]
-        public async Task PostComment_ValidComment_ShouldPostComment()
+        [Theory]
+        [InlineData("This is just a test comment")]
+        public async Task PostComment_ValidComment_ShouldPostComment(string content)
         {
+            // Arrange
+            var userName = db.UserRepository.Get(userId).UserName;
 
+            var expectedCommentsFromDb = db.CommentRepository.GetCommentsByUser(userName, skip, take);
+            if (expectedCommentsFromDb == null || expectedCommentsFromDb.Count < 1)
+            {
+                throw new ArgumentNullException("No sample comments were found, " +
+                    "please change the real estate id or add test comments");
+            }
+            var expectedCommentsDto = _mapper.Map<IEnumerable<CommentDto>>(expectedCommentsFromDb);
+
+            _client.SetFakeBearerToken((object)fakeToken);
+
+            // Act
+            var response = await _client.GetFromJsonAsync<IEnumerable<CommentDto>>($"byuser/{userName}?skip={skip}&take={take}");
+
+            // Assert
+            response.Should().NotBeEmpty();
+            response.Should().BeEquivalentTo(expectedCommentsDto);
         }
+
+        private void 
     }
 }
