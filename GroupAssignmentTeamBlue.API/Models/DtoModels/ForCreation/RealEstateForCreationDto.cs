@@ -59,7 +59,7 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         /// <summary>
         /// The year the place was built
         /// </summary>
-
+        [Range(1600,2025, ErrorMessage = "{0} must be in the range of 1600-2025")]
         public int ConstructionYear { get; set; }
         /// <summary>
         /// Primary pictures url
@@ -76,13 +76,13 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         /// Square meters for given listing
         /// </summary>
         [Required(ErrorMessage = "{0} is required.")]
-        [Range(5,5000, ErrorMessage ="SquareMeters must be in range 5-5000")]
+        [Range(5,5000, ErrorMessage ="{0} must be in range 5-5000")]
         public int SquareMeters { get; set; }
         /// <summary>
         /// Amount of rooms, range of 1-50
         /// </summary>
         [Required(ErrorMessage = "{0} is required.")]
-        [Range(1,50, ErrorMessage ="Amount of rooms must be in range 1-50")]
+        [Range(1,50, ErrorMessage ="{0} must be in range 1-50")]
         public int Rooms { get; set; }
         /// <summary>
         /// Optional, additional pictures for given realEstate

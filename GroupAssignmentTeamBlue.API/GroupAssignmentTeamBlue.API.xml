@@ -82,6 +82,12 @@
             <param name="take">Amount to take, has to be 1-100. default = 10</param>
             <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstateCount">
+            <summary>
+            GET for the number of real estates.
+            </summary>
+            <returns>Number of real estates.</returns>
+        </member>
         <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstate(System.Int32)">
             <summary>
             GET for a single RealEstate, by RealEstateId. If user is authenticated, it returns full details, else a dto with less details

@@ -117,6 +117,10 @@ namespace GroupAssignmentTeamBlue.API
                 var xmlFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
                 setupAction.IncludeXmlComments(xmlFullPath);
             });
+
+            services.AddCors(options => 
+                options.AddDefaultPolicy(builder => 
+                    builder.AllowAnyOrigin()));
         }
 
         /// <summary>
@@ -151,6 +155,8 @@ namespace GroupAssignmentTeamBlue.API
             }
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();
