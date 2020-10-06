@@ -28,26 +28,17 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;" +
                         "Trusted_Connection=True;MultipleActiveResultSets=true";
         protected readonly AdvertContext context;
-        protected dynamic fakeToken;
-        protected readonly UserManager<User> _userManager;
 
         public ControllerTestsBase(IntegrationTestsWebApplicationFactory<TestStartup> factory,
             string baseUri)
         {
             _factory = factory;
 
-            _mapper = _factory.Services.GetRequiredService<IMapper>();
-
-            //_userManager = _factory.Services.GetRequiredService<UserManager<User>>();
-            
+            _mapper = _factory.Services.GetRequiredService<IMapper>();            
 
             context = ConfigureTestDbContext();
             context.Database.Migrate();
             db = new UnitOfWork(context);
-
-            fakeToken = new ExpandoObject();
-            fakeToken.sub = Guid.NewGuid();
-            fakeToken.role = new[] { "sub-role", "admin" };
 
             if (!String.IsNullOrEmpty(baseUri))
             {

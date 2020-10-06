@@ -21,6 +21,8 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class AccountControllerTests : ControllerTestsBase
     {
+        private string userAlreadyExists = "User already exists, please change the username.";
+
         public AccountControllerTests(IntegrationTestsWebApplicationFactory<TestStartup> factory)
             : base(factory, "http://localhost:5000/api/account/")
         {
@@ -35,8 +37,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var user = db.UserRepository.Get(userName);
             if (user != null)
             {
-                throw new Exception("User already exists," +
-                    "please change the username.");
+                throw new Exception(userAlreadyExists);
             }
 
             var requestContent = new Dictionary<string, string>()
@@ -74,8 +75,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var user = db.UserRepository.Get(userName);
             if(user != null)
             {
-                throw new Exception("User already exists," +
-                    "please change the username.");
+                throw new Exception(userAlreadyExists);
             }
 
             // Arrange

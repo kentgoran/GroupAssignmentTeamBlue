@@ -16,7 +16,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
     public class CommentControllerTests : ControllerTestsBase
     {
         private const string noSampleUser = "No sample user was found, please change the user id or add a test user.";
-        private const string noSampleComments = "No sample comments were found, please change the real estate id or add test comments.";
+        private const string noSampleComments = "No sample comments were found, please change the access id or add test comments.";
         private const string noSampleRealEstate = "Could not find sample real estate, please change the real estate id.";
         private const string commentAlreadyExists = "Comment already exists, please change the sample comment or remove the existing comment.";
 
@@ -118,12 +118,15 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         {
             // Arrange
             var user = db.UserRepository.Get(userId);
+            if(user == null)
+            {
+                throw new Exception(noSampleUser);
+            }
 
             var expectedCommentsFromDb = db.CommentRepository.GetCommentsByUser(user.UserName, skip, take);
             if (expectedCommentsFromDb == null || expectedCommentsFromDb.Count < 1)
             {
-                throw new ArgumentNullException("No sample comments were found, " +
-                    "please change the real estate id or add test comments");
+                throw new ArgumentNullException();
             }
             var expectedCommentsDto = _mapper.Map<IEnumerable<CommentDto>>(expectedCommentsFromDb);
 
@@ -145,6 +148,10 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         {
             // Arrange
             var user = db.UserRepository.Get(userId);
+            if (user == null)
+            {
+                throw new Exception(noSampleUser);
+            }
 
             var token = FakeToken.CreateFakeTokenByUser(user);
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -163,6 +170,10 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         {
             // Arrange
             var user = db.UserRepository.Get(1);
+            if (user == null)
+            {
+                throw new Exception(noSampleUser);
+            }
 
             var token = FakeToken.CreateFakeTokenByUser(user);
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

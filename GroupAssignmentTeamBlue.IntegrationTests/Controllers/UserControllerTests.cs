@@ -15,7 +15,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class UserControllerTests : ControllerTestsBase
     {
-        private dynamic fakeTokenForExistingUser = new ExpandoObject();
+        private const string noSampleUser = "Could not find sample user.";
 
         public UserControllerTests(IntegrationTestsWebApplicationFactory<TestStartup> factory)
             : base(factory, "http://localhost:5000/api/users/")
@@ -29,7 +29,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var expectedUser = db.UserRepository.Get(1);
             if (expectedUser == null)
             {
-                throw new ArgumentNullException("Could not find sample user");
+                throw new Exception(noSampleUser);
             }
             var expectedUserWithIncludes = db.UserRepository.Get(expectedUser.UserName);
 
@@ -44,10 +44,11 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             Assert.NotNull(response);
         }
 
-        [Fact]
-        public async Task GetUser_UnexsistingUser_ShouldReturnNotFound()
+        [Theory]
+        [InlineData("No")]
+        public async Task GetUser_UnexsistingUser_ShouldReturnNotFound(string userNamne)
         {
-            var response = await _client.GetAsync(" ");
+            var response = await _client.GetAsync(userNamne);
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
@@ -60,7 +61,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var ratedUser = db.UserRepository.Get(2);
             if (ratingUser == null || ratedUser == null)
             {
-                throw new ArgumentNullException("Could not find sample users");
+                throw new Exception(noSampleUser);
             }
 
             var oldRating = db.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
@@ -100,13 +101,13 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var ratingUser = db.UserRepository.Get(1);
             if (ratingUser == null)
             {
-                throw new ArgumentNullException("Could not find sample users");
+                throw new Exception(noSampleUser);
             }
 
             var ratedUser = db.UserRepository.Get(unexistingUserName);
             if(ratedUser != null)
             {
-                throw new ArgumentNullException("User did exists, " +
+                throw new ArgumentNullException("User did exist, " +
                     "please change the username for the non existing testing user.");
             }
 
@@ -131,7 +132,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var ratedUser = db.UserRepository.Get(2);
             if (ratingUser == null || ratedUser == null)
             {
-                throw new ArgumentNullException("Could not find sample users");
+                throw new ArgumentNullException(noSampleUser);
             }
 
             var oldRating = db.RatingRepository.Get(ratedUser.Id, ratingUser.Id);

@@ -56,26 +56,5 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
-
-        //[Fact]
-        //public async Task Create_ValidUserNameAndPassword_ShouldReturnToken()
-        //{
-        //    //TODO: Add test user to db
-        //    var user = db.UserRepository.Get(1);
-        //    if(user == null)
-        //    {
-        //        throw new Exception("Could not find sample user," +
-        //            "please change the user id.");
-        //    }
-
-        //    var contentDictionary = new Dictionary<string, string>()
-        //    {
-        //        { "username", user.UserName },
-        //        { "password", user.PasswordHash },
-        //        { "grant_type", content.Grant_Type }
-        //    };
-
-        //    var encodedContent = new FormUrlEncodedContent(contentDictionary);
-        //}
     }
 }

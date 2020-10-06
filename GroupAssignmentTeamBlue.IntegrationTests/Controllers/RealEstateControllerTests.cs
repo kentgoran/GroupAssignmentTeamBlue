@@ -22,7 +22,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class RealEstateControllerTests : ControllerTestsBase
     {
-        private const string noSampleRealEstate = "Could not find sample real estate, please change the real estate id.";
+        private const string noSampleRealEstate = "Could not find sample real estate(s), ";
+        private const string noSampleUser = "Could not find sample user";
+
         private RealEstateForCreationDto testRealEstate = new RealEstateForCreationDto()
         {   
             Title = "Testing", Description = "Just some testing", Contact = "Tester07",
@@ -61,8 +63,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             if(realEstatesEntities == null ||
                 realEstatesEntities.Count() !=  take)
             {
-                throw new Exception("Could not find sample real estates," +
-                    "please change the skip and take value or add more real estates to the database");
+                throw new Exception(noSampleRealEstate);
             }
 
             var expectedRealEstates = _mapper.Map<IEnumerable<RealEstateDto>>(realEstatesEntities);
@@ -92,8 +93,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var realEstateEntites = db.RealEstateRepository.SkipAndTakeRealEstates(defaultSkip, defaultTake);
             if(realEstateEntites == null || realEstateEntites.Count < defaultTake)
             {
-                throw new Exception("Could not find sample realestates," +
-                    "add more real estates to the database.");
+                throw new Exception(noSampleRealEstate);
             }
 
             var expectedRealEstates = _mapper.Map<IEnumerable<RealEstateDto>>(realEstateEntites);
@@ -107,7 +107,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 
         [Theory]
         [InlineData(1)]
-        public async Task GetRealEstate_Unauthenticated_ExistingRealEstate_ReturnsUnauthorized(int id)
+        public async Task GetRealEstate_Unauthenticated_ExistingRealEstate_ReturnsRealEstatePartlyDetailed(int id)
         {
             var realEstate = db.RealEstateRepository.Get(id);
             if(realEstate == null)
@@ -115,45 +115,54 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 throw new Exception(noSampleRealEstate);
             }
 
-            var reponse = await _client.GetAsync($"/{id}");
+            var expectedRealEstate = _mapper.Map<RealEstatePartlyDetailedDto>(realEstate);
+
+            var reponse = await _client.GetFromJsonAsync<RealEstatePartlyDetailedDto>(_client.BaseAddress + $"/{id}");
 
             // Assert
-            reponse.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+            reponse.Should().BeEquivalentTo(expectedRealEstate);
         }
 
-        [Fact]
-        public async Task GetRealEstate_Unauthenticated_NonexistingRealEstate_ReturnsNotFound()
+        [Theory]
+        [InlineData(-1)]
+        public async Task GetRealEstate_Unauthenticated_NonexistingRealEstate_ReturnsNotFound(int id)
         {
             // Arrange
-            if (db.RealEstateRepository.EntityExists(-1))
+            if (db.RealEstateRepository.EntityExists(id))
             {
-                throw new ArgumentException("A real estate with the given id was found, please change the id.");
+                throw new Exception(noSampleRealEstate);
             }
 
             // Act 
-            var response = await _client.GetAsync("/-1");
+            var response = await _client.GetAsync(_client.BaseAddress + $"/{id}");
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
-        [Fact]
-        public async Task GetRealEstate_Authenticated_ExistingRealEstate_ReturnsRealEstate()
+        [Theory]
+        [InlineData(1)]
+        public async Task GetRealEstate_Authenticated_ExistingRealEstate_ReturnsRealEstate(int id)
         {
             // Arrange
-            var realEstateEntity = db.RealEstateRepository.GetWithIncludes(1);
+            var realEstateEntity = db.RealEstateRepository.GetWithIncludes(id);
             if (realEstateEntity == null)
             {
-                throw new ArgumentNullException("Could not find sample real estate for test");
+                throw new Exception(noSampleRealEstate);
             }
             var expectedRealEstate = _mapper.Map<RealEstateFullDetailDto>(realEstateEntity);
 
             var user = db.UserRepository.Get(1);
+            if (user == null)
+            {
+                throw new Exception(noSampleUser);
+            }
+
             var token = FakeToken.CreateFakeTokenByUser(user);
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             // Act
-            var response = await _client.GetFromJsonAsync<RealEstateFullDetailDto>("/1");
+            var response = await _client.GetFromJsonAsync<RealEstateFullDetailDto>(_client.BaseAddress + $"/{id}");
 
             // Assert
             response.Should().BeEquivalentTo(expectedRealEstate);
@@ -166,10 +175,15 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var realEstateEntity = db.RealEstateRepository.Get(-1);
             if (realEstateEntity != null)
             {
-                throw new ArgumentException("Could not find sample real estate for test");
+                throw new ArgumentException(noSampleRealEstate);
             }
 
             var user = db.UserRepository.Get(1);
+            if (user == null)
+            {
+                throw new Exception(noSampleUser);
+            }
+
             var token = FakeToken.CreateFakeTokenByUser(user);
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -193,6 +207,11 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             }
 
             var user = db.UserRepository.Get(1);
+            if (user == null)
+            {
+                throw new Exception(noSampleUser);
+            }
+
             var token = FakeToken.CreateFakeTokenByUser(user);
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -218,6 +237,11 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         {
             // Arrange
             var user = db.UserRepository.Get(1);
+            if (user == null)
+            {
+                throw new Exception(noSampleUser);
+            }
+
             var token = FakeToken.CreateFakeTokenByUser(user);
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -259,7 +283,6 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 RemoveLastRealEstateFromDb(testRealEstate.Title);
             }
         }
-        // TODO: Create CreateRealEstate_Unauthorized test
 
         private void RemoveLastRealEstateFromDb(string realEstateTitle)
         {
