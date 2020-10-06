@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroupAssignmentTeamBlue.DAL.Migrations
 {
     [DbContext(typeof(AdvertContext))]
-    [Migration("20200930123416_DatabaseCreation")]
+    [Migration("20201006144429_DatabaseCreation")]
     partial class DatabaseCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
