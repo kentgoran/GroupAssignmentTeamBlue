@@ -54,6 +54,20 @@
             <param name="take">The amount of comments to take, default = 10</param>
             <returns>200 OK, with a list of comments</returns>
         </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.GetCommentCountByEstate(System.Int32)">
+            <summary>
+            GET for the number of comments for the given realEstate
+            </summary>
+            <param name="id">RealEstate Id</param>
+            <returns>the number of comments made about given realEstate, as an int</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.GetCommentCountByUser(System.String)">
+            <summary>
+            GET for the number of comments by given username
+            </summary>
+            <param name="username">users nickname</param>
+            <returns>the number of comments made by given user, as an int</returns>
+        </member>
         <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.PostComment(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto)">
             <summary>
             POST for a new comment

@@ -125,6 +125,44 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         /// <summary>
+        /// GET for the number of comments for the given realEstate
+        /// </summary>
+        /// <param name="id">RealEstate Id</param>
+        /// <returns>the number of comments made about given realEstate, as an int</returns>
+        [HttpGet("{id}/count", Name = "GetCommentCountByEstate")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
+        public ActionResult GetCommentCountByEstate(int id)
+        {
+            if (!_unitOfWork.RealEstateRepository.EntityExists(id))
+            {
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {id}" });
+                return NotFound(errorResponse);
+            }
+            return Ok(_unitOfWork.CommentRepository.GetCommentsByRealEstateCount(id));
+        }
+
+        /// <summary>
+        /// GET for the number of comments by given username
+        /// </summary>
+        /// <param name="username">users nickname</param>
+        /// <returns>the number of comments made by given user, as an int</returns>
+        [HttpGet("byuser/{username}/count", Name = "GetCommentCountByUser")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
+        public ActionResult GetCommentCountByUser(string username)
+        {
+            if(_unitOfWork.UserRepository.Get(username) == null)
+            {
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("Username", new string[] { $"Could not find a User with name {username}" });
+                return NotFound(errorResponse);
+            }
+            return Ok(_unitOfWork.CommentRepository.GetCommentsByUsernameCount(username));
+        }
+
+        /// <summary>
         /// POST for a new comment
         /// </summary>
         /// <param name="commentForCreation">Information about the comment to be created</param>

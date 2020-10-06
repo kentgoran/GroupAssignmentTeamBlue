@@ -43,5 +43,14 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
                 OrderBy(c => c.TimeOfCreation).Skip(skip).Take(take).
                 Include(c => c.User).ToList();
         }
+
+        public int GetCommentsByRealEstateCount(int id)
+        {
+            return context.Comments.Where(c => c.RealEstateId == id).Count();
+        }
+        public int GetCommentsByUsernameCount(string username)
+        {
+            return context.Comments.Where(c => c.User.UserName == username).Count();
+        }
     }
 }
