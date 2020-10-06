@@ -109,7 +109,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             //If the user is logged in, returns the fully detailed RealEstate, else returns less detailed data
             var realEstateDto = User.Identity.IsAuthenticated ?
                 _mapper.Map<RealEstateFullDetailDto>(realEstateEntity) :
-                _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
+                _mapper.Map<RealEstateDto>(realEstateEntity);
 
             return Ok(realEstateDto);
         }

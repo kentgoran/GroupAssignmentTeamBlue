@@ -13,18 +13,6 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels
     public class RealEstateFullDetailDto : RealEstateDto
     {
         /// <summary>
-        /// City from where the RealEstate is
-        /// </summary>
-        public string City { get; set; }
-        /// <summary>
-        /// Amount of square meters
-        /// </summary>
-        public int SquareMeters { get; set; }
-        /// <summary>
-        /// Amount of rooms
-        /// </summary>
-        public int Rooms { get; set; }
-        /// <summary>
         /// Name of the user who created the listing
         /// </summary>
         public string UserName { get; set; }
