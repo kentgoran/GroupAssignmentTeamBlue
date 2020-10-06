@@ -3,10 +3,10 @@ using GroupAssignmentTeamBlue.API;
 using GroupAssignmentTeamBlue.API.Models.DtoModels;
 using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
 using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
-using IdentityModel.Client;
 using System;
 using System.Dynamic;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Xunit;
@@ -54,7 +54,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         }
 
         [Fact]
-        public async Task RateUser_ExsistingUsers_ShouldCreateRating()
+        public async Task RateUser_Authenticated_ExsistingUsers_ShouldCreateRating()
         {
             // Arrange
             var ratingUser = db.UserRepository.Get(1);
@@ -70,13 +70,12 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var rating = new RatingForCreationDto() { UserName = ratedUser.UserName, Value = 2 };
 
             var token = FakeToken.CreateFakeTokenByUser(ratingUser);
-            _client.SetBearerToken(token);
-
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             try
             {
                 // Act
-                var response = await _client.PostAsJsonAsync<RatingForCreationDto>("rate", rating);
+                var response = await _client.PutAsJsonAsync("rate", rating);
 
                 // Assert
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -91,6 +90,29 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 RemoveRatingFromDb(ratedUser.Id, ratingUser.Id, oldScore);
                 this.Dispose();
             }
+        }
+
+        [Fact]
+        public async Task RateUser_Authenticated_UnexsistingRatedUser_ShouldReturnBadRequest()
+        {
+            // Arrange
+            var ratingUser = db.UserRepository.Get(1);
+            if (ratingUser == null)
+            {
+                throw new ArgumentNullException("Could not find sample users");
+            }
+
+            var rating = new RatingForCreationDto() { UserName = " ", Value = 2 };
+
+            var token = FakeToken.CreateFakeTokenByUser(ratingUser);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+
+            // Act
+            var response = await _client.PutAsJsonAsync("rate", rating);
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
 
         private void RemoveRatingFromDb(int ratedUserId, int ratingUserId, int? oldScore)
