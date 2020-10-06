@@ -39,5 +39,10 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
                 .Include(r => r.Comments)
                 .ThenInclude(c => c.User).FirstOrDefault();
         }
+
+        public int GetRealEstateCount()
+        {
+            return context.RealEstates.Count();
+        }
     }
 }

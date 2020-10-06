@@ -77,6 +77,17 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         /// <summary>
+        /// GET for the number of real estates.
+        /// </summary>
+        /// <returns>Number of real estates.</returns>
+        [HttpGet("count")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        public IActionResult GetRealEstateCount()
+        {
+            return Ok(_unitOfWork.RealEstateRepository.GetRealEstateCount());
+        }
+
+        /// <summary>
         /// GET for a single RealEstate, by RealEstateId. If user is authenticated, it returns full details, else a dto with less details
         /// </summary>
         /// <param name="id">Id of the RealEstate to get</param>
