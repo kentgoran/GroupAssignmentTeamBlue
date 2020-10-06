@@ -22,6 +22,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 {
     public class RealEstateControllerTests : ControllerTestsBase
     {
+        private const string noSampleRealEstate = "Could not find sample real estate, please change the real estate id.";
         private RealEstateForCreationDto testRealEstate = new RealEstateForCreationDto()
         {   
             Title = "Testing", Description = "Just some testing", Contact = "Tester07",
@@ -29,7 +30,6 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             SellingPrice = null, ConstructionYear = 2020, ListingUrl = "http://findatestingfacility.com/1",
             City = "Varberg", SquareMeters = 100, Rooms = 1, Urls = new List<string> { "https://testingfacility.img" }
         };
-
         private RealEstateForCreationDto testRealEstateNullDescription = new RealEstateForCreationDto()
         {
             Title = "Testing",
@@ -105,27 +105,24 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             response.Should().BeEquivalentTo(expectedRealEstates);
         }
 
-        [Fact]
-        public async Task GetRealEstate_Unauthenticated_ExistingRealEstate_ReturnsRealEstate()
+        [Theory]
+        [InlineData(1)]
+        public async Task GetRealEstate_Unauthenticated_ExistingRealEstate_ReturnsUnauthorized(int id)
         {
-            // Arrange
-            var realEstateEntity = db.RealEstateRepository.Get(1);
-            if (realEstateEntity == null)
+            var realEstate = db.RealEstateRepository.Get(id);
+            if(realEstate == null)
             {
-                throw new ArgumentNullException("Could not find sample real estate for test");
+                throw new Exception(noSampleRealEstate);
             }
 
-            var expectedRealEstate = _mapper.Map<RealEstatePartlyDetailedDto>(realEstateEntity);
-
-            // Act + Assert
-            var reponse = await _client.GetFromJsonAsync<RealEstatePartlyDetailedDto>("/1");
+            var reponse = await _client.GetAsync($"/{id}");
 
             // Assert
-            reponse.Should().BeEquivalentTo(expectedRealEstate);
+            reponse.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }
 
         [Fact]
-        public async Task GetRealEstate_Unauthenticated_NonexistingRealEstate_ReturnsRealEstate()
+        public async Task GetRealEstate_Unauthenticated_NonexistingRealEstate_ReturnsNotFound()
         {
             // Arrange
             if (db.RealEstateRepository.EntityExists(-1))
@@ -163,7 +160,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         }
 
         [Fact]
-        public async Task GetRealEstate_Authenticated_NonExistingRealEstate_ReturnsRealEstate()
+        public async Task GetRealEstate_Authenticated_NonExistingRealEstate_ReturnsNotFound()
         {
             // Arrange
             var realEstateEntity = db.RealEstateRepository.Get(-1);
@@ -243,12 +240,12 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         }
 
         [Fact]
-        public async Task CreateRealEstate_Unauthenticated_InvalidRealEstate_ShouldReturnUnauthorized()
+        public async Task CreateRealEstate_Unauthenticated_ValidRealEstate_ShouldReturnUnauthorized()
         {
             try
             {
                 // Act
-                var response = await _client.PostAsJsonAsync("", testRealEstateNullDescription);
+                var response = await _client.PostAsJsonAsync("", testRealEstate);
 
                 // Assert
                 response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);

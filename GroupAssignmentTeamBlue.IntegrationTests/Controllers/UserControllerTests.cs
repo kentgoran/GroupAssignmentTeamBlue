@@ -45,9 +45,8 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         }
 
         [Fact]
-        public async Task GetUser_UnexsistingUser_ShouldReturn404NotFound()
+        public async Task GetUser_UnexsistingUser_ShouldReturnNotFound()
         {
-            // Ändra string vv 
             var response = await _client.GetAsync(" ");
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -92,8 +91,10 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             }
         }
 
-        [Fact]
-        public async Task RateUser_Authenticated_UnexsistingRatedUser_ShouldReturnBadRequest()
+        [Theory]
+        [InlineData("No")]
+        public async Task RateUser_Authenticated_UnexsistingRatedUser_ShouldReturnNotFound(
+            string unexistingUserName)
         {
             // Arrange
             var ratingUser = db.UserRepository.Get(1);
@@ -102,7 +103,14 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 throw new ArgumentNullException("Could not find sample users");
             }
 
-            var rating = new RatingForCreationDto() { UserName = " ", Value = 2 };
+            var ratedUser = db.UserRepository.Get(unexistingUserName);
+            if(ratedUser != null)
+            {
+                throw new ArgumentNullException("User did exists, " +
+                    "please change the username for the non existing testing user.");
+            }
+
+            var rating = new RatingForCreationDto() { UserName = unexistingUserName, Value = 2 };
 
             var token = FakeToken.CreateFakeTokenByUser(ratingUser);
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -112,7 +120,42 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var response = await _client.PutAsJsonAsync("rate", rating);
 
             // Assert
-            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
+
+        [Fact]
+        public async Task RateUser_Unauthenticated_ExistingUsers_ShouldReturnUnauthorized()
+        {
+            // Arrange
+            var ratingUser = db.UserRepository.Get(1);
+            var ratedUser = db.UserRepository.Get(2);
+            if (ratingUser == null || ratedUser == null)
+            {
+                throw new ArgumentNullException("Could not find sample users");
+            }
+
+            var oldRating = db.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
+            int? oldScore = oldRating == null ? null : oldRating.Score as int?;
+
+            var rating = new RatingForCreationDto() { UserName = ratedUser.UserName, Value = 2 };
+
+            try
+            {
+                // Act
+                var response = await _client.PutAsJsonAsync("rate", rating);
+
+                // Assert
+                response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+                var addedRating = db.RatingRepository.Get(ratedUser.Id, ratingUser.Id);
+                addedRating?.Score.Should().Be(oldScore);
+            }
+            // Finally to ensure that the test-cleanup is always executed
+            finally
+            {
+                // Cleanup incase of test failure
+                RemoveRatingFromDb(ratedUser.Id, ratingUser.Id, oldScore);
+                this.Dispose();
+            }
         }
 
         private void RemoveRatingFromDb(int ratedUserId, int ratingUserId, int? oldScore)

@@ -35,12 +35,8 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             var user = db.UserRepository.Get(userName);
             if (user != null)
             {
-                RemoveUserFromDb(userName);
-                user = db.UserRepository.Get(userName);
-                if (user != null)
-                {
-                    throw new Exception("Unable to remove user from database");
-                }
+                throw new Exception("User already exists," +
+                    "please change the username.");
             }
 
             var requestContent = new Dictionary<string, string>()
@@ -72,9 +68,15 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
 
         [Theory]
         [InlineData("test@user.com", "SuchAGoodPassword123!")]
-        public async Task RegisterNewUser_InvalidUser_ShouldRegisterUser(
+        public async Task RegisterNewUser_InvalidUser_ShouldReturnBadRequest(
         string userName, string password)
         {
+            var user = db.UserRepository.Get(userName);
+            if(user != null)
+            {
+                throw new Exception("User already exists," +
+                    "please change the username.");
+            }
 
             // Arrange
             var contentDictionary = new Dictionary<string, string>()
@@ -99,6 +101,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             }
             finally
             {
+                // Incase user was added to the database
                 RemoveUserFromDb(userName);
             }
         }
