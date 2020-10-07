@@ -7,7 +7,7 @@ using System.Text;
 
 namespace GroupAssignmentTeamBlue.Model
 {
-    public class RealEstate
+    public class RealEstate : IEntity
     {
         [Key]
         public int Id { get; set; }

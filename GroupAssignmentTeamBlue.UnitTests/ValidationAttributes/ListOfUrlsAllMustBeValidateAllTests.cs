@@ -1,11 +1,8 @@
 ﻿using GroupAssignmentTeamBlue.API.ValidationAttributes;
-using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
 using Xunit;
 
-namespace GroupAssignmentTeamBlue.UnitTests
+namespace GroupAssignmentTeamBlue.UnitTests.ValidationAttributes
 {
     public class ListOfUrlsAllMustBeValidateAllTests
     {

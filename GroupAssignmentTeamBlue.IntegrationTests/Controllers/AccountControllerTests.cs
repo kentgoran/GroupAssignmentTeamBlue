@@ -1,19 +1,10 @@
 ﻿using FluentAssertions;
 using GroupAssignmentTeamBlue.API;
-using GroupAssignmentTeamBlue.API.Controllers;
-using GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation;
-using GroupAssignmentTeamBlue.DAL.Repositories;
 using GroupAssignmentTeamBlue.IntegrationTests.Helpers;
-using GroupAssignmentTeamBlue.Model;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -47,7 +38,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 { "password", password},
                 { "confirmPassword", password}
             };
-            
+
             var encodedContent = new FormUrlEncodedContent(requestContent);
 
             try
@@ -73,7 +64,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         string userName, string password)
         {
             var user = db.UserRepository.Get(userName);
-            if(user != null)
+            if (user != null)
             {
                 throw new Exception(userAlreadyExists);
             }

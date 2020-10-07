@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GroupAssignmentTeamBlue.Model
 {
-    public class Rating
+    public class Rating : IEntity
     {
         [Key]
         public int Id { get; set; }

@@ -15,12 +15,12 @@ namespace GroupAssignmentTeamBlue.DAL.Context
     public class AdvertContext : IdentityDbContext<User, UserRole, int>
     {
         
-        public DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
         
-        public DbSet<Rating> Ratings { get; set; }
-        public DbSet<RealEstate> RealEstates { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
+        public virtual DbSet<RealEstate> RealEstates { get; set; }
 
-        public DbSet<Picture> Pictures { get; set; }
+        public virtual DbSet<Picture> Pictures { get; set; }
 
         public AdvertContext(DbContextOptions<AdvertContext> options) : base(options)
         {

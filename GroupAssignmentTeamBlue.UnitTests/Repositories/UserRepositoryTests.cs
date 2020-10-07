@@ -17,7 +17,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
         }
 
         [Fact]
-        public void GetUser_ValidUser_ShouldAddUser()
+        public void GetUser_ValidId_ShouldGetUser()
         {
 
         }

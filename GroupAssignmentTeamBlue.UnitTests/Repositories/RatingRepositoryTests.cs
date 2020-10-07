@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 {
-    public class RealEstateRepositoryTests
+    public class RatingRepositoryTests
     {
     }
 }

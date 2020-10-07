@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GroupAssignmentTeamBlue.Model
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser<int>, IEntity
     {
         public IEnumerable<Comment> Comments { get; set; }
         public IEnumerable<Rating> RatingsMade { get; set; }
