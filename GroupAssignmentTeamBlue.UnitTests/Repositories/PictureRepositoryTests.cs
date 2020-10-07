@@ -1,11 +1,9 @@
-﻿using Castle.Components.DictionaryAdapter;
-using FluentAssertions;
+﻿using FluentAssertions;
 using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.DAL.Repositories.Child_Repositories;
 using GroupAssignmentTeamBlue.Model;
 using GroupAssignmentTeamBlue.UnitTests.Helpers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using Moq;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,7 +80,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
             // Arrange
             int id = testPictures.First().Id;
             var expectedPic = testPictures.First();
-            
+
             dbSetPictureMock.Setup(ds => ds.Find(It.IsAny<int>())).Returns(FindPicture(id));
 
             // Act
@@ -108,11 +106,13 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
             // Arrange
             int realEstateId = testPictures.Last().RealEstateId;
 
+            dbSetPictureMock.Setup(ds => ds.Find(It.IsAny<Functi>())).Callback(testPictures.Where));
+
             // Act
             var pictures = repo.GetAllPicturesForRealEstate(realEstateId);
 
             // Assert
-
+            pictures.All(p => p.Id == pictures.First().Id).Should().BeTrue();
         }
 
         [Fact]
