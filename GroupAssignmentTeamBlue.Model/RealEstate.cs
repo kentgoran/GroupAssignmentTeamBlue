@@ -14,7 +14,7 @@ namespace GroupAssignmentTeamBlue.Model
         [Required]
         [MaxLength(50)]
         public string Title { get; set; }
-        [MaxLength(500)]
+        [MaxLength(1000)]
         public string Description { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
