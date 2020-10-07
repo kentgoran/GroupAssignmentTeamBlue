@@ -44,18 +44,13 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
                 Include(c => c.User).ToList();
         }
 
-        /// <summary>
-        /// Gets comments for a given username
-        /// </summary>
-        /// <param name="username">the username in question</param>
-        /// <param name="skip">The amount of comments to skip</param>
-        /// <param name="take">The amount of comments to take</param>
-        /// <returns>an ICollection of comments</returns>
-        public Comment GetCommentByUser(string username, string content)
+        public int GetCommentsByRealEstateCount(int id)
         {
-            return context.Comments
-                .Where(c => c.User.UserName == username && c.Content == content)
-                .OrderBy(c => c.TimeOfCreation).Include(c => c.User).FirstOrDefault();
+            return context.Comments.Where(c => c.RealEstateId == id).Count();
+        }
+        public int GetCommentsByUsernameCount(string username)
+        {
+            return context.Comments.Where(c => c.User.UserName == username).Count();
         }
     }
 }

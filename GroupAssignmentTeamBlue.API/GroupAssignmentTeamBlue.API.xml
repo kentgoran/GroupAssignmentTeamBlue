@@ -54,6 +54,20 @@
             <param name="take">The amount of comments to take, default = 10</param>
             <returns>200 OK, with a list of comments</returns>
         </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.GetCommentCountByEstate(System.Int32)">
+            <summary>
+            GET for the number of comments for the given realEstate
+            </summary>
+            <param name="id">RealEstate Id</param>
+            <returns>the number of comments made about given realEstate, as an int</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.GetCommentCountByUser(System.String)">
+            <summary>
+            GET for the number of comments by given username
+            </summary>
+            <param name="username">users nickname</param>
+            <returns>the number of comments made by given user, as an int</returns>
+        </member>
         <member name="M:GroupAssignmentTeamBlue.API.Controllers.CommentController.PostComment(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.CommentForCreationDto)">
             <summary>
             POST for a new comment
@@ -90,10 +104,17 @@
         </member>
         <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstate(System.Int32)">
             <summary>
-            GET for a single RealEstate, by RealEstateId. If user is authenticated, it returns full details, else a dto with less details
+            GET for a single RealEstate, by RealEstateId. Requires authentication
             </summary>
             <param name="id">Id of the RealEstate to get</param>
-            <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
+            <returns>a RealEstate with full details</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstateNoAuth(System.Int32)">
+            <summary>
+            Get for a single RealEstate, RealEstateId. Does not require authentication, and thus also returns a less detailed RealEstate
+            </summary>
+            <param name="id">Id of the RealEstate to get</param>
+            <returns>a RealEstate with partial details</returns>
         </member>
         <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.CreateRealEstate(GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation.RealEstateForCreationDto)">
             <summary>
@@ -368,9 +389,59 @@
             RealEstate dto
             </summary>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Contact">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Id">
             <summary>
-            Contact information
+            Id of the realEstate
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Title">
+            <summary>
+            Title of the object
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Rent">
+            <summary>
+            How much the rent is, per month
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.SellPrice">
+            <summary>
+            How much to buy the object
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.IsRentable">
+            <summary>
+            Boolean depicting whether the place is for rent or not
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.IsSellable">
+            <summary>
+            Boolean depicting whether the place is for sale or not
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Description">
+            <summary>
+            Objects description
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Address">
+            <summary>
+            Address of the object
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.RealEstateType">
+            <summary>
+            Object type
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.ConstructionYear">
+            <summary>
+            The year the object was built
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.DateOfAdvertCreation">
+            <summary>
+            Date and time of advert creating
             </summary>
         </member>
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.ListingUrl">
@@ -378,24 +449,29 @@
             A listings primary picture url
             </summary>
         </member>
-        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto">
-            <summary>
-            A Real Estate Dto with full details
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.City">
-            <summary>
-            City from where the RealEstate is
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.SquareMeters">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.SquareMeters">
             <summary>
             Amount of square meters
             </summary>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.Rooms">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Rooms">
             <summary>
             Amount of rooms
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.City">
+            <summary>
+            City from where the RealEstate is
+            </summary>
+        </member>
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateDto.Contact">
+            <summary>
+            Contact information
+            </summary>
+        </member>
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto">
+            <summary>
+            A Real Estate Dto with full details
             </summary>
         </member>
         <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateFullDetailDto.UserName">
@@ -413,64 +489,14 @@
             Urls to pictures
             </summary>
         </member>
-        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto">
+        <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateNoAuthDetailDto">
             <summary>
-            Real Estate dto, partly detailed
+            A Real Estate Dto without authentication-required details
             </summary>
         </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Id">
+        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstateNoAuthDetailDto.Urls">
             <summary>
-            Id of the realEstate
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Title">
-            <summary>
-            Title of the object
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Rent">
-            <summary>
-            How much the rent is, per month
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.SellPrice">
-            <summary>
-            How much to buy the object
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.IsRentable">
-            <summary>
-            Boolean depicting whether the place is for rent or not
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.IsSellable">
-            <summary>
-            Boolean depicting whether the place is for sale or not
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Description">
-            <summary>
-            Objects description
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.Address">
-            <summary>
-            Address of the object
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.RealEstateType">
-            <summary>
-            Object type
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.ConstructionYear">
-            <summary>
-            The year the object was built
-            </summary>
-        </member>
-        <member name="P:GroupAssignmentTeamBlue.API.Models.DtoModels.RealEstatePartlyDetailedDto.DateOfAdvertCreation">
-            <summary>
-            Date and time of advert creating
+            Urls to pictures
             </summary>
         </member>
         <member name="T:GroupAssignmentTeamBlue.API.Models.DtoModels.UserDto">
