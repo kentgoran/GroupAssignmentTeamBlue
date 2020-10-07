@@ -44,6 +44,13 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
                 Include(c => c.User).ToList();
         }
 
+        public Comment GetCommentByUser(string username, string content)
+        {
+            return context.Comments
+                .Where(c => c.User.UserName == username && c.Content == content)
+                .Include(c => c.User).FirstOrDefault();
+        }
+
         public int GetCommentsByRealEstateCount(int id)
         {
             return context.Comments.Where(c => c.RealEstateId == id).Count();
