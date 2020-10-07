@@ -61,5 +61,13 @@ namespace GroupAssignmentTeamBlue.UnitTests
 
             Assert.False(isValid);
         }
+
+        [Fact]
+        public void IsValid_NonRealEstateObject_ShouldBeInvalid()
+        {
+            var isValid = validationAttribute.IsValid(2);
+
+            Assert.False(isValid);
+        }
     }
 }

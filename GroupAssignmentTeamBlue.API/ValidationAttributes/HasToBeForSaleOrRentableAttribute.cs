@@ -22,7 +22,7 @@ namespace GroupAssignmentTeamBlue.API.ValidationAttributes
         {
             try 
             {
-                var realEstate = value as RealEstateForCreationDto;
+                var realEstate = (RealEstateForCreationDto)value;
 
                 // If the realestate is neither sellable nor rentable,
                 // return error message

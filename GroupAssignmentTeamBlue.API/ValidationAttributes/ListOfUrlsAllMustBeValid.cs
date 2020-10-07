@@ -23,7 +23,9 @@ namespace GroupAssignmentTeamBlue.API.ValidationAttributes
         {
             try
             {
-                List<string> urls = value as List<string>;
+                // Fixed: List<string> urls becomes null if value is not a List<string> and is passed as valid,
+                // only happens while using the as keyword.
+                List<string> urls = (List<string>)value;
                 //Check for null, so to not validate an empty input (would throw ArgumentNullException)
                 if(urls != null)
                 {

@@ -115,9 +115,9 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
                 throw new Exception(noSampleRealEstate);
             }
 
-            var expectedRealEstate = _mapper.Map<RealEstatePartlyDetailedDto>(realEstate);
+            var expectedRealEstate = _mapper.Map<RealEstateNoAuthDetailDto>(realEstate);
 
-            var reponse = await _client.GetFromJsonAsync<RealEstatePartlyDetailedDto>(_client.BaseAddress + $"/{id}");
+            var reponse = await _client.GetFromJsonAsync<RealEstateNoAuthDetailDto>(_client.BaseAddress + $"/{id}/noauth");
 
             // Assert
             reponse.Should().BeEquivalentTo(expectedRealEstate);
@@ -134,7 +134,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
             }
 
             // Act 
-            var response = await _client.GetAsync(_client.BaseAddress + $"/{id}");
+            var response = await _client.GetAsync(_client.BaseAddress + $"/{id}/noauth");
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
