@@ -44,6 +44,12 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
                 Include(c => c.User).ToList();
         }
 
+        /// <summary>
+        /// Gets comments for a given username
+        /// </summary>
+        /// <param name="username">the username in question</param>
+        /// <param name="content">the content of the comment to return</param>
+        /// <returns>The Comment matching the username and content or null if none was found.</returns>
         public Comment GetCommentByUser(string username, string content)
         {
             return context.Comments
