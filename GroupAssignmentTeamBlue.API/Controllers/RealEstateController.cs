@@ -88,13 +88,13 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         /// <summary>
-        /// GET for a single RealEstate, by RealEstateId. If user is authenticated, it returns full details, else a dto with less details
+        /// GET for a single RealEstate, by RealEstateId. Requires authentication
         /// </summary>
         /// <param name="id">Id of the RealEstate to get</param>
-        /// <returns>a RealEstate, with details corresponding to if the user is logged in or not</returns>
+        /// <returns>a RealEstate with full details</returns>
+        [Authorize]
         [HttpGet("{id}", Name = "GetRealEstate")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RealEstateFullDetailDto))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
         public ActionResult GetRealEstate(int id)
         {
@@ -106,10 +106,30 @@ namespace GroupAssignmentTeamBlue.API.Controllers
                 return NotFound(errorResponse);
             }
 
-            //If the user is logged in, returns the fully detailed RealEstate, else returns less detailed data
-            var realEstateDto = User.Identity.IsAuthenticated ?
-                _mapper.Map<RealEstateFullDetailDto>(realEstateEntity) :
-                _mapper.Map<RealEstateDto>(realEstateEntity);
+            var realEstateDto = _mapper.Map<RealEstateFullDetailDto>(realEstateEntity);
+
+            return Ok(realEstateDto);
+        }
+
+        /// <summary>
+        /// Get for a single RealEstate, RealEstateId. Does not require authentication, and thus also returns a less detailed RealEstate
+        /// </summary>
+        /// <param name="id">Id of the RealEstate to get</param>
+        /// <returns>a RealEstate with partial details</returns>
+        [HttpGet("{id}/noauth", Name = "GetRealEstateNoAuth")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RealEstateNoAuthDetailDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiErrorResponseBody))]
+        public ActionResult GetRealEstateNoAuth(int id)
+        {
+            var realEstateEntity = _unitOfWork.RealEstateRepository.GetWithIncludes(id);
+            if (realEstateEntity == null)
+            {
+                ApiErrorResponseBody errorResponse = new ApiErrorResponseBody(false);
+                errorResponse.AddError("RealEstate", new string[] { $"Could not find a Real Estate with id {id}" });
+                return NotFound(errorResponse);
+            }
+
+            var realEstateDto = _mapper.Map<RealEstateNoAuthDetailDto>(realEstateEntity);
 
             return Ok(realEstateDto);
         }
