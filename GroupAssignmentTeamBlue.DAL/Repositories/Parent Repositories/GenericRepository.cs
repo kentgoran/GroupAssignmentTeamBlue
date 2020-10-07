@@ -28,9 +28,7 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
 
         public virtual TEntity Get(int Id)
         {
-            var set = context.Set<TEntity>();
-            var entity = set.Find(Id);
-            return entity;
+            return context.Set<TEntity>().Find(Id);
         }
         public virtual ICollection<TEntity> GetAll()
         {

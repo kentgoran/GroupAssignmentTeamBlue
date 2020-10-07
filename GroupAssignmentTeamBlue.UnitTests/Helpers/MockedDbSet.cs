@@ -12,6 +12,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Helpers
     internal class MockedDbSet<TEntity> : Mock<DbSet<TEntity>>
         where TEntity : class
     {
+
         public MockedDbSet(IEnumerable<TEntity> setData)
         {
             var queriableData = setData.AsQueryable();
