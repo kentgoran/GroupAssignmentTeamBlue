@@ -20,11 +20,15 @@ namespace GroupAssignmentTeamBlue.API.Models.DtoModels.ForCreation
         /// Title of the advert
         /// </summary>
         [Required(ErrorMessage = "A {0} is required")]
+        [MinLength(5, ErrorMessage = "{0} must be between 5 and 50 characters.")]
+        [MaxLength(50, ErrorMessage = "{0} must be between 5 and 50 characters.")]
         public string Title { get; set; }
         /// <summary>
         /// A description of the place
         /// </summary>
         [Required(ErrorMessage = "A {0} is required")]
+        [MinLength(10, ErrorMessage = "{0} must be between 10 and 1000 characters.")]
+        [MaxLength(1000, ErrorMessage = "{0} must be between 10 and 1000 characters.")]
         public string Description { get; set; }
         /// <summary>
         /// Contact info, ie email/phone number
