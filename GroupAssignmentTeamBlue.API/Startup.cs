@@ -141,6 +141,14 @@ namespace GroupAssignmentTeamBlue.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStatusCodePages(async context =>
+            {
+                if (context.HttpContext.Response.StatusCode == 401)
+                {
+                    context.HttpContext.Response.ContentType = "Unauthorized, You must be logged in to consume this request.";
+                    await context.HttpContext.Response.WriteAsync("Unauthorized, You must be logged in to consume this request.");
+                };    
+            });
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

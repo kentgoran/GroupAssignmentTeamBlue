@@ -26,7 +26,7 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         public ICollection<Comment> GetCommentsForRealEstate(int realEstateId, int skip, int take)
         {
             return context.Comments.Where(c => c.RealEstateInQuestion.Id == realEstateId).
-                OrderBy(c => c.TimeOfCreation).Skip(skip).Take(take).
+                OrderByDescending(c => c.TimeOfCreation).Skip(skip).Take(take).
                 Include(c => c.User).ToList();
         }
 
@@ -40,7 +40,7 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         public ICollection<Comment> GetCommentsByUser(string username, int skip, int take)
         {
             return context.Comments.Where(c => c.User.UserName == username).
-                OrderBy(c => c.TimeOfCreation).Skip(skip).Take(take).
+                OrderByDescending(c => c.TimeOfCreation).Skip(skip).Take(take).
                 Include(c => c.User).ToList();
         }
 

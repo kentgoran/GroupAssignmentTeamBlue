@@ -16,15 +16,20 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         }
 
         /// <summary>
-        /// Skips and takes a number of realEstates, ordered by date of creation, descending
+        /// Skips and takes a number of realEstates, search by city, ordered by date of creation, descending
         /// </summary>
         /// <param name="skip">amount to skip</param>
         /// <param name="take">amount to take</param>
+        /// <param name="city">filter by city</param>
         /// <returns>a list of RealEstates</returns>
-        public ICollection<RealEstate> SkipAndTakeRealEstates(int skip, int take)
+        public ICollection<RealEstate> SkipAndTakeRealEstatesByCity(int skip, int take, string city)
         {
-            return context.RealEstates.OrderByDescending(r => r.DateOfAdvertCreation).Skip(skip).Take(take).ToList();
+            return context.RealEstates
+                .OrderByDescending(r => r.DateOfAdvertCreation)
+                .Where(re => re.City.ToLower().Contains(city))
+                .Skip(skip).Take(take).ToList();
         }
+
 
         /// <summary>
         /// Gets a realEstate, including its comments, pictures and user
@@ -40,9 +45,9 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
                 .ThenInclude(c => c.User).FirstOrDefault();
         }
 
-        public int GetRealEstateCount()
+        public int GetRealEstateCount(string city)
         {
-            return context.RealEstates.Count();
+            return context.RealEstates.Where(r => r.City.ToLower().Contains(city)).Count();
         }
     }
 }

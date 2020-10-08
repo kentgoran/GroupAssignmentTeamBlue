@@ -47,15 +47,16 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         /// <summary>
-        /// GET for RealEstates, with optional skip/take parameters for paging, does not require authentication
+        /// GET for RealEstates, with optional skip/take parameters for paging, filter by city, does not require authentication
         /// </summary>
         /// <param name="skip">Amount to skip, can't be negative number. default = 0</param>
         /// <param name="take">Amount to take, has to be 1-100. default = 10</param>
+        /// <param name="city">City to filter, optional</param>
         /// <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RealEstateDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponseBody))]
-        public IActionResult GetRealEstates(int skip = 0, int take = 10)
+        public IActionResult GetRealEstates(int skip = 0, int take = 10, string city = "")
         { 
             if (skip < 0)
             {
@@ -71,20 +72,20 @@ namespace GroupAssignmentTeamBlue.API.Controllers
             }
 
             var realEstateEntities = _unitOfWork.RealEstateRepository
-                .SkipAndTakeRealEstates(skip, take);
+                .SkipAndTakeRealEstatesByCity(skip, take, city);
             var realEstateDtos = _mapper.Map<IEnumerable<RealEstateDto>>(realEstateEntities);
             return Ok(realEstateDtos);
         }
 
         /// <summary>
-        /// GET for the number of real estates.
+        /// GET for the number of real estates with given search parameter "city"
         /// </summary>
         /// <returns>Number of real estates.</returns>
         [HttpGet("count")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        public IActionResult GetRealEstateCount()
+        public IActionResult GetRealEstateCount(string city = "")
         {
-            return Ok(_unitOfWork.RealEstateRepository.GetRealEstateCount());
+            return Ok(_unitOfWork.RealEstateRepository.GetRealEstateCount(city));
         }
 
         /// <summary>

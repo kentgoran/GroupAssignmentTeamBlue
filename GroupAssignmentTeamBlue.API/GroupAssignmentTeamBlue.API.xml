@@ -88,17 +88,24 @@
             <param name="context">DbContext to be injected</param>
             <param name="userManager">UserManager to be injected</param>
         </member>
-        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstates(System.Int32,System.Int32)">
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstates(System.Int32,System.Int32,System.String)">
             <summary>
-            GET for RealEstates, with optional skip/take parameters for paging, does not require authentication
+            GET for RealEstates, with optional skip/take parameters for paging, filter by city, does not require authentication
             </summary>
             <param name="skip">Amount to skip, can't be negative number. default = 0</param>
             <param name="take">Amount to take, has to be 1-100. default = 10</param>
+            <param name="city">City to filter, optional</param>
             <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         </member>
         <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstateCount">
             <summary>
             GET for the number of real estates.
+            </summary>
+            <returns>Number of real estates.</returns>
+        </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstateCount(System.String)">
+            <summary>
+            GET for the number of real estates with given search parameter "city"
             </summary>
             <returns>Number of real estates.</returns>
         </member>
