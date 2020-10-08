@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using Xunit;
 
@@ -18,11 +20,15 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
         private readonly RatingRepository repo;
         private readonly List<Rating> testRatings = new List<Rating>()
         {
-            new Rating() { Id = 1, Score = 3, RatingUserId = 1, RatedUserId = 2 },
-            new Rating() { Id = 2, Score = 2, RatingUserId = 2, RatedUserId = 1 },
-            new Rating() { Id = 3, Score = 5, RatingUserId = 3, RatedUserId = 4 }
+            new Rating() { Id = 1, Score = 3, RatingUser = new User() { Id = 1},
+                RatedUser = new User() { Id = 2 }},
+            new Rating() { Id = 2, Score = 2, RatingUser = new User() { Id = 2}, 
+                RatedUser = new User() { Id = 1 }},
+            new Rating() { Id = 3, Score = 5, RatingUser = new User() { Id = 3 }, 
+                RatedUser = new User() { Id = 4 }}
         };
         private MockedDbSet<Rating> dbSetRatingMock;
+        private Mock<AdvertContext> contextMock;
 
         public RatingRepositoryTests()
         {
@@ -30,7 +36,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
             dbSetRatingMock = new MockedDbSet<Rating>(testRatings);
 
             var builder = new DbContextOptionsBuilder<AdvertContext>();
-            var contextMock = new Mock<AdvertContext>(builder.Options);
+            contextMock = new Mock<AdvertContext>(builder.Options);
             contextMock.Setup(c => c.Set<Rating>()).Returns(dbSetRatingMock.Object);
             contextMock.Setup(c => c.Ratings).Returns(dbSetRatingMock.Object);
 
@@ -38,7 +44,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
         }
 
         [Fact]
-        public void Add_ShouldCallAdd_ShouldAddPicture()
+        public void Add_ShouldCallAdd_ShouldAddRating()
         {
             // Arrange
             var rating = new Rating() { Id = 8, Score = 3, RatingUserId = 6, RatedUserId = 5 };
@@ -55,10 +61,11 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 
             // Clean up
             testRatings.Remove(rating);
+            dbSetRatingMock.Verify(ds => ds.Add(It.IsAny<Rating>()), Times.Exactly(1));
         }
 
         [Fact]
-        public void RemovePicture_ShouldCallRemove_ShouldRemovePicture()
+        public void RemovePicture_ShouldCallRemove_ShouldRemoveRating()
         {
             // Arrange
             var pictureToRemove = testRatings.Last();
@@ -72,11 +79,12 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 
             // Assert
             testRatings.Should().NotContain(pictureToRemove);
+            dbSetRatingMock.Verify(ds => ds.Remove(It.IsAny<Rating>()), Times.Exactly(1));
             testRatings.Add(pictureToRemove);
         }
 
         [Fact]
-        public void Get_ShouldCallFind_ShouldReturnPicture()
+        public void Get_ShouldCallFind_ShouldReturnRating()
         {
             // Arrange
             int id = testRatings.First().Id;
@@ -90,6 +98,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 
             // Assert
             picture.Should().BeEquivalentTo(expectedPic);
+            dbSetRatingMock.Verify(ds => ds.Find(It.IsAny<int>()), Times.Exactly(1));
         }
 
         [Fact]
@@ -100,6 +109,21 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 
             // Assert
             ratings.Should().BeEquivalentTo(testRatings);
+        }
+
+        [Fact]
+        public void Get_WithRatedUserIdRatingUserId_ShouldReturnRating()
+        {
+            // Arrange
+            int ratedUserId = testRatings.First().RatedUser.Id;
+            int ratingUserId = testRatings.First().RatingUser.Id;
+            var expectedRating = testRatings.First();
+
+            // Act
+            var rating = repo.Get(ratedUserId, ratingUserId);
+
+            // Assert
+            rating.Should().BeEquivalentTo(expectedRating);
         }
 
         [Fact]

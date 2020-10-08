@@ -4,10 +4,12 @@ using GroupAssignmentTeamBlue.DAL.Repositories.Child_Repositories;
 using GroupAssignmentTeamBlue.Model;
 using GroupAssignmentTeamBlue.UnitTests.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using Xunit;
 
 namespace GroupAssignmentTeamBlue.UnitTests.Repositories
@@ -22,6 +24,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
             new Picture() { Id = 3, Url = "http://hij.img", RealEstateId = 2 }
         };
         private MockedDbSet<Picture> dbSetPictureMock;
+        private AdvertContext context;
 
         public PictureRepositoryTests()
         {
@@ -34,6 +37,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
             contextMock.Setup(c => c.Pictures).Returns(dbSetPictureMock.Object);
 
             repo = new PictureRepository(contextMock.Object);
+            context = contextMock.Object;
         }
 
         [Fact]
@@ -54,6 +58,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 
             // Clean up
             testPictures.Remove(picture);
+            dbSetPictureMock.Verify(m => m.Add(It.IsAny<Picture>()), Times.Exactly(1));
         }
 
         [Fact]
@@ -72,6 +77,8 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
             // Assert
             testPictures.Should().NotContain(pictureToRemove);
             testPictures.Add(pictureToRemove);
+            dbSetPictureMock.Verify(m => m.Remove(It.IsAny<Picture>()), Times.Exactly(1));
+
         }
 
         [Fact]
@@ -89,6 +96,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 
             // Assert
             picture.Should().BeEquivalentTo(expectedPic);
+            dbSetPictureMock.Verify(m => m.Find(It.IsAny<int>()), Times.Exactly(1));
         }
 
         [Fact]
@@ -101,33 +109,17 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
             pictures.Should().BeEquivalentTo(testPictures);
         }
 
-        //[Fact]
-        // TODO: få where att funka
+        [Fact]
         public void GetAllPicturesForRealEstate_ShouldGetAllWithSameRealEstateId()
         {
             // Arrange
             int realEstateId = testPictures.Last().RealEstateId;
 
-            //dbSetPictureMock.Setup(ds => ds.Where(It.IsAny<Func<Picture, bool>>())).Returns(testPictures.Where(p => p.RealEstateId == realEstateId));
-
             // Act
             var pictures = repo.GetAllPicturesForRealEstate(realEstateId);
 
             // Assert
-            pictures.All(p => p.Id == pictures.First().Id).Should().BeTrue();
-        }
-
-        [Fact]
-        public void Update_ShouldGetAllWithSameRealEstateId()
-        {
-            // Arrange
-            int realEstateId = testPictures.Last().RealEstateId;
-
-            // Act
-            var pictures = repo.GetAllPicturesForRealEstate(realEstateId);
-
-            // Assert
-            Assert.True(pictures.All(p => p.Id == pictures.First().Id));
+            pictures.All(p => p.RealEstateId == realEstateId).Should().BeTrue();
         }
 
         [Fact]

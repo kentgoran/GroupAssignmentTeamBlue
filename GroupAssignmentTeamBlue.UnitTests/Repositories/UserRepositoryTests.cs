@@ -107,6 +107,19 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
         }
 
         [Fact]
+        public void Get_ShouldGetByUserName()
+        {
+            // Arrange
+            var expectedUser = testUsers.First();
+
+            // Act
+            var user = repo.Get(expectedUser.UserName);
+
+            // Assert
+            user.Should().BeEquivalentTo(expectedUser);
+        }
+
+        [Fact]
         public void EntityExists_ExistingEntity_ShouldReturnTrue()
         {
             // Arrange

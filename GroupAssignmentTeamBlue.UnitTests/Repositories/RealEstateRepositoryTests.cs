@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using FluentAssertions;
 using GroupAssignmentTeamBlue.DAL.Context;
 using GroupAssignmentTeamBlue.DAL.Repositories;
 using GroupAssignmentTeamBlue.Model;
@@ -64,9 +65,11 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 
             // Assert
             testRealEstates.Should().Contain(rating);
+            dbSetRealEstateMock.Verify(ds => ds.Add(It.IsAny<RealEstate>()), Times.Exactly(1));
 
             // Clean up
             testRealEstates.Remove(rating);
+            
         }
 
         [Fact]
@@ -84,6 +87,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 
             // Assert
             testRealEstates.Should().NotContain(realEstateToRemove);
+            dbSetRealEstateMock.Verify(ds => ds.Remove(It.IsAny<RealEstate>()), Times.Exactly(1));
             testRealEstates.Add(realEstateToRemove);
         }
 
@@ -112,6 +116,37 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
 
             // Assert
             realEstates.Should().BeEquivalentTo(testRealEstates);
+        }
+
+        [Fact]
+        public void SkipAndTakeRealEstates_ShouldSkipAndTake_ShouldReturnRealEstates()
+        {
+            // Arrange
+            int skip = 1;
+            int take = 2;
+            var expectedRealEstates = testRealEstates
+                .OrderByDescending(r => r.DateOfAdvertCreation)
+                .Skip(skip).Take(take);
+
+            // Act
+            var realEstates = repo.SkipAndTakeRealEstates(skip, take);
+
+            // Assert
+            realEstates.Should().BeEquivalentTo(expectedRealEstates);
+        }
+
+        [Fact]
+        public void GetWithIncludes_ShouldGetRealEstateWithIncludes()
+        {
+            // Arrange
+            var expectedRealEstate = testRealEstates.Last();
+            int realEstateId = expectedRealEstate.Id;
+
+            // Act
+            var realEstate = repo.GetWithIncludes(realEstateId);
+
+            // Arrange
+            realEstate.Should().BeEquivalentTo(expectedRealEstate);
         }
 
         [Fact]
