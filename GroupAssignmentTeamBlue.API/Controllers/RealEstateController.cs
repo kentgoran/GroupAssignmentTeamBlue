@@ -78,25 +78,14 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         /// <summary>
-        /// GET for the number of real estates.
-        /// </summary>
-        /// <returns>Number of real estates.</returns>
-        [HttpGet("count")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        public IActionResult GetRealEstateCount()
-        {
-            return Ok(_unitOfWork.RealEstateRepository.GetRealEstateCount());
-        }
-
-        /// <summary>
         /// GET for the number of real estates with given search parameter "city"
         /// </summary>
         /// <returns>Number of real estates.</returns>
         [HttpGet("count/{city}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        public IActionResult GetRealEstateCount(string city)
+        public IActionResult GetRealEstateCount(string city = "")
         {
-            return Ok(_unitOfWork.RealEstateRepository.GetRealEstateCountCity(city));
+            return Ok(_unitOfWork.RealEstateRepository.GetRealEstateCount(city));
         }
 
         /// <summary>
