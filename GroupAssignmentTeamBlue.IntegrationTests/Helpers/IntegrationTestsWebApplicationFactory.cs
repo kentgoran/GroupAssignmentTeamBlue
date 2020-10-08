@@ -38,14 +38,12 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Helpers
                 //    opt.DefaultAuthenticateScheme = FakeJwtBearerDefaults.AuthenticationScheme;
                 //    opt.DefaultChallengeScheme = FakeJwtBearerDefaults.AuthenticationScheme;
                 //}).AddFakeJwtBearer();
-
                 
                 services.AddDbContext<AdvertContext>(opt =>
                 {
                     opt.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TestAdvertTeamBlue;" +
                         "Trusted_Connection=True;MultipleActiveResultSets=true");
                 });
-                
 
                 var config = new MapperConfiguration(opt =>
                 {
