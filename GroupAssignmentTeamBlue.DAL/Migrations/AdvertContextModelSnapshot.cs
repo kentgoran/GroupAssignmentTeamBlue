@@ -52,6 +52,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+                  });
                 });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Picture", b =>
@@ -127,6 +128,7 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 

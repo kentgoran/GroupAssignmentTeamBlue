@@ -12,8 +12,10 @@ namespace GroupAssignmentTeamBlue.Model
         [Key]
         public int Id { get; set; }
         [Required]
-        [MaxLength(50)]
+        [MinLength(5, ErrorMessage = "{0} must be between 5 and 50 characters.")]
+        [MaxLength(50, ErrorMessage = "{0} must be between 5 and 50 characters.")]
         public string Title { get; set; }
+        [Required]
         [MaxLength(1000)]
         public string Description { get; set; }
         [ForeignKey("UserId")]
