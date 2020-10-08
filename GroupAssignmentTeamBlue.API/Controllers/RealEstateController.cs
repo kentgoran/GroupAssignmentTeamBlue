@@ -89,6 +89,17 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         }
 
         /// <summary>
+        /// GET for the number of real estates with given search parameter "city"
+        /// </summary>
+        /// <returns>Number of real estates.</returns>
+        [HttpGet("count/{city}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        public IActionResult GetRealEstateCount(string city)
+        {
+            return Ok(_unitOfWork.RealEstateRepository.GetRealEstateCountCity(city));
+        }
+
+        /// <summary>
         /// GET for a single RealEstate, by RealEstateId. Requires authentication
         /// </summary>
         /// <param name="id">Id of the RealEstate to get</param>

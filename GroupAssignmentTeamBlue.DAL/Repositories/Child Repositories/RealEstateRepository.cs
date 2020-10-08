@@ -49,5 +49,9 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         {
             return context.RealEstates.Count();
         }
+        public int GetRealEstateCountCity(string city)
+        {
+            return context.RealEstates.Where(r => r.City.ToLower().Contains(city)).Count();
+        }
     }
 }
