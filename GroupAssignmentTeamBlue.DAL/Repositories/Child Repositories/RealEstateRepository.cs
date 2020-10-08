@@ -44,11 +44,7 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
                 .Include(r => r.Comments)
                 .ThenInclude(c => c.User).FirstOrDefault();
         }
-        
-        public int GetRealEstateCount()
-        {
-            return context.RealEstates.Count();
-        }
+
         public int GetRealEstateCountCity(string city)
         {
             return context.RealEstates.Where(r => r.City.ToLower().Contains(city)).Count();

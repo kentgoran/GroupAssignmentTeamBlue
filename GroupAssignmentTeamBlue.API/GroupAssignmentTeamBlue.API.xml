@@ -97,9 +97,9 @@
             <param name="city">City to filter, optional</param>
             <returns>A list of RealEstates present, BadRequest if skip/take is invalid numbers</returns>
         </member>
-        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstateCount">
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstateCount(System.String)">
             <summary>
-            GET for the number of real estates.
+            GET for the number of real estates with given search parameter "city"
             </summary>
             <returns>Number of real estates.</returns>
         </member>
