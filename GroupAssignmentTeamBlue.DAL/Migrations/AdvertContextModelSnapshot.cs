@@ -53,7 +53,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
 
                     b.ToTable("Comments");
                   });
-                });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Picture", b =>
                 {
