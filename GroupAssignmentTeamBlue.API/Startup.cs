@@ -103,13 +103,13 @@ namespace GroupAssignmentTeamBlue.API
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "BlueFast API",
-                        Version = "0.1.2",
+                        Version = "1.0",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact()
                         {
                             Email = "simonwestman88@gmail.com",
                             Name = "Simon Westman, Linnea Smedberg, Oskar Wennström MUT19"
                         },
-                        Description = "(Closed beta)\nAPI for consumption by SUT19 team blue. Other use prohibited."
+                        Description = "API for consumption by SUT19 team blue. Other use prohibited."
                     });
 
                 //Includes Xml comments in Swagger
