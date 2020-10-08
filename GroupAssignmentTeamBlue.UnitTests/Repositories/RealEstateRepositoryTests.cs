@@ -129,7 +129,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
                 .Skip(skip).Take(take);
 
             // Act
-            var realEstates = repo.SkipAndTakeRealEstates(skip, take);
+            var realEstates = repo.SkipAndTakeRealEstatesByCity(skip, take, "");
 
             // Assert
             realEstates.Should().BeEquivalentTo(expectedRealEstates);

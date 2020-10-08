@@ -59,7 +59,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         public async Task GetRealEstates_ValidSkipTake_Unauthenticated_ShouldReturnRealEstates(int skip, int take)
         {
             // Arrange
-            var realEstatesEntities = db.RealEstateRepository.SkipAndTakeRealEstates(skip, take);
+            var realEstatesEntities = db.RealEstateRepository.SkipAndTakeRealEstatesByCity(skip, take, "");
             if(realEstatesEntities == null ||
                 realEstatesEntities.Count() !=  take)
             {
@@ -90,7 +90,7 @@ namespace GroupAssignmentTeamBlue.IntegrationTests.Controllers
         [InlineData(0, 10)]
         public async Task GetRealEstates_Unauthenticated_ShouldReturnRealEstates(int defaultSkip, int defaultTake)
         {
-            var realEstateEntites = db.RealEstateRepository.SkipAndTakeRealEstates(defaultSkip, defaultTake);
+            var realEstateEntites = db.RealEstateRepository.SkipAndTakeRealEstatesByCity(defaultSkip, defaultTake, "");
             if(realEstateEntites == null || realEstateEntites.Count < defaultTake)
             {
                 throw new Exception(noSampleRealEstate);
