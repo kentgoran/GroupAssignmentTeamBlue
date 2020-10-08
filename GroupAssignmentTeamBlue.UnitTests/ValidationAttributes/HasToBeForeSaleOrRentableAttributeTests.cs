@@ -3,7 +3,7 @@ using GroupAssignmentTeamBlue.API.ValidationAttributes;
 using GroupAssignmentTeamBlue.Model.Enums;
 using Xunit;
 
-namespace GroupAssignmentTeamBlue.UnitTests
+namespace GroupAssignmentTeamBlue.UnitTests.ValidationAttributes
 {
     public class HasToBeForeSaleOrRentableAttributeTests
     {
