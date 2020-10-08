@@ -81,7 +81,7 @@ namespace GroupAssignmentTeamBlue.API.Controllers
         /// GET for the number of real estates with given search parameter "city"
         /// </summary>
         /// <returns>Number of real estates.</returns>
-        [HttpGet("count/{city}")]
+        [HttpGet("count")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         public IActionResult GetRealEstateCount(string city = "")
         {
