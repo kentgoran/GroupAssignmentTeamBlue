@@ -18,13 +18,13 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
         private readonly RealEstateRepository repo;
         private readonly List<RealEstate> testRealEstates = new List<RealEstate>()
         {
-            new RealEstate() { Id = 1, Pictures = new List<Picture>(),
+            new RealEstate() { Id = 1, City = "Varberg", Pictures = new List<Picture>(),
                 User = new User(), Comments = new List<Comment>(),
                 DateOfAdvertCreation = new DateTime(2020, 07, 30) },
-            new RealEstate() { Id = 2, Pictures = new List<Picture>(),
+            new RealEstate() { Id = 2, City = "", Pictures = new List<Picture>(),
                 User = new User(), Comments = new List<Comment>(),
                 DateOfAdvertCreation = new DateTime(2020, 09, 30) },
-            new RealEstate() { Id = 3, Pictures = new List<Picture>(), 
+            new RealEstate() { Id = 3, City = "", Pictures = new List<Picture>(), 
                 User = new User(), Comments = new List<Comment>(),
                 DateOfAdvertCreation = new DateTime(2020, 06, 30) }
         };
@@ -124,12 +124,14 @@ namespace GroupAssignmentTeamBlue.UnitTests.Repositories
             // Arrange
             int skip = 1;
             int take = 2;
+            string city = "Varberg";
             var expectedRealEstates = testRealEstates
                 .OrderByDescending(r => r.DateOfAdvertCreation)
-                .Skip(skip).Take(take);
+                .Where(re => re.City.ToLower().Contains(city))
+                .Skip(skip).Take(take).ToList();
 
             // Act
-            var realEstates = repo.SkipAndTakeRealEstatesByCity(skip, take, "");
+            var realEstates = repo.SkipAndTakeRealEstatesByCity(skip, take, city);
 
             // Assert
             realEstates.Should().BeEquivalentTo(expectedRealEstates);
