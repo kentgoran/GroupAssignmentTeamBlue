@@ -103,6 +103,12 @@
             </summary>
             <returns>Number of real estates.</returns>
         </member>
+        <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstateCount(System.String)">
+            <summary>
+            GET for the number of real estates with given search parameter "city"
+            </summary>
+            <returns>Number of real estates.</returns>
+        </member>
         <member name="M:GroupAssignmentTeamBlue.API.Controllers.RealEstateController.GetRealEstate(System.Int32)">
             <summary>
             GET for a single RealEstate, by RealEstateId. Requires authentication

@@ -26,8 +26,8 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         {
             return context.RealEstates
                 .OrderByDescending(r => r.DateOfAdvertCreation)
-                .Skip(skip).Take(take)
-                .Where(re => re.City.ToLower().Contains(city)).ToList();
+                .Where(re => re.City.ToLower().Contains(city))
+                .Skip(skip).Take(take).ToList();
         }
 
 
@@ -48,6 +48,10 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories
         public int GetRealEstateCount()
         {
             return context.RealEstates.Count();
+        }
+        public int GetRealEstateCountCity(string city)
+        {
+            return context.RealEstates.Where(r => r.City.ToLower().Contains(city)).Count();
         }
     }
 }
