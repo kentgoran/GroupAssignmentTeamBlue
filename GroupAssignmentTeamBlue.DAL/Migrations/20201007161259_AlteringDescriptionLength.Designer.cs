@@ -4,14 +4,16 @@ using GroupAssignmentTeamBlue.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GroupAssignmentTeamBlue.DAL.Migrations
 {
     [DbContext(typeof(AdvertContext))]
-    partial class AdvertContextModelSnapshot : ModelSnapshot
+    [Migration("20201007161259_AlteringDescriptionLength")]
+    partial class AlteringDescriptionLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +54,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
-                  });
                 });
 
             modelBuilder.Entity("GroupAssignmentTeamBlue.Model.Picture", b =>
@@ -128,7 +129,6 @@ namespace GroupAssignmentTeamBlue.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 

@@ -103,7 +103,7 @@ namespace GroupAssignmentTeamBlue.API
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "BlueFast API",
-                        Version = "0.1",
+                        Version = "0.1.2",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact()
                         {
                             Email = "simonwestman88@gmail.com",

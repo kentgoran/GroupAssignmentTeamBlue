@@ -39,12 +39,12 @@ namespace GroupAssignmentTeamBlue.DAL.Context
             //DbGenerator.Initializer();
             //modelBuilder.Entity<User>().HasData(DbGenerator.GeneratedUsers);
 
-            DbGenerator.Initializer(20, 40, 60);
+            //DbGenerator.Initializer(20, 40, 60);
 
-            modelBuilder.Entity<User>().HasData(DbGenerator.GeneratedUsers);
-            modelBuilder.Entity<RealEstate>().HasData(DbGenerator.GeneratedRealEstates);
-            modelBuilder.Entity<Comment>().HasData(DbGenerator.GeneratedComments);
-            modelBuilder.Entity<Rating>().HasData(DbGenerator.GeneratedRatings);
+            //modelBuilder.Entity<User>().HasData(DbGenerator.GeneratedUsers);
+            //modelBuilder.Entity<RealEstate>().HasData(DbGenerator.GeneratedRealEstates);
+            //modelBuilder.Entity<Comment>().HasData(DbGenerator.GeneratedComments);
+            //modelBuilder.Entity<Rating>().HasData(DbGenerator.GeneratedRatings);
 
             base.OnModelCreating(modelBuilder);
         }
