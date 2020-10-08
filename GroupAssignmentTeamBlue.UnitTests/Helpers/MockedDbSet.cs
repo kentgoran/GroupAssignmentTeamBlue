@@ -20,7 +20,7 @@ namespace GroupAssignmentTeamBlue.UnitTests.Helpers
             this.As<IQueryable<TEntity>>().Setup(ds => ds.Provider).Returns(queriableData.Provider);
             this.As<IQueryable<TEntity>>().Setup(ds => ds.Expression).Returns(queriableData.Expression);
             this.As<IQueryable<TEntity>>().Setup(ds => ds.ElementType).Returns(queriableData.ElementType);
-            this.As<IQueryable<TEntity>>().Setup(ds => ds.GetEnumerator()).Returns(queriableData.GetEnumerator());
+            this.As<IQueryable<TEntity>>().Setup(ds => ds.GetEnumerator()).Returns(() => queriableData.GetEnumerator());
         }
     }
 }

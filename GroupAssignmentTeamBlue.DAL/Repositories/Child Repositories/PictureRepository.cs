@@ -15,8 +15,7 @@ namespace GroupAssignmentTeamBlue.DAL.Repositories.Child_Repositories
 
         public IEnumerable<Picture> GetAllPicturesForRealEstate(int realEstateId)
         {
-            var pictures = context.Pictures.ToList();
-            return pictures.Where(p => p.RealEstateId == realEstateId);
+            return context.Pictures.Where(p => p.RealEstateId == realEstateId).ToList();
         }
     }
 }
