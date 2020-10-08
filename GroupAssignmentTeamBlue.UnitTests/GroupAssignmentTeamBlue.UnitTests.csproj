@@ -25,9 +25,4 @@
     <ProjectReference Include="..\GroupAssignmentTeamBlue.API\GroupAssignmentTeamBlue.API.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="ForCreationDtos\" />
-  </ItemGroup>
-
 </Project>
